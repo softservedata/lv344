@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Suite1">
+
+	<parameter name="browserName" value="chrome" />
+
+	<!-- 3 ERROR 5 WARNING 7 INFO 9 DEBUG -->
+	<test verbose="9" name="Test1">
+		<parameter name="number" value="2" />
+		<classes>
+			<class name="edu.softserve.com.WishListMaven.AppTest">
+				<methods>
+					<include name="removebuttonfromwishlist" />
+					<include name="addtowishlistbyproductpage" />
+					<include name="addcartbuttonfromwishlist" />
+			
+				</methods>
+			</class>
+		</classes>
+	</test> <!-- Test -->
+
+</suite> <!-- Suite -->
