@@ -37,7 +37,6 @@ public class AppTest
 		String dataTest2 = "iPhone";
 		//
 		driver.findElement(By.xpath(String.format(CARTBUTTON_BYXPATH, dataTest1))).click();
-		//Thread.sleep(2000); // DO NOT USE
 		//
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 		//(new WebDriverWait(driver, 10)).until(
