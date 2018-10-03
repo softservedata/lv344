@@ -73,7 +73,7 @@ public class AppTest
 		System.out.println("number = " + number + "  number == 0 : " + (number == 0));
 		//
 		price = RegexUtils.extractFirstDouble(cart.getText());
-		System.out.println("price = " + price);
+		System.out.println("DONE price = " + price);
 		Thread.sleep(2000); // DO NOT USE
 		//
 		driver.quit();
