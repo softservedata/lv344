@@ -16,8 +16,12 @@ public class AppTest
 	
 	@Test
 	public void cartAdd() throws Exception {
+		System.out.println("PATH to Driver: " +
+				AppTest.class.getResource("/chromedriver-windows-32bit.exe").getPath());
 		System.setProperty("webdriver.chrome.driver",
-				"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe");
+				AppTest.class.getResource("/chromedriver-windows-32bit.exe").getPath());
+				//"./target/test-classes/chromedriver-windows-32bit.exe");
+				//"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
