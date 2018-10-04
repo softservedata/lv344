@@ -14,10 +14,10 @@ public class AppTest
 {
 	private static final String CARTBUTTON_BYXPATH = "//div[contains(@class,'product-layout')]//a[text()='%s']/../../following-sibling::div/button[contains(@onclick,'cart')]";
 	
-	@Test
+	//@Test
 	public void cartAdd() throws Exception {
 		System.setProperty("webdriver.chrome.driver",
-				"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe");
+				"C:\\\\Users\\\\Andrii\\\\AppData\\\\Local\\\\Google\\\\Chrome\\\\Application\\\\chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
