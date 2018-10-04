@@ -1,4 +1,4 @@
-package com.softserve.yeltsova.JavaStudyAutomation.demo2;
+package com.softserve.edu;
 
 import java.util.concurrent.TimeUnit;
 
