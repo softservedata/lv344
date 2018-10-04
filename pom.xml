@@ -202,7 +202,7 @@
 						</surefire.reports.directory>
 					</systemPropertyVariables>
 					<suiteXmlFiles>
-						<suiteXmlFile>testng2.xml</suiteXmlFile>
+						<suiteXmlFile>testAll.xml</suiteXmlFile>
 					</suiteXmlFiles>
 					<reportsDirectory>${testng.reports.directory}</reportsDirectory>
 				</configuration>
