@@ -25,7 +25,7 @@ public class Tests {
 	@BeforeMethod
 	public void SetUp() throws Exception {
 		System.setProperty("webdriver.chrome.driver",
-				"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe");
+				Tests.class.getResource("/chromedriver-windows-32bit.exe").getPath());
 		driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.get("http://atqc-shop.epizy.com");
