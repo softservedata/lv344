@@ -1,16 +1,14 @@
 package com.softserve.edu;
+
 import org.testng.annotations.Test;
 import org.testng.annotations.DataProvider;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.AfterTest;
-import static org.testng.Assert.assertTrue;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
@@ -20,6 +18,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 public class TestSearch {
+	static final String MAIN_PAGE_URL = "http://atqc-shop.epizy.com/";
+	static final String EMAIL_ADDRESS = "search@test.mail";
+	static final String PASSWORD = "search";
+	
 	private WebDriver driver;
 	
 	@DataProvider(name = "request=mac")
@@ -86,23 +88,23 @@ public class TestSearch {
 	
 	
   	@Test(dataProvider = "request=mac")
-	public void testSearchWithEnter(String request, ArrayList<String> resultList) throws NoSuchElementException,InterruptedException {
-		driver.get("http://atqc-shop.epizy.com/");
+	public void testSearchWithEnter(String request, ArrayList<String> expectedResultList) throws NoSuchElementException,InterruptedException {
+		driver.get(MAIN_PAGE_URL);
 		driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).click();//find 'search' text field
 		driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).clear();
 		Thread.sleep(1000);
 		//type search request and press 'Enter' key
 		driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).sendKeys(request+Keys.ENTER);
 		Thread.sleep(1000);
-		List<String> actualResults = getActualResultList();
-		Collections.sort(actualResults);
-		Assert.assertEquals(resultList, actualResults);	
+		List<String> actualResultList = getActualResultList();
+		Collections.sort(actualResultList);
+		Assert.assertEquals(expectedResultList, actualResultList);	
 		}
 	
   	
 	@Test(dataProvider = "request=hp")
-		public void testResultWithFilters(String request, ArrayList<String> resultList) throws NoSuchElementException,InterruptedException {
-			driver.get("http://atqc-shop.epizy.com/");
+		public void testResultWithFilters(String request, ArrayList<String> expectedResultList) throws NoSuchElementException,InterruptedException {
+			driver.get(MAIN_PAGE_URL);
 			driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).click();
 			driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).clear();
 			driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).sendKeys(" ");
@@ -127,23 +129,23 @@ public class TestSearch {
 			Thread.sleep(1000);
 			driver.findElement(By.cssSelector("[selected='selected']")).click();
 			Thread.sleep(1000);
-			Assert.assertEquals(resultList, getActualResultList());	
+			Assert.assertEquals(expectedResultList, getActualResultList());	
 			
 		}
 	
 	
 		@Test(dataProvider = "request=mac")
-		public void testTopAndMainForms(String request, ArrayList<String> resultList) throws NoSuchElementException,InterruptedException {
-			driver.get("http://atqc-shop.epizy.com/");
+		public void testTopAndMainForms(String request, ArrayList<String> expectedResultList) throws NoSuchElementException,InterruptedException {
+			driver.get(MAIN_PAGE_URL);
 			driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).click();
 			driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).clear();
 			driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).sendKeys("mac");
 			Thread.sleep(1000);
 			driver.findElement(By.cssSelector(".btn.btn-default.btn-lg[type='button']")).click();
 			Thread.sleep(1000);
-			List<String> actualResults = getActualResultList();
-			Collections.sort(actualResults);
-			Assert.assertEquals(resultList, actualResults);							
+			List<String> actualResultList = getActualResultList();
+			Collections.sort(actualResultList);
+			Assert.assertEquals(expectedResultList, actualResultList);							
 			driver.findElement(By.id("input-search")).click();
 			Thread.sleep(1000);
 			driver.findElement(By.id("input-search")).clear();
@@ -152,23 +154,25 @@ public class TestSearch {
 			Thread.sleep(1000);
 			driver.findElement(By.cssSelector(".btn.btn-default.btn-lg[type='button']")).click();
 			Thread.sleep(1000);
-			actualResults = getActualResultList();
-			Collections.sort(actualResults);
-			Assert.assertEquals(resultList, actualResults);				}
-		
+			actualResultList = getActualResultList();
+			Collections.sort(actualResultList);
+			Assert.assertEquals(expectedResultList, actualResultList);
+			driver.getPageSource();
+		}
+			
 	
 	@Test(dataProvider = "request=apple")
-	public void testLogedInAndGuest(String request, ArrayList<String> resultList) throws NoSuchElementException,InterruptedException {
-		driver.get("http://atqc-shop.epizy.com/");
+	public void testLogedInAndGuest(String request, ArrayList<String> expectedResultList) throws NoSuchElementException,InterruptedException {
+		driver.get(MAIN_PAGE_URL);
 		driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).click();	
 		driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).clear();
 		driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).sendKeys(request);																		
 		Thread.sleep(1000);
 		driver.findElement(By.cssSelector(".btn.btn-default.btn-lg[type='button']")).click();
 		Thread.sleep(1000);
-		List<String> actualResults = getActualResultList();
-		Collections.sort(actualResults);
-		Assert.assertEquals(resultList, actualResults);	
+		List<String> actualResultList = getActualResultList();
+		Collections.sort(actualResultList);
+		Assert.assertEquals(expectedResultList, actualResultList);	
 		Thread.sleep(1000);
 		driver.findElement(By.cssSelector("[title='My Account']")).click();					
 		Thread.sleep(1000);
@@ -176,22 +180,21 @@ public class TestSearch {
 		Thread.sleep(1000);
 		driver.findElement(By.name("email")).click();				
 		driver.findElement(By.name("email")).clear();
-		driver.findElement(By.name("email")).sendKeys("search@test.mail");		
+		driver.findElement(By.name("email")).sendKeys(EMAIL_ADDRESS);		
 		Thread.sleep(1000);
 		driver.findElement(By.name("password")).click();									
 		driver.findElement(By.name("password")).clear();
-		driver.findElement(By.name("password")).sendKeys("search"+ Keys.ENTER);			
+		driver.findElement(By.name("password")).sendKeys(PASSWORD+ Keys.ENTER);			
 		Thread.sleep(1000);
 		driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).click();
 		driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).clear();
-		driver.findElement(By.cssSelector(".form-control.input-lg[name='search']"))
-		.sendKeys(request);																		
+		driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).sendKeys(request);																		
 		Thread.sleep(1000);
 		driver.findElement(By.cssSelector(".btn.btn-default.btn-lg[type='button']")).click();
 		Thread.sleep(1000);
-		actualResults = getActualResultList();
-		Collections.sort(actualResults);
-		Assert.assertEquals(resultList, actualResults);		}
+		actualResultList = getActualResultList();
+		Collections.sort(actualResultList);
+		Assert.assertEquals(expectedResultList, actualResultList);		}
   	
 	/**
 	 * 
