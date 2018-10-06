@@ -13,7 +13,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import UITests.RegexUtils;
+//import UITests.RegexUtils;
 
 public class Tests {
 	WebDriver driver = null;
@@ -41,30 +41,35 @@ public class Tests {
 	@Test(enabled = true)
 	public void SmokeTestOpenCart() throws Exception {
 		System.out.println("SmokeTestOpenCart start");
+		Thread.sleep(4000); // For demonstration
 //Verify 1 text element
-		//Thread.sleep(2000); // For demonstration
 		Assert.assertEquals(driver.findElement(By.xpath("//*[@id='content']/h3")).getText(), "Featured");
-		System.out.println(ststus1 + "Element on page was found...");
+		System.out.println(ststus1 + "Element main on page was found...");
+		Thread.sleep(2000); // For demonstration
 //Verify 1 button
-		//Thread.sleep(2000); // For demonstration
 		driver.manage().deleteAllCookies();
 		Assert.assertEquals(driver.findElement(By.cssSelector("#cart-total")).getText(), "0 item(s) - $0.00");
 		System.out.println(ststus1 + "Button on page was found...");
+		Thread.sleep(2000); // For demonstration
 //Find and verify element at another page
 		//Thread.sleep(2000); // For demonstration
 		driver.findElement(By.linkText("Site Map")).click();
 		Assert.assertEquals(driver.findElement(By.xpath("//*[@id='content']/h1")).getText(), "Site Map");
 		System.out.println(ststus1 + "Element on enother page was found...");
+		Thread.sleep(2000); // For demonstration
 //Message about all is great
 		System.out.println("All is great, you can continue.");
+		Thread.sleep(4000); // For demonstration
 	}
 
 	@Test(dependsOnMethods = { "SmokeTestOpenCart" }, enabled = true)
 	public void AddItemToCart() throws Exception {
 		System.out.println("AddItemToCart start");
+		Thread.sleep(4000); // For demonstration
 //Add McBook to cart
 		driver.findElement(By.xpath(String.format(CART_BUTTON_ByXpath, "MacBook"))).click();
 		System.out.println(ststus1 + "Good was added...");
+		Thread.sleep(2000); // For demonstration
 //Check if user see correct message about adding good to cart
 		Assert.assertTrue(driver.findElement(By.cssSelector(".alert-success")).getText()
 				.contains("Success: You have added MacBook to your shopping cart!"));
@@ -77,8 +82,9 @@ public class Tests {
 //Back to main page
 		driver.findElement(By.cssSelector("#logo")).click();
 //Check if price on cart button is correct
+		Assert.assertEquals(RegexUtils.extractFirstNumber(driver.findElement(By.cssSelector("#cart-total")).getText()), 1);
 		Assert.assertEquals(RegexUtils.extractFirstDouble(driver.findElement(By.cssSelector("#cart-total")).getText()), ItemPrice);
-		System.out.println(ststus1 + "Goods price correct...");
+		System.out.println(ststus1 + "Count and price is correct...");
 		Thread.sleep(2000); // For demonstration
 //Check if all sum is correct
 		driver.findElement(By.cssSelector("#cart-total")).click();
@@ -90,11 +96,9 @@ public class Tests {
 				driver.findElement(By.xpath("//td/strong[text()='Eco Tax (-2.00)']/../../td[contains(text() , '$')]")).getText()), 2.0);// eco tax		
 		System.out.println(ststus1 + "Eco Tax display correct...");
 		System.out.println("All data display correct.");
+		Thread.sleep(4000); // For demonstration
 	}
-	
-	
-	
-	
+		
 	@Test(dependsOnMethods = { "SmokeTestOpenCart", "AddItemToCart" }, enabled = true)
 	public void AddSingleItemToCart() throws Exception {
 		System.out.println("AddSingleItemToCart start");
@@ -148,77 +152,85 @@ public class Tests {
 		System.out.println(ststus1 + "Eco Tax display correct...");
 		System.out.println("All data display correct.");	
 		Thread.sleep(4000); // For demonstration	
-	}
-	
+	}	
 	
 	@Test(dependsOnMethods = { "SmokeTestOpenCart", "AddItemToCart" }, enabled = true)
 	public void ChangeNumOfItemsInCart() throws Exception {
 		System.out.println("ChangeNumOfItemsInCart start");
-//Add MacBook to cart
-		driver.findElement(By.linkText("MacBook")).click();
-		driver.findElement(By.cssSelector("#button-cart")).click();
-		System.out.println(ststus1 + "McBook was added to cart...");
-		 Thread.sleep(2000); // For demonstration
-// Check if user see correct message about adding good to cart
-		Assert.assertTrue(driver.findElement(By.cssSelector(".alert-success"))
-				.getText().contains("Success: You have added MacBook to your shopping cart!"));
+		Thread.sleep(4000); // For demonstration
+//Add McBook to cart
+		driver.findElement(By.xpath(String.format(CART_BUTTON_ByXpath, "MacBook"))).click();
+		System.out.println(ststus1 + "Good was added...");
+		Thread.sleep(2000); // For demonstration
+//Check if user see correct message about adding good to cart
+		Assert.assertTrue(driver.findElement(By.cssSelector(".alert-success")).getText()
+				.contains("Success: You have added MacBook to your shopping cart!"));
 		System.out.println(ststus1 + "User see correct message, good was added...");
 		Thread.sleep(2000); // For demonstration
 //Check if cart button contain correct data
-		Assert.assertEquals(driver.findElement(By.cssSelector("#cart")).getText(), "1 item(s) - $602.00");
+		Assert.assertEquals(RegexUtils.extractFirstNumber(driver.findElement(By.cssSelector("#cart-total")).getText()), 1);
+		System.out.println(ststus1 + "One good was added to cart ...");
+		Thread.sleep(2000); // For demonstration
 //Open cart
 		driver.manage().window().maximize();
 		driver.findElement(By.linkText("Shopping Cart")).click();
 		System.out.println(ststus1 + "Shopping Cart page was opened...");
 		Thread.sleep(2000); // For demonstration
 //Edit quantity
-		driver.findElement(By.xpath("//*[@id=\"content\"]/form/div/table/tbody/tr/td[4]/div/input")).clear();
-		driver.findElement(By.xpath("//*[@id=\"content\"]/form/div/table/tbody/tr/td[4]/div/input")).sendKeys("5");
+		driver.findElement(By.xpath("//div[contains(@class, 'input')]//input[contains(@name, 'quantity')]")).clear();
+		driver.findElement(By.xpath("//div[contains(@class, 'input')]//input[contains(@name, 'quantity')]")).sendKeys("5");
 		driver.findElement(By.cssSelector(".fa-refresh")).click();
 //Check if user see correct message about modified cart
 		Assert.assertTrue(driver.findElement(By.cssSelector(".alert-success"))
 				.getText().contains("Success: You have modified your shopping cart!"));
 		System.out.println(ststus1 + "User see correct message, cart was modified...");
+		Thread.sleep(2000); // For demonstration
 //Check if quantity in cart display correctly
 		driver.findElement(By.cssSelector("#cart")).click();
-		Assert.assertEquals(driver
-				.findElement(By.cssSelector(
-						"#cart > ul > li:nth-child(2) > div > table > tbody > tr:nth-child(2) > td:nth-child(2)")).getText(), "$10.00");// eco tax
+		Assert.assertEquals(RegexUtils.extractFirstDouble(
+				driver.findElement(By.xpath("//td/strong[text()='Eco Tax (-2.00)']/../../td[contains(text() , '$')]")).getText()), 10.0);// eco tax
 		System.out.println(ststus1 + "Quantity in cart display correct...");
 		System.out.println("Positiv quantity editing worc correctly");
+		Thread.sleep(4000); // For demonstration
 	}
+	
 	@Test(dependsOnMethods = { "SmokeTestOpenCart" }, enabled = true)
 	public void ErrorMessageChangeNumOfItemsInCart() throws Exception {
 		System.out.println("ErrorMessageChangeNumOfItemsInCart start");
-		//Add MacBook to cart
-		driver.findElement(By.linkText("MacBook")).click();
-		driver.findElement(By.cssSelector("#button-cart")).click();
-		System.out.println(ststus1 + "McBook was added to cart...");
-		 Thread.sleep(2000); // For demonstration
-// Check if user see correct message about adding good to cart
-		Assert.assertTrue(driver.findElement(By.cssSelector(".alert-success"))
-				.getText().contains("Success: You have added MacBook to your shopping cart!"));
+		Thread.sleep(4000); // For demonstration
+//Add McBook to cart
+		driver.findElement(By.xpath(String.format(CART_BUTTON_ByXpath, "MacBook"))).click();
+		System.out.println(ststus1 + "Good was added...");
+		Thread.sleep(2000); // For demonstration
+//Check if user see correct message about adding good to cart
+		Assert.assertTrue(driver.findElement(By.cssSelector(".alert-success")).getText()
+				.contains("Success: You have added MacBook to your shopping cart!"));
 		System.out.println(ststus1 + "User see correct message, good was added...");
 		Thread.sleep(2000); // For demonstration
 //Check if cart button contain correct data
-		Assert.assertEquals(driver.findElement(By.cssSelector("#cart")).getText(), "1 item(s) - $602.00");
+		Assert.assertEquals(RegexUtils.extractFirstNumber(driver.findElement(By.cssSelector("#cart-total")).getText()), 1);
+		System.out.println(ststus1 + "One good was added to cart ...");
+		Thread.sleep(2000); // For demonstration
 //Open cart
 		driver.manage().window().maximize();
 		driver.findElement(By.linkText("Shopping Cart")).click();
 		System.out.println(ststus1 + "Shopping Cart page was opened...");
 		Thread.sleep(2000); // For demonstration
 //Edit quantity
-		driver.findElement(By.xpath("//*[@id=\"content\"]/form/div/table/tbody/tr/td[4]/div/input")).clear();
-		driver.findElement(By.xpath("//*[@id=\"content\"]/form/div/table/tbody/tr/td[4]/div/input")).sendKeys("test");
+		driver.findElement(By.xpath("//div[contains(@class, 'input')]//input[contains(@name, 'quantity')]")).clear();
+		driver.findElement(By.xpath("//div[contains(@class, 'input')]//input[contains(@name, 'quantity')]")).sendKeys("test");
 		Thread.sleep(2000); // For demonstration
 //Check Error message
 		Assert.assertTrue(driver.findElement(By.cssSelector(".alert-success"))
 				.getText().contains("Warning: Input valid data!"));
 		System.out.println("User see correct messageabout warning.");
+		Thread.sleep(4000); // For demonstration	
 	}
+	
 	@Test(dependsOnMethods = { "SmokeTestOpenCart", "AddItemToCart" }, enabled = true)
 	public void CartAfterRelogin() throws Exception {
 		System.out.println("CartAfterRelogin start");
+		Thread.sleep(4000); // For demonstration
 //Open Login page
 		driver.findElement(By.linkText("My Account")).click();
 //Input logged data
@@ -228,7 +240,7 @@ public class Tests {
 		driver.findElement(By.id("input-password")).clear();
 		driver.findElement(By.id("input-password")).sendKeys("Q1w2e3r4" + Keys.ENTER);
 		System.out.println(ststus1 + "Login succesful...");
-		//Thread.sleep(2000); // For demonstration
+		Thread.sleep(2000); // For demonstration
 //Clear cart if we have one or more goods there
 		if(RegexUtils.extractFirstNumber(driver.findElement(By.cssSelector("#cart-total")).getText()) != 0) {
 			do{
@@ -266,7 +278,7 @@ public class Tests {
 //Check if cart contain added good
 		driver.manage().window().maximize();
 		driver.findElement(By.linkText("Shopping Cart")).click();
-		Assert.assertTrue(driver.findElement(By.cssSelector("div > table > tbody > tr > td:nth-child(2) > a"))//need to edit<<<<<<
+		Assert.assertTrue(driver.findElement(By.xpath("//div[contains(@class, 'table')]//a[text()='MacBook']"))
 				.getText().contains("MacBook"));
 		System.out.println(ststus1 + "Cart contain added good");
 		Thread.sleep(2000); // For demonstration
@@ -274,10 +286,10 @@ public class Tests {
 		driver.findElement(By.cssSelector("#cart")).click();
 		driver.findElement(By.cssSelector(".fa-times")).click();
 		System.out.println("Cart is empty...");
-		//Thread.sleep(2000); // For demonstration
+		Thread.sleep(2000); // For demonstration
 		driver.findElement(By.linkText("My Account")).click();
 		driver.findElement(By.linkText("Logout")).click();
 		System.out.println("Logout succesful.");
-		Thread.sleep(2000); // For demonstration
+		Thread.sleep(4000); // For demonstration
 	}
 }
