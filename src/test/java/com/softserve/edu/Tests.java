@@ -13,6 +13,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import UITests.RegexUtils;
+
 public class Tests {
 	WebDriver driver = null;
 	String ststus1 = "Running>> ";
@@ -96,48 +98,56 @@ public class Tests {
 	@Test(dependsOnMethods = { "SmokeTestOpenCart", "AddItemToCart" }, enabled = true)
 	public void AddSingleItemToCart() throws Exception {
 		System.out.println("AddSingleItemToCart start");
+		Thread.sleep(4000); // For demonstration
 //Check if cart is empty
-		Assert.assertEquals(driver.findElement(By.cssSelector("#cart-total")).getText(), "0 item(s) - $0.00");
+		Assert.assertEquals(RegexUtils.extractFirstNumber(driver.findElement(By.cssSelector("#cart-total")).getText()), 0);
+		System.out.println(ststus1 + "ACart is empty...");
 //Add MacBook to cart
-		driver.findElement(By.linkText("MacBook")).click();
-		driver.findElement(By.cssSelector("#button-cart")).click();
+		driver.findElement(By.xpath(String.format(CART_BUTTON_ByXpath, "MacBook"))).click();
 		System.out.println(ststus1 + "McBook was added to cart...");
 		Thread.sleep(2000); // For demonstration
-// Check if user see correct message about adding good to cart
+//Check if user see correct message about adding good to cart
 		Assert.assertTrue(
-				driver.findElement(By.cssSelector("body > div:nth-child(4) > div.alert.alert-success")).getText()
+				driver.findElement(By.cssSelector(".alert-success")).getText()
 				.contains("Success: You have added MacBook to your shopping cart!"));
 		System.out.println(ststus1 + "User see correct message, good was added...");
 		Thread.sleep(2000); // For demonstration
-//Check if cart button contain correct data
-		Assert.assertEquals(driver.findElement(By.cssSelector("#cart")).getText(), "1 item(s) - $602.00");
-//Back to main page		
-		driver.get("http://atqc-shop.epizy.com");
+//Check if cart button contain correct data about MacBook price
+		Assert.assertEquals(RegexUtils.extractFirstNumber(driver.findElement(By.cssSelector("#cart-total")).getText()), 1);
+		Assert.assertEquals(RegexUtils.extractFirstDouble(
+				driver.findElement(By.cssSelector("#cart-total")).getText()), 
+				RegexUtils.extractFirstDouble(driver.findElement(By.xpath(String.format(ITEM_PRICE_ByXpath, "MacBook"))).getText()));
+		System.out.println(ststus1 + "Cart contains correct data...");
+		Thread.sleep(2000); // For demonstration
 //Add iPhone to cart		
-		driver.findElement(By.linkText("iPhone")).click();
-		driver.findElement(By.cssSelector("#button-cart")).click();
-		System.out.println(ststus1 + "iPhone was added to cart...");
+		driver.findElement(By.xpath(String.format(CART_BUTTON_ByXpath, "iPhone"))).click();
+		System.out.println(ststus1 + "iPhone was added to cart(second item)...");
 		Thread.sleep(2000); // For demonstration
 // Check if user see correct message about adding good to cart
 		Assert.assertTrue(
-				driver.findElement(By.cssSelector("body > div:nth-child(4) > div.alert.alert-success")).getText()
+				driver.findElement(By.cssSelector(".alert-success")).getText()
 						.contains("Success: You have added iPhone to your shopping cart!"));
-		System.out.println(ststus1 + "User see correct message, good was added...");
+		System.out.println(ststus1 + "User see correct message, good was added(second item)...");
 		Thread.sleep(2000); // For demonstration
 //Check if cart button contain correct data
-		Assert.assertEquals(driver.findElement(By.cssSelector("#cart")).getText(), "2 item(s) - $725.20");
+		Assert.assertEquals(RegexUtils.extractFirstNumber(driver.findElement(By.cssSelector("#cart-total")).getText()), 2);
+		Assert.assertEquals(RegexUtils.extractFirstDouble(
+				driver.findElement(By.cssSelector("#cart-total")).getText()), 
+				RegexUtils.extractFirstDouble(driver.findElement(By.xpath(String.format(ITEM_PRICE_ByXpath, "MacBook"))).getText()) + 
+				RegexUtils.extractFirstDouble(driver.findElement(By.xpath(String.format(ITEM_PRICE_ByXpath, "iPhone"))).getText()));
 		driver.findElement(By.cssSelector("#cart")).click();
+		System.out.println(ststus1 + "Cart contains correct data(MacBook + iPhone price)...");
 		Thread.sleep(2000); // For demonstration
 //Wait when web element will be visible
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 		(new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOfElementLocated(By.linkText("View Cart")));
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 //Check if the tax is counted correctly
-		Assert.assertEquals(driver
-			.findElement(By.cssSelector(
-						"#cart > ul > li:nth-child(2) > div > table > tbody > tr:nth-child(2) > td:nth-child(2)")).getText(), "$4.00");// eco tax
+		Assert.assertEquals(RegexUtils.extractFirstDouble(
+				driver.findElement(By.xpath("//td/strong[text()='Eco Tax (-2.00)']/../../td[contains(text() , '$')]")).getText()), 4.0);// eco tax		
 		System.out.println(ststus1 + "Eco Tax display correct...");
-		System.out.println("All data display correct.");		
+		System.out.println("All data display correct.");	
+		Thread.sleep(4000); // For demonstration	
 	}
 	
 	
