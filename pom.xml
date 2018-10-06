@@ -168,7 +168,15 @@
 	</dependencies>
 
 	<build>
+	<extensions>
+			<extension>
+				<groupId>kr.motd.maven</groupId>
+				<artifactId>os-maven-plugin</artifactId>
+				<version>1.6.0</version>
+			</extension>
+		</extensions>
 		<plugins>
+		
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
@@ -207,7 +215,57 @@
 					<reportsDirectory>${testng.reports.directory}</reportsDirectory>
 				</configuration>
 			</plugin>
-
+			<plugin>
+				<groupId>com.github.webdriverextensions</groupId>
+				<artifactId>webdriverextensions-maven-plugin</artifactId>
+				<version>3.1.3</version>
+				<executions>
+					<execution>
+						<id>pre-test</id>
+						<goals>
+							<goal>install-drivers</goal>
+						</goals>
+						<!-- Uncomment for download automatically -->
+						<phase>test-compile</phase>
+						<!-- <phase>test</phase> -->
+					</execution>
+				</executions>
+				<configuration>
+					<installationDirectory>${project.build.directory}/test-classes</installationDirectory>
+					<!-- <installationDirectory>${project.basedir}/src/test/resources</installationDirectory> -->
+					<keepDownloadedWebdrivers>true</keepDownloadedWebdrivers>
+					<drivers>
+						<driver>
+							<name>chromedriver</name>
+							<platform>${os.detected.name}</platform>
+							<!-- <platform>windows</platform> -->
+							<!-- <bit>32</bit> -->
+							<version>2.42</version>
+							<!-- <url>https://chromedriver.storage.googleapis.com/2.42/chromedriver_win32.zip</url> -->
+						</driver>
+					</drivers>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.github.ekryd.echo-maven-plugin</groupId>
+				<artifactId>echo-maven-plugin</artifactId>
+				<version>1.2.0</version>
+				<executions>
+					<execution>
+						<phase>test</phase>
+						<goals>
+							<goal>echo</goal>
+						</goals>
+						<configuration>
+							<message>+++++Operation System: ${os.detected.name}</message>
+<!-- 							<message>+++++Build Directory: ${project.build.directory}</message> -->
+							<!-- <message>+++++Operation System: ${os.detected.classifier}</message> -->
+							<!-- <message>+++++Local Repository: ${settings.localRepository}</message> -->
+							<!-- <message>+++++TestNG Version: ${org.testng.version}</message> -->
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 

@@ -18,7 +18,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 public class TestSearch {
-	static final String MAIN_PAGE_URL = "http://atqc-shop.epizy.com/";
 	static final String EMAIL_ADDRESS = "search@test.mail";
 	static final String PASSWORD = "search";
 	
@@ -67,29 +66,33 @@ public class TestSearch {
 	
 	@BeforeTest
 	public void createDriver() {
+		//setting path to chromedriver.exe
 		System.setProperty("webdriver.chrome.driver",
-                "C:\\Users\\Andrii\\AppData\\Local\\Google\\Chrome\\Application\\chromedriver.exe");
+				TestSearch.class.getResource("/chromedriver-windows-32bit.exe").getPath());
+        //        "C:\\Users\\Andrii\\AppData\\Local\\Google\\Chrome\\Application\\chromedriver.exe");
+		
 		ChromeOptions chromeOptions = new ChromeOptions();
 		chromeOptions.addArguments("--start-maximized");
 		//chromeOptions.addArguments("--headless");
 		driver = new ChromeDriver(chromeOptions);
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);//setting implicitly wait
 	}
 	
 	
 	@AfterTest
 	public void logoutAndClose() throws InterruptedException{
 		Thread.sleep(1000);
+		//search and click 'My account' drop-down list by css selector
 		driver.findElement(By.cssSelector("[title='My Account']")).click();					
 		driver.findElement(By.cssSelector("[href*='/logout']")).click();
+		//closing browser window
 		driver.close();
-		driver = null;
 	}
 	
 	
   	@Test(dataProvider = "request=mac")
 	public void testSearchWithEnter(String request, ArrayList<String> expectedResultList) throws NoSuchElementException,InterruptedException {
-		driver.get(MAIN_PAGE_URL);
+		driver.get("http://atqc-shop.epizy.com/");
 		driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).click();//find 'search' text field
 		driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).clear();
 		Thread.sleep(1000);
@@ -104,7 +107,7 @@ public class TestSearch {
   	
 	@Test(dataProvider = "request=hp")
 		public void testResultWithFilters(String request, ArrayList<String> expectedResultList) throws NoSuchElementException,InterruptedException {
-			driver.get(MAIN_PAGE_URL);
+			driver.get("http://atqc-shop.epizy.com/");
 			driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).click();
 			driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).clear();
 			driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).sendKeys(" ");
@@ -136,7 +139,7 @@ public class TestSearch {
 	
 		@Test(dataProvider = "request=mac")
 		public void testTopAndMainForms(String request, ArrayList<String> expectedResultList) throws NoSuchElementException,InterruptedException {
-			driver.get(MAIN_PAGE_URL);
+			driver.get("http://atqc-shop.epizy.com/");
 			driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).click();
 			driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).clear();
 			driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).sendKeys("mac");
@@ -163,7 +166,7 @@ public class TestSearch {
 	
 	@Test(dataProvider = "request=apple")
 	public void testLogedInAndGuest(String request, ArrayList<String> expectedResultList) throws NoSuchElementException,InterruptedException {
-		driver.get(MAIN_PAGE_URL);
+		driver.get("http://atqc-shop.epizy.com/");
 		driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).click();	
 		driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).clear();
 		driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).sendKeys(request);																		
