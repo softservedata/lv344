@@ -1,22 +1,11 @@
 package com.softserve.edu;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriverService;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -25,24 +14,16 @@ import org.testng.annotations.Test;
 
 public class AppTest 
 {
-	public static ChromeDriverService service;
-
 	@BeforeClass
 	public void createService() throws Exception {
-		service = new ChromeDriverService.Builder()
-				.usingDriverExecutable(
-						new File("C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe"))
-				.build();
-		service.start();
-		System.out.println("\t+++Service Start");
+		System.setProperty("webdriver.chrome.driver",
+				AppTest.class.getResource("/chromedriver-windows-32bit.exe").getPath());
 	}
 	@AfterClass
 	public void StopService() {
-		if (service != null) {
-			service.stop();
-			System.out.println("\t+++RemoteWebDriver Stop");
-		}
+		
 	}
+	
 	// list of tabs which expected on site
 		@DataProvider(parallel = true)
 		public Object[][] tabNames() {
@@ -62,24 +43,14 @@ public class AppTest
 		 */
 		@Test(dataProvider = "tabNames")
 		public void testHorizontalTabEquivalentVerticalTab(String tabName, String showAll, int x, int y) throws Exception {
-			ChromeOptions options = new ChromeOptions();
-			DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-			WebDriver driver = new RemoteWebDriver(service.getUrl(), capabilities);
+			WebDriver driver = new ChromeDriver();
+			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			driver.manage().window().maximize();
 			//for opening new Chrome window as cascade
 			driver.manage().window().setPosition(new Point(x, y));
-			// Set work of Chrome
-			options.addArguments("--start-maximized");
-			options.setBinary("C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe");
-			capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-			
-			System.out.println("\t+++RemoteWebDriver Start, service.getUrl()=" + service.getUrl());
-			
-			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 			// Go to main page of tested site
 			driver.get("http://atqc-shop.epizy.com/index.php?route=common/home");
-			
-			// create attribute for search some element on site
-			
+						
 			driver.findElement(By.linkText(tabName)).click();
 			Thread.sleep(1000);// for demonstration
 			
@@ -144,19 +115,9 @@ public class AppTest
 		public void testHorizontalDropdownListEquivalentVerticalDropdownList(String tabName, String element, int x, int y)
 																	throws Exception {
 
-			ChromeOptions options = new ChromeOptions();
-			DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-			WebDriver driver = new RemoteWebDriver(service.getUrl(), capabilities);
-			//for opening new Chrome window as cascade
-			driver.manage().window().setPosition(new Point(x, y));
-			// Set work of Chrome
-			options.addArguments("--start-maximized");
-			options.setBinary("C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe");
-			capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-			
-			System.out.println("\t+++RemoteWebDriver Start, service.getUrl()=" + service.getUrl());
-			//
+			WebDriver driver = new ChromeDriver();
 			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			driver.manage().window().maximize();
 			// Go to main page of tested site
 			driver.get("http://atqc-shop.epizy.com/index.php?route=common/home");
 			// find tab
@@ -214,9 +175,11 @@ public class AppTest
 											int x, int y, int expectedQuantity)
 				throws Exception {
 
-			ChromeOptions options = new ChromeOptions();
-			DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-			WebDriver driver = new RemoteWebDriver(service.getUrl(), capabilities);
+			WebDriver driver = new ChromeDriver();
+			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			driver.manage().window().maximize();
+			//for opening new Chrome window as cascade
+			driver.manage().window().setPosition(new Point(x, y));
 			//variable for counting sum of products in horizontal menu
 			int sumOfProductsHor = 0;
 			//variable for counting sum of products in vertical menu
@@ -225,16 +188,7 @@ public class AppTest
 			int sumOfProductsRef = 0;
 			String myXPathVer = "//*[@id='column-left']/div/a[contains(text(), '%s')]";
 			String myXPathRef = "//*[@id='content']/div/div/ul/li/a[contains(text(), '%s')]";
-			// Set work of Chrome
-			options.addArguments("--start-maximized");
-			options.setBinary("C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe");
-			capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-			//for opening new Chrome window as cascade
-			driver.manage().window().setPosition(new Point(x, y));
 			
-			System.out.println("\t+++RemoteWebDriver Start, service.getUrl()=" + service.getUrl());
-			//
-			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 			// Go to main page of tested site
 			driver.get("http://atqc-shop.epizy.com/index.php?route=common/home");
 			// find tab
@@ -261,9 +215,6 @@ public class AppTest
 			Assert.assertEquals(sumOfProductsVer, expectedQuantity);
 			
 			// count sum quantity of products in "Refine Search" menu
-			
-			
-			// count sum quantity of products in "Refine Search" menu
 			sumOfProductsRef += RegexUtils.extractFirstNumber(driver.findElement(By.xpath(String.format(myXPathRef, element1)))
 					.getText());
 			sumOfProductsRef += RegexUtils.extractFirstNumber(driver.findElement(By.xpath(String.format(myXPathRef, element2)))
@@ -285,10 +236,11 @@ public class AppTest
 											String element1, String element2, String element3, String element4,
 											int x, int y, int expectedQuantity)
 				throws Exception {
-
-			ChromeOptions options = new ChromeOptions();
-			DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-			WebDriver driver = new RemoteWebDriver(service.getUrl(), capabilities);
+			WebDriver driver = new ChromeDriver();
+			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			driver.manage().window().maximize();
+			//for opening new Chrome window as cascade
+			driver.manage().window().setPosition(new Point(x, y));
 			//variable for counting sum of products in horizontal menu
 			int sumOfProductsHor = 0;
 			//variable for counting sum of products in vertical menu
@@ -296,17 +248,8 @@ public class AppTest
 			//variable for counting sum of products in "Refine Search" menu
 			int sumOfProductsRef = 0;
 			String myXPathVer = "//*[@id='column-left']/div/a[contains(text(), '%s')]";
-			String myXPathRef = "//*[@id='content']/div/div/ul/li/a[contains(text(), '%s')]";
-			// Set work of Chrome
-			options.addArguments("--start-maximized");
-			options.setBinary("C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe");
-			capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-			//for opening new Chrome window as cascade
-			driver.manage().window().setPosition(new Point(x, y));
+			String myXPathRef = "//*[@id='content']/div/div/ul/li/a[contains(text(), '%s')]";	
 			
-			System.out.println("\t+++RemoteWebDriver Start, service.getUrl()=" + service.getUrl());
-			//
-			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 			// Go to main page of tested site
 			driver.get("http://atqc-shop.epizy.com/index.php?route=common/home");
 			// find tab
@@ -368,9 +311,11 @@ public class AppTest
 											int x, int y, int expectedQuantity)
 				throws Exception {
 
-			ChromeOptions options = new ChromeOptions();
-			DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-			WebDriver driver = new RemoteWebDriver(service.getUrl(), capabilities);
+			WebDriver driver = new ChromeDriver();
+			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			driver.manage().window().maximize();
+			//for opening new Chrome window as cascade
+			driver.manage().window().setPosition(new Point(x, y));
 			//variable for counting sum of products in horizontal menu
 			int sumOfProductsHor = 0;
 			//variable for counting sum of products in vertical menu
@@ -379,16 +324,7 @@ public class AppTest
 			int sumOfProductsRef = 0;
 			String myXPathVer = "//*[@id='column-left']/div/a[contains(text(), '%s')]";
 			String myXPathRef = "//*[@id='content']/div/div/ul/li/a[contains(text(), '%s')]";
-			// Set work of Chrome
-			options.addArguments("--start-maximized");
-			options.setBinary("C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe");
-			capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-			//for opening new Chrome window as cascade
-			driver.manage().window().setPosition(new Point(x, y));
 			
-			System.out.println("\t+++RemoteWebDriver Start, service.getUrl()=" + service.getUrl());
-			//
-			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 			// Go to main page of tested site
 			driver.get("http://atqc-shop.epizy.com/index.php?route=common/home");
 			// find tab
@@ -443,9 +379,10 @@ public class AppTest
 											int expectedQuantity)
 				throws Exception {
 
-			ChromeOptions options = new ChromeOptions();
-			DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-			WebDriver driver = new RemoteWebDriver(service.getUrl(), capabilities);
+			WebDriver driver = new ChromeDriver();
+			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			driver.manage().window().maximize();
+			
 			//variable for counting sum of products in horizontal menu
 			int sumOfProductsHor = 0;
 			//variable for counting sum of products in vertical menu
@@ -454,14 +391,7 @@ public class AppTest
 			int sumOfProductsRef = 0;
 			String myXPathVer = "//*[@id='column-left']/div/a[contains(text(), '%s')]";
 			String myXPathRef = "//*[@id='content']/div/div/ul/li/a[contains(text(), '%s')]";
-			// Set work of Chrome
-			options.addArguments("--start-maximized");
-			options.setBinary("C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe");
-			capabilities.setCapability(ChromeOptions.CAPABILITY, options);
 			
-			System.out.println("\t+++RemoteWebDriver Start, service.getUrl()=" + service.getUrl());
-			//
-			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 			// Go to main page of tested site
 			driver.get("http://atqc-shop.epizy.com/index.php?route=common/home");
 			// find tab
