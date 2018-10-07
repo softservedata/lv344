@@ -5,14 +5,9 @@ import java.util.regex.Pattern;
 
 public final class RegexUtils {
 
-    private final static String DOUBLE_UI_SEPARATOR = ",";
     private final static String PATTERN_UNSIGNED_NUMBER = "\\d+";
-    // private final static String PATTERN_UNSIGNED_DOUBLE = "\\d+(\\.\\d+)*";
-    private final static String PATTERN_UNSIGNED_DOUBLE = "\\d+(,\\d+)*\\.\\d{2}";
     private final static String EXTRACT_NUMBER_MESSAGE = "NumberFormatException for pattern =  %s text =  %s";
 
-    private RegexUtils() {
-    }
 
     public static boolean isTextMatches(String pattern, String text) {
         Matcher matcher = Pattern.compile(pattern).matcher(text);
@@ -29,7 +24,7 @@ public final class RegexUtils {
     }
 
     public static int extractFirstNumber(String text) {
-        int result = -1;
+        int result = 0;
         String extractText = extractFirstString(PATTERN_UNSIGNED_NUMBER, text);
         if (!extractText.isEmpty()) {
             try {
@@ -42,36 +37,5 @@ public final class RegexUtils {
         return result;
     }
 
-    public static double extractFirstDouble(String text) {
-        double result = -1;
-        String extractText = extractFirstString(PATTERN_UNSIGNED_DOUBLE, text);
-        if (!extractText.isEmpty()) {
-            try {
-                result = Double.parseDouble(commaRemover(extractText));
-
-            } catch (NumberFormatException e) {
-                // TODO Develop Custom Exception
-                throw new RuntimeException(String.format(EXTRACT_NUMBER_MESSAGE, PATTERN_UNSIGNED_DOUBLE, text));
-            }
-        }
-        return result;
-    }
-
-    public static boolean isDoubleMatches(String text) {
-    	return isTextMatches(PATTERN_UNSIGNED_DOUBLE, text);
-    }
-
-    public static String extractPathWithoutServer(String pattern, String text) {
-        String result = text;
-        Matcher matcher = Pattern.compile(pattern).matcher(text);
-        if (matcher.find()) {
-            result = text.substring(matcher.end() - 1);
-        }
-        return result;
-    }
-
-    private static String commaRemover(String text) {
-    	return text.replaceAll(DOUBLE_UI_SEPARATOR, new String());
-    }
 
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Suite">
+	
+	<test verbose="1" name="RunTests">
+		
+		<classes>
+			<class name="com.softserve.edu.AppTest">
+				<methods>
+					<include name="testHorizontalTabEquivalentVerticalTab" />
+					<include name="testHorizontalDropdownListEquivalentVerticalDropdownList" />
+					<include name="testEquivalenceQuantityOfProductsOfHorizontalVerticalRefineSearchMenu1" />
+					<include name="testEquivalenceQuantityOfProductsOfHorizontalVerticalRefineSearchMenu2" />
+					<include name="testEquivalenceQuantityOfProductsOfHorizontalVerticalRefineSearchMenu3" />
+					<include name="testEquivalenceQuantityOfProductsOfHorizontalVerticalRefineSearchMenu4" />
+				</methods>
+			</class>
+		</classes>
+	</test> <!-- Test -->
+
+</suite> <!-- Suite -->
