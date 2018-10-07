@@ -23,9 +23,14 @@ public class Tests {
 	private final String ITEM_PRICE_ByXpath = "//div[contains(@class, 'product-layout')]//a[text()='%s']"
 			+ "/../following-sibling::p[contains(@class, 'price')]";
 	
-
 	@BeforeMethod
-	public void SetUp() throws Exception {
+	public void connection() {
+		System.setProperty("webdriver.chrome.driver",
+				Tests.class.getResource("/chromedriver-windows-32bit.exe").getPath());
+	}
+	
+	@BeforeMethod
+	public void setUp() {
 		System.setProperty("webdriver.chrome.driver",
 				Tests.class.getResource("/chromedriver-windows-32bit.exe").getPath());
 		driver = new ChromeDriver();
@@ -34,7 +39,7 @@ public class Tests {
 	}
 
 	@AfterMethod
-	public void TearDown() throws Exception {
+	public void tearDown() {
 		driver.quit();
 	}
 
