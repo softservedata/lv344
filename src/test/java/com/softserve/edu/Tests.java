@@ -13,8 +13,11 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-//import UITests.RegexUtils;
-
+/**
+ * Checking the Cart Functionality
+ * 
+ * @author Yurii Stasiv
+ */
 public class Tests {
 	WebDriver driver = null;
 	String ststus1 = "Running>> ";
@@ -43,6 +46,9 @@ public class Tests {
 		driver.quit();
 	}
 
+	/** 
+	 * Test for further testing
+	 */
 	@Test(enabled = true)
 	public void SmokeTestOpenCart() throws Exception {
 		System.out.println("SmokeTestOpenCart start");
@@ -66,7 +72,10 @@ public class Tests {
 		System.out.println("All is great, you can continue.");
 		Thread.sleep(4000); // For demonstration
 	}
-
+	
+	/** 
+	 * The test checks the addition of the product to the cart
+	 */
 	@Test(dependsOnMethods = { "SmokeTestOpenCart" }, enabled = true)
 	public void AddItemToCart() throws Exception {
 		System.out.println("AddItemToCart start");
@@ -103,7 +112,10 @@ public class Tests {
 		System.out.println("All data display correct.");
 		Thread.sleep(4000); // For demonstration
 	}
-		
+	
+	/** 
+	 * The test checks the addition of several items to the cart
+	 */
 	@Test(dependsOnMethods = { "SmokeTestOpenCart", "AddItemToCart" }, enabled = true)
 	public void AddSingleItemToCart() throws Exception {
 		System.out.println("AddSingleItemToCart start");
@@ -159,6 +171,9 @@ public class Tests {
 		Thread.sleep(4000); // For demonstration	
 	}	
 	
+		/** 
+		 * The test checks the change in the number of items in the cart
+		 */
 	@Test(dependsOnMethods = { "SmokeTestOpenCart", "AddItemToCart" }, enabled = true)
 	public void ChangeNumOfItemsInCart() throws Exception {
 		System.out.println("ChangeNumOfItemsInCart start");
@@ -199,6 +214,9 @@ public class Tests {
 		Thread.sleep(4000); // For demonstration
 	}
 	
+	/**
+	 * The test checks the error message when trying to enter non-valid data
+	 */
 	@Test(dependsOnMethods = { "SmokeTestOpenCart" }, enabled = true)
 	public void ErrorMessageChangeNumOfItemsInCart() throws Exception {
 		System.out.println("ErrorMessageChangeNumOfItemsInCart start");
@@ -232,6 +250,9 @@ public class Tests {
 		Thread.sleep(4000); // For demonstration	
 	}
 	
+	/**
+	 * The test checks if the product is stored after re-entering
+	 */
 	@Test(dependsOnMethods = { "SmokeTestOpenCart", "AddItemToCart" }, enabled = true)
 	public void CartAfterRelogin() throws Exception {
 		System.out.println("CartAfterRelogin start");
