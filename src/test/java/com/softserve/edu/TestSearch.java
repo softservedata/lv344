@@ -5,6 +5,8 @@ import org.testng.annotations.DataProvider;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -112,6 +114,7 @@ public class TestSearch {
 		Collections.sort(actualResultList);
 		//check if results are right
 		Assert.assertEquals(expectedResultList, actualResultList);	
+		Thread.sleep(2000);//only for demonstration
 	}
 
 
@@ -156,6 +159,8 @@ public class TestSearch {
 		Thread.sleep(1500);//only for demonstration
 
 		Assert.assertEquals(expectedResultList, getActualResultList());	
+		Thread.sleep(2000);//only for demonstration
+
 
 	}
 
@@ -191,6 +196,8 @@ public class TestSearch {
 		actualResultList = getActualResultList();
 		Collections.sort(actualResultList);
 		Assert.assertEquals(expectedResultList, actualResultList);
+		Thread.sleep(2000);//only for demonstration
+
 	}
 
 
@@ -238,11 +245,14 @@ public class TestSearch {
 
 		actualResultList = getActualResultList();
 		Collections.sort(actualResultList);
-		Assert.assertEquals(expectedResultList, actualResultList);		}
+		Assert.assertEquals(expectedResultList, actualResultList);		
+		Thread.sleep(2000);//only for demonstration
+
+		}
 
 	/**
 	 * 
-	 * @return List of goods on the page
+	 * @return List of good names on the page
 	 */
 	public List<String> getActualResultList() {
 		//find all good names on the page
