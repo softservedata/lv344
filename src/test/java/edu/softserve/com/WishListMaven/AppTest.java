@@ -21,6 +21,7 @@ import org.testng.annotations.Test;
 public class AppTest {
 	private WebDriver driver;
 
+	
 	@BeforeTest
 	public void beforeTest() {
 		System.setProperty("webdriver.chrome.driver",
@@ -34,6 +35,8 @@ public class AppTest {
 		driver.quit();
 	}
 
+	
+	//Go to application and login
 	@BeforeMethod
 	public void beforeMethod() {
 
@@ -50,18 +53,21 @@ public class AppTest {
 		driver.findElement(By.xpath("//input[@type='submit']")).click();
 
 	}
-
+	
+    //provide log off operation
 	@AfterMethod
 	public void afterMethod() {
 		driver.findElement(By.xpath("//*[contains(@class, 'fa fa-user')]")).click();
 		driver.findElement(By.xpath("//a[contains(text(),'Logout')]")).click();
-		// driver.quit();
 
 	}
 
-	@Test // Verify Remove Button from Wish List
+	
+	//check remove button functionality on 'wish list' page
+	@Test 
 	public void removebuttonfromwishlist() throws Exception {
 
+		//Add product to wish list
 		int countOld = RegexUtils.extractFirstNumber(driver.findElement(By.id("wishlist-total")).getAttribute("title"));
 
 		driver.findElement(By.xpath("//a[contains(@class, 'dropdown-toggle') and text() = 'Tablets']")).click();
@@ -80,19 +86,15 @@ public class AppTest {
 		String mes = "Success: You have added " + productname + " to your wish list!";
 		Assert.assertTrue(message.getText().startsWith(mes));
 
-//		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-//	(new WebDriverWait(driver, 10)).until(
-//			ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class= 'alert alert-success']")));
-//		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-		Thread.sleep(500);
+		Thread.sleep(500); // for demonstration
 
 		driver.findElement(By.xpath("//*[@id='wishlist-total']")).click();
 
 		int countNew = RegexUtils.extractFirstNumber(driver.findElement(By.id("wishlist-total")).getAttribute("title"));
 		int expected = countOld + 1;
 		assertEquals(countNew, expected);
-
+		
+         //remove product from wish list
 		driver.findElement(By.xpath("//a[contains(text(),'" + productname + "')]/../following-sibling::td//a")).click();
 
 		message = driver.findElement(By.xpath("//*[contains(@class, 'alert alert-success')]"));
@@ -113,12 +115,14 @@ public class AppTest {
 
 	}
 
-	@Test // Verify Add to cart button from Wish List
+	// check possibility to add product from wish list to cart using 'add to cart' button
+	@Test 
 	public void addcartbuttonfromwishlist() throws Exception {
 
+		//Add product to wish list
 		driver.findElement(By.xpath("//a[contains(@class, 'dropdown-toggle') and text() = 'Tablets']")).click();
 		driver.findElement(By.xpath("//a[contains(@class, 'see-all') and text() = 'Show All Tablets']")).click();
-		Thread.sleep(500);
+		Thread.sleep(500);// for demonstration
 
 		WebElement product = driver.findElement(By.xpath("//*[@class='product-thumb']"))
 				.findElement(By.xpath(".//img"));
@@ -129,44 +133,39 @@ public class AppTest {
 				"//a[contains(text(),'" + productname + "')]/../../..//button/..//i[contains(@class,'fa fa-heart')]"))
 				.click();
 
-//		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-//		(new WebDriverWait(driver, 10)).until(
-//				ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='wishlist-total']")));
-//		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-		Thread.sleep(1000);
+		Thread.sleep(1000);// for demonstration
 
 		driver.findElement(By.xpath("//*[@id='wishlist-total']")).click();
 
+		//add product to cart
 		driver.findElement(By.xpath("//a[contains(text(),'" + productname
 				+ "')]/../following-sibling::td//*[@class='fa fa-shopping-cart']")).click();
-		Thread.sleep(500);
+		Thread.sleep(500);// for demonstration
 		WebElement message = driver.findElement(By.xpath("//*[contains(@class, 'alert alert-success')]"));
 		String mes = "Success: You have added " + productname + " to your shopping cart!";
 		Assert.assertTrue(message.getText().startsWith(mes));
 
-//		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-//		(new WebDriverWait(driver, 10)).until(
-//				ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@title, 'Shopping Cart')]")));
-//		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
 		driver.findElement(By.xpath("//a[contains(@title, 'Shopping Cart')]")).click();
-		Thread.sleep(500);
+		Thread.sleep(500);// for demonstration
 
 		message = driver
 				.findElement(By.xpath("//a[contains(text(),'" + productname + "')]/../following-sibling::td//input"));
 		assertTrue(message.isDisplayed());
+		
+		//delete product from cart and from wish list
 		driver.findElement(By.xpath(
 				"//a[contains(text(),'Amazon Fire Case')]/../following-sibling::td//button//i[@class='fa fa-times-circle']"))
 				.click();
-		Thread.sleep(500);
+		Thread.sleep(500);// for demonstration
 		driver.findElement(By.id("wishlist-total")).click();
-		Thread.sleep(500);
+		Thread.sleep(500);// for demonstration
 		driver.findElement(By.xpath("//a[contains(text(),'" + productname + "')]/../following-sibling::td//a")).click();
 
 	}
 
-	@Test // Verify AddToWishList button from main page of product
+	
+	//Add to wish list a product from 'product' page pressing button according button
+	@Test 
 	public void addtowishlistbyproductpage() throws Exception {
 
 		driver.findElement(By.xpath("//a[contains(@class, 'dropdown-toggle') and text() = 'Tablets']")).click();
@@ -177,24 +176,21 @@ public class AppTest {
 		String productname;
 		productname = product.getAttribute("title");
 
+		
 		driver.findElement(By.xpath("//*[contains(@class, 'product-thumb')]"))
 				.findElement(By.xpath(".//a[contains(@href, *)]")).click();
-		// Thread.sleep(500);
 		driver.findElement(By.xpath("//*[@class='btn btn-default']//*[@class='fa fa-heart']")).click();
-		// Thread.sleep(500);
 
+		
 		WebElement message = driver.findElement(By.xpath("//*[@class= 'alert alert-success']"));
 		String mes = "Success: You have added " + productname + " to your wish list!";
 		Assert.assertTrue(message.getText().startsWith(mes));
 
 		driver.findElement(By.xpath("//*[@id='wishlist-total']")).click();
-		// Thread.sleep(500);
 
 		message = driver
 				.findElement(By.xpath("//a[contains(text(),'" + productname + "')]/../following-sibling::td//a"));
 		assertTrue(message.isDisplayed());
-
-		// Thread.sleep(500);
 
 		driver.findElement(By.xpath("//a[contains(text(),'" + productname + "')]/../following-sibling::td//a")).click();
 

@@ -12,8 +12,8 @@
 			<class name="edu.softserve.com.WishListMaven.AppTest">
 				<methods>
 					<include name="removebuttonfromwishlist" />
-					<include name="addtowishlistbyproductpage" />
-					<include name="addcartbuttonfromwishlist" />
+				 	<include name="addtowishlistbyproductpage" /> 
+				 	<include name="addcartbuttonfromwishlist" /> 
 			
 				</methods>
 			</class>
