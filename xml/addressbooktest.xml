@@ -5,7 +5,7 @@
 		<classes>
 			<class name="com.softserve.edu.selen.AddressBookEntriesTest">
 				<methods>
-					<include name="verifyAddDeleteAddress" />
+					<include name="confrimAddDeleteAddress" />
 				</methods>
 			</class>
 		</classes>

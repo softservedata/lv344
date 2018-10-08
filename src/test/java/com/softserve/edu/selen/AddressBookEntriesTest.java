@@ -31,7 +31,7 @@ public class AddressBookEntriesTest {
 	@BeforeClass
 	public void setUp() {
 		System.setProperty("webdriver.chrome.driver",
-				"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe");
+				AddressBookEntriesTest.class.getResource("/chromedriver-windows-32bit.exe").getPath());
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--start-maximized");
 		driver = new ChromeDriver(options);
@@ -39,7 +39,7 @@ public class AddressBookEntriesTest {
 	}
 
 	/**
-	 * Set started options for test: open necessary web page, login with valid
+	 * Set started options for test: open OpenCart, login with valid
 	 * credentials
 	 */
 	@BeforeMethod
@@ -74,7 +74,7 @@ public class AddressBookEntriesTest {
 	 * address is added, deletes address, verifies address is deleted
 	 */
 	@Test
-	public void verifyAddDeleteAddress() {
+	public void confrimAddDeleteAddress() {
 
 		// Open new address link
 		driver.findElement(By.xpath("//a[text()='Address Book']")).click();

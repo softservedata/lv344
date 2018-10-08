@@ -5,7 +5,7 @@
 		<classes>
 			<class name="com.softserve.edu.selen.AddressBookEntriesParallelTest">
 				<methods>
-					<include name="verifyAddAddressWithEmptyFields" />
+					<include name="confrimAddAddressWithEmptyFields" />
 				</methods>
 			</class>
 		</classes>

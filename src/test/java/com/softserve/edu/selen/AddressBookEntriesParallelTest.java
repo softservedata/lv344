@@ -22,7 +22,6 @@ public class AddressBookEntriesParallelTest {
 	/**
 	 * Data provider for test that runs parallel, @return xpath to error message
 	 * and text error message contains
-	 *
 	 */
 	@DataProvider(parallel = true)
 	public Object[][] addressBookDataProvider() {
@@ -46,7 +45,7 @@ public class AddressBookEntriesParallelTest {
 	@BeforeClass
 	public void setUp() {
 		System.setProperty("webdriver.chrome.driver",
-				"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe");
+				AddressBookEntriesParallelTest.class.getResource("/chromedriver-windows-32bit.exe").getPath());
 	}
 
 	/**
@@ -54,7 +53,7 @@ public class AddressBookEntriesParallelTest {
 	 * pathToErrorMessage contains valid message @param message
 	 */
 	@Test(dataProvider = "addressBookDataProvider")
-	public void verifyAddAddressWithEmptyFields(String pathToErrorMessage, String message) throws InterruptedException {
+	public void confrimAddAddressWithEmptyFields(String pathToErrorMessage, String message) throws InterruptedException {
 
 		// Set properties for web driver
 		ChromeOptions options = new ChromeOptions();
@@ -62,7 +61,7 @@ public class AddressBookEntriesParallelTest {
 		WebDriver driver = new ChromeDriver(options);
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
-		// Open necessary web page
+		// Open OpenCart
 		driver.get("http://atqc-shop.epizy.com/");
 
 		// Login with valid credentials

@@ -16,7 +16,7 @@ public final class Parser {
 	/** Integer number that is extracted */
 	private final static String PATTERN_UNSIGNED_NUMBER = "\\d+";
 
-	/** Error mesaage appers when extraction failed */
+	/** Error message appears when extraction failed */
 	private final static String EXTRACT_NUMBER_MESSAGE = "NumberFormatException for pattern =  %s text =  %s";
 
 	/**

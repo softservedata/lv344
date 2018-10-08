@@ -5,8 +5,8 @@
 		<classes>
 			<class name="com.softserve.edu.selen.ProductComparisonTest">
 				<methods>
-					<include name="verifyAddProductToCompareList"/>
-					<include name="verifyAddFiveProducts"/>
+					<include name="checkAddProductToCompareList"/>
+					<include name="confirmAddFiveProducts"/>
 				</methods>
 			</class>
 		</classes>

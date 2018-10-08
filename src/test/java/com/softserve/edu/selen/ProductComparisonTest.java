@@ -34,9 +34,9 @@ public class ProductComparisonTest {
 	 * Initialize and set properties for web driver one time before all tests
 	 */
 	@BeforeClass
-	public void setUp() {
+	public void setUp() {		
 		System.setProperty("webdriver.chrome.driver",
-				"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe");
+				ProductComparisonTest.class.getResource("/chromedriver-windows-32bit.exe").getPath());
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--start-maximized");
 		driver = new ChromeDriver(options);
@@ -52,7 +52,7 @@ public class ProductComparisonTest {
 	}
 
 	/**
-	 * Set started options for test: open necessary web page
+	 * Set started options for test: open OpenCart
 	 */
 	@BeforeMethod
 	public void testSetUp() {
@@ -64,17 +64,17 @@ public class ProductComparisonTest {
 	 * deletes product from compare list, verifies product is deleted from
 	 * compare list
 	 */
-	@Test(priority = 0)
-	public void verifyAddProductToCompareList() {
+	@Test(priority = 1)
+	public void checkAddProductToCompareList() {
 
-		// Add Mac to compare list
+		// Add iMac to compare list
 		driver.findElement(By.xpath("//a[text()='Desktops']")).click();
 		driver.findElement(By.xpath("//a[text()='Mac (1)']")).click();
 		driver.findElement(By
 				.xpath("//div[contains(@class,'product-layout')]//a[text()='iMac']/../../following-sibling::div/button[contains(@onclick,'compare')]"))
 				.click();
 
-		// Verify that Mac added to compare list
+		// Verify that iMac added to compare list
 		Assert.assertTrue(driver.findElement(By.cssSelector("div.alert.alert-success")).getText()
 				.contains("Success: You have added iMac to your product comparison!"));
 		driver.findElement(By.className("close"));
@@ -84,7 +84,7 @@ public class ProductComparisonTest {
 		Assert.assertEquals(numberOfProduct, 1);
 		driver.findElement(By.id("compare-total")).click();
 
-		// Delete Mac from compare list
+		// Delete iMac from compare list
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",
 				driver.findElement(By.tagName("footer")));
 		driver.findElement(By.cssSelector("a.btn.btn-danger.btn-block")).click();
@@ -99,8 +99,8 @@ public class ProductComparisonTest {
 	 * 
 	 * @throws InterruptedException
 	 */
-	@Test(priority = 1)
-	public void verifyAddFiveProducts() throws InterruptedException {
+	@Test(priority = 2)
+	public void confirmAddFiveProducts() throws InterruptedException {
 
 		// Added four product to compare list
 		driver.findElement(By.xpath("//a[text() = 'Components']")).click();
@@ -134,6 +134,8 @@ public class ProductComparisonTest {
 		int numberOfProduct = Parser.extractFirstNumber(driver.findElement(By.id("compare-total")).getText());
 		Assert.assertEquals(numberOfProduct, 4);
 		driver.findElement(By.id("compare-total")).click();
+		
+		//For demonstration only
 		Thread.sleep(1000);
 
 		// Added fifth product to compare list

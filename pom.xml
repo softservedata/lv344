@@ -204,7 +204,9 @@
 						</surefire.reports.directory>
 					</systemPropertyVariables>
 					<suiteXmlFiles>
-						<suiteXmlFile>testng2.xml</suiteXmlFile>
+						<suiteXmlFile>${project.basedir}/xml/addressbooktest.xml</suiteXmlFile>
+						<suiteXmlFile>${project.basedir}/xml/addressbookentriesparalleltest.xml</suiteXmlFile>
+						<suiteXmlFile>${project.basedir}/xml/productcomparisontest.xml</suiteXmlFile>					
 					</suiteXmlFiles>
 					<reportsDirectory>${testng.reports.directory}</reportsDirectory>
 				</configuration>
@@ -222,7 +224,7 @@
 							<goal>echo</goal>
 						</goals>
 						<configuration>
-							<message>+++++Operation System: ${os.detected.name}</message>
+							<message>+++++basedir: ${project.basedir}</message>
 						</configuration>
 					</execution>
 				</executions>
