@@ -85,7 +85,7 @@ public class TestSearch {
 
 	@AfterTest
 	public void logoutAndClose() throws InterruptedException{
-		Thread.sleep(1500);//only for demonstration
+		Thread.sleep(2000);//only for demonstration
 		//search and click 'My account' drop-down list by css selector
 		driver.findElement(By.cssSelector("[title='My Account']")).click();					
 		driver.findElement(By.cssSelector("[href*='/logout']")).click();
@@ -102,11 +102,11 @@ public class TestSearch {
 
 		driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).click();
 		driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).clear();
-		Thread.sleep(1500);//only for demonstration 
+		Thread.sleep(2000);//only for demonstration 
 
 		//type search request and press 'Enter' key
 		driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).sendKeys(request+Keys.ENTER);
-		Thread.sleep(1500);//only for demonstration
+		Thread.sleep(2000);//only for demonstration
 
 		//search all goods on the page and put them in the list
 		List<String> actualResultList = getActualResultList();
@@ -126,37 +126,35 @@ public class TestSearch {
 		driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).click();
 		driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).clear();
 		driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).sendKeys(" ");
-		Thread.sleep(1500);//only for demonstration
+		Thread.sleep(2000);//only for demonstration
 		//click search
 		driver.findElement(By.cssSelector(".btn.btn-default.btn-lg[type='button']")).click();
-		Thread.sleep(1500);//only for demonstration
+		Thread.sleep(2000);//only for demonstration
 		//type search request to main search field
 		driver.findElement(By.id("input-search")).click();
 		driver.findElement(By.id("input-search")).clear();
 		driver.findElement(By.id("input-search")).sendKeys(request);
-		Thread.sleep(1500);//only for demonstration
+		Thread.sleep(2000);//only for demonstration
 		//click 'search in descriptions' textfield
 		driver.findElement(By.id("description")).click();
-		Thread.sleep(1500);//only for demonstration
+		Thread.sleep(2000);//only for demonstration
 		
 		driver.findElement(By.id("button-search")).click();
-		Thread.sleep(1500);//only for demonstration
+		Thread.sleep(2000);//only for demonstration
 		//click 'list' button
 		driver.findElement(By.cssSelector(".fa.fa-th-list")).click();
-		Thread.sleep(1500);//only for demonstration
+		Thread.sleep(2000);//only for demonstration
 		//click 'sort' drop-down list
 		driver.findElement(By.id("input-sort")).click();
-		Thread.sleep(1500);//only for demonstration
+		Thread.sleep(2000);//only for demonstration
 		//choose option
 		//search element by partial value
 		driver.findElement(By.cssSelector("[value*='price&order=DESC']")).click();
-		Thread.sleep(1500);//only for demonstration
+		Thread.sleep(2000);//only for demonstration
 		//click 'show' drop-down list
-		driver.findElement(By.id("input-limit")).click();
-		Thread.sleep(1500);//only for demonstration
-		
+		driver.findElement(By.id("input-limit")).click();		
 		driver.findElement(By.xpath("//option[text()='15']")).click();
-		Thread.sleep(1500);//only for demonstration
+		Thread.sleep(2000);//only for demonstration
 
 		Assert.assertEquals(expectedResultList, getActualResultList());	
 		Thread.sleep(2000);//only for demonstration
@@ -173,25 +171,25 @@ public class TestSearch {
 		driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).click();
 		driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).clear();
 		driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).sendKeys("mac");
-		Thread.sleep(1500);//only for demonstration
+		Thread.sleep(2000);//only for demonstration
 
 		driver.findElement(By.cssSelector(".btn.btn-default.btn-lg[type='button']")).click();
-		Thread.sleep(1500);//only for demonstration
+		Thread.sleep(2000);//only for demonstration
 
 		List<String> actualResultList = getActualResultList();
 		Collections.sort(actualResultList);
 		Assert.assertEquals(expectedResultList, actualResultList);	
 
 		driver.findElement(By.id("input-search")).click();
-		Thread.sleep(1500);//only for demonstration
+		Thread.sleep(2000);//only for demonstration
 
 		driver.findElement(By.id("input-search")).clear();
 		driver.findElement(By.id("input-search")).sendKeys("mac");;
 		driver.findElement(By.id("button-search")).click();
-		Thread.sleep(1500);//only for demonstration
+		Thread.sleep(2000);//only for demonstration
 
 		driver.findElement(By.cssSelector(".btn.btn-default.btn-lg[type='button']")).click();
-		Thread.sleep(1500);//only for demonstration
+		Thread.sleep(2000);//only for demonstration
 
 		actualResultList = getActualResultList();
 		Collections.sort(actualResultList);
@@ -209,39 +207,39 @@ public class TestSearch {
 		driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).click();	
 		driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).clear();
 		driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).sendKeys(request);																		
-		Thread.sleep(1500);//only for demonstration
+		Thread.sleep(2000);//only for demonstration
 
 		driver.findElement(By.cssSelector(".btn.btn-default.btn-lg[type='button']")).click();
-		Thread.sleep(1500);//only for demonstration
+		Thread.sleep(2000);//only for demonstration
 
 		List<String> actualResultList = getActualResultList();
 		Collections.sort(actualResultList);
 		Assert.assertEquals(expectedResultList, actualResultList);	
-		Thread.sleep(1500);//only for demonstration
+		Thread.sleep(2000);//only for demonstration
 		//click 'My account' drop-down list in the top menu
 		driver.findElement(By.cssSelector("[title='My Account']")).click();					
-		Thread.sleep(1500);//only for demonstration
+		Thread.sleep(2000);//only for demonstration
 		//choose option 'Login'
 		driver.findElement(By.cssSelector("[href*='/login']")).click();
-		Thread.sleep(1500);//only for demonstration
+		Thread.sleep(2000);//only for demonstration
 		//set email 
 		driver.findElement(By.name("email")).click();				
 		driver.findElement(By.name("email")).clear();
 		driver.findElement(By.name("email")).sendKeys(EMAIL_ADDRESS);		
-		Thread.sleep(1500);//only for demonstration
+		Thread.sleep(2000);//only for demonstration
 		//set password
 		driver.findElement(By.name("password")).click();									
 		driver.findElement(By.name("password")).clear();
 		driver.findElement(By.name("password")).sendKeys(PASSWORD+ Keys.ENTER);			
-		Thread.sleep(1500);//only for demonstration
+		Thread.sleep(2000);//only for demonstration
 		//repeat search
 		driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).click();
 		driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).clear();
 		driver.findElement(By.cssSelector(".form-control.input-lg[name='search']")).sendKeys(request);																		
-		Thread.sleep(1500);//only for demonstration
+		Thread.sleep(2000);//only for demonstration
 
 		driver.findElement(By.cssSelector(".btn.btn-default.btn-lg[type='button']")).click();
-		Thread.sleep(1500);//only for demonstration
+		Thread.sleep(2000);//only for demonstration
 
 		actualResultList = getActualResultList();
 		Collections.sort(actualResultList);
