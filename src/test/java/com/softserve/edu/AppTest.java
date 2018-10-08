@@ -45,7 +45,7 @@ public class AppTest
 		public void testHorizontalTabEquivalentVerticalTab(String tabName, String showAll, int x, int y) throws Exception {
 			WebDriver driver = new ChromeDriver();
 			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-			driver.manage().window().maximize();
+			//driver.manage().window().maximize();
 			//for opening new Chrome window as cascade
 			driver.manage().window().setPosition(new Point(x, y));
 			// Go to main page of tested site
@@ -76,7 +76,7 @@ public class AppTest
 		}
 
 		
-		@DataProvider//(parallel = true)
+		@DataProvider(parallel = true)
 		public Object[][] dropdownList() {
 			return new Object[][] { {"Desktops", "PC", 0, 0},
 									{"Desktops", "Mac", 10, 10},
@@ -116,8 +116,9 @@ public class AppTest
 																	throws Exception {
 
 			WebDriver driver = new ChromeDriver();
-			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-			driver.manage().window().maximize();
+			driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+			//driver.manage().window().maximize();
+			driver.manage().window().setPosition(new Point(x, y));
 			// Go to main page of tested site
 			driver.get("http://atqc-shop.epizy.com/index.php?route=common/home");
 			// find tab
@@ -177,7 +178,7 @@ public class AppTest
 
 			WebDriver driver = new ChromeDriver();
 			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-			driver.manage().window().maximize();
+			//driver.manage().window().maximize();
 			//for opening new Chrome window as cascade
 			driver.manage().window().setPosition(new Point(x, y));
 			//variable for counting sum of products in horizontal menu
@@ -238,7 +239,7 @@ public class AppTest
 				throws Exception {
 			WebDriver driver = new ChromeDriver();
 			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-			driver.manage().window().maximize();
+			//driver.manage().window().maximize();
 			//for opening new Chrome window as cascade
 			driver.manage().window().setPosition(new Point(x, y));
 			//variable for counting sum of products in horizontal menu
@@ -313,7 +314,7 @@ public class AppTest
 
 			WebDriver driver = new ChromeDriver();
 			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-			driver.manage().window().maximize();
+			//driver.manage().window().maximize();
 			//for opening new Chrome window as cascade
 			driver.manage().window().setPosition(new Point(x, y));
 			//variable for counting sum of products in horizontal menu
@@ -382,7 +383,6 @@ public class AppTest
 			WebDriver driver = new ChromeDriver();
 			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 			driver.manage().window().maximize();
-			
 			//variable for counting sum of products in horizontal menu
 			int sumOfProductsHor = 0;
 			//variable for counting sum of products in vertical menu
