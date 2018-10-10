@@ -10,6 +10,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
+import com.softserve.edu.opencart.tools.RegexUtils;
+
 public class AppTest 
 {
 	private static final String CARTBUTTON_BYXPATH = "//div[contains(@class,'product-layout')]//a[text()='%s']/../../following-sibling::div/button[contains(@onclick,'cart')]";
