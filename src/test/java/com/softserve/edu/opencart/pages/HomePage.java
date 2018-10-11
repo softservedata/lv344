@@ -14,8 +14,8 @@ public class HomePage extends AHeadComponent {
 	
 	// Business Logic
 	
-	public HomePage chooseCurrency(Currencies currencies) {
-        clickCurrencyByPartialName(currencies.toString());
+	public HomePage chooseCurrency(Currencies currency) {
+        clickCurrencyByPartialName(currency.toString());
         return new HomePage(driver); 
     }
 	

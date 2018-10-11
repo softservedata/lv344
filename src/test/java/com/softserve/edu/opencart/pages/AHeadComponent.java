@@ -119,6 +119,7 @@ public abstract class AHeadComponent {
     }
 	
 	public void clickCurrencyByPartialName(String optionName) {
+		clickSearchProductField();
         clickCurrency();
         createDropdownOptions(By.cssSelector("div.btn-group.open ul.dropdown-menu li"));
         clickDropdownOptionByPartialName(optionName);
@@ -305,7 +306,7 @@ public abstract class AHeadComponent {
         	throw new RuntimeException(String.format(OPTION_NOT_FOUND_MESSAGE,
         			optionName, dropdownOptions.getListOptionsText().toString()));
         }
-        dropdownOptions.clickDropdownOptionByPartialName(optionName);
+        getDropdownOptions().clickDropdownOptionByPartialName(optionName);
         dropdownOptions = null;
     }
 	
