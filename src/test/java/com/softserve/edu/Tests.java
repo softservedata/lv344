@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -30,7 +31,7 @@ public class Tests {
 	String testItem = "MacBook";
 	String testItem2 = "iPhone";
 	
-	@BeforeMethod
+	@BeforeClass
 	public void connection() {
 		System.setProperty("webdriver.chrome.driver",
 				Tests.class.getResource("/chromedriver-windows-32bit.exe").getPath());
@@ -38,6 +39,8 @@ public class Tests {
 	
 	@BeforeMethod
 	public void setUp() {
+		System.setProperty("webdriver.chrome.driver",
+				Tests.class.getResource("/chromedriver-windows-32bit.exe").getPath());
 		driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.get("http://atqc-shop.epizy.com");
