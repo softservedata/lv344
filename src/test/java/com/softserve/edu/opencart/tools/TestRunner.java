@@ -34,29 +34,13 @@ public abstract class TestRunner {
 	@BeforeMethod
 	public void beforeMethod() {
 		driver.get("http://atqc-shop.epizy.com/");
-		driver.findElement(By.xpath("//*[contains(@class, 'fa fa-user')]")).click();
-		driver.findElement(By.xpath("//a[contains(text(),'Login')]")).click();
-		driver.findElement(By.id("input-email")).clear();	
-		driver.findElement(By.id("input-email")).sendKeys("YuraStasiv@hotmail.com");
-		driver.findElement(By.id("input-password")).clear();
-		driver.findElement(By.id("input-password")).sendKeys("Q1w2e3r4" + Keys.ENTER);
-		System.out.println("Login succesful");
-		driver.findElement(By.cssSelector("#logo")).click();
 	}
 
 	@AfterMethod // (alwaysRun = true)
-	public void afterMethod(ITestResult result) throws InterruptedException {
-		if (RegexUtils.extractFirstNumber(driver.findElement(By.cssSelector("#cart-total")).getText()) != 0) {
-			driver.findElement(By.name("search")).click();
-			driver.findElement(By.cssSelector("#cart")).click();
-			driver.findElement(By.cssSelector(".fa-times")).click();
-			System.out.println("Cart is empty");
-			
-			driver.findElement(By.xpath("//*[contains(@class, 'fa fa-user')]")).click();
-			driver.findElement(By.xpath("//a[contains(text(),'Logout')]")).click();
-			System.out.println("User Logout");
+	public void afterMethod(ITestResult result) {
+		
 		}
-	}
+	
 	
 //	protected HomePage loadApplication() {
 //		return new HomePage(driver);
