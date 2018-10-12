@@ -11,6 +11,7 @@
 	<test verbose="9" name="Test2">
 		<parameter name="number" value="2" />
 		<classes>
+
 			<class name="com.softserve.edu.checkChangePasswordTest">
 				<methods>
 					<include name="changePasswordTest" />
@@ -18,17 +19,17 @@
 			</class>
 
 			<class name="com.softserve.edu.errorMessageWhenChangingPasswordTest">
-			<methods>
-			<include name="errorMessegeTest" />
-			</methods>
+				<methods>
+					<include name="errorMessegeTest" />
+				</methods>
 			</class>
 
 
-			<class name="com.softserve.edu.checkPostWhenFofgotPasswordTest">
-			<methods>
-			<include name="checkPostTest" />
-			</methods>
-			</class>
+<!-- 			<class name="com.softserve.edu.checkPostWhenFofgotPasswordTest"> -->
+<!-- 				<methods> -->
+<!-- 					<include name="checkPostTest" /> -->
+<!-- 				</methods> -->
+<!-- 			</class> -->
 
 		</classes>
 	</test> <!-- Test -->

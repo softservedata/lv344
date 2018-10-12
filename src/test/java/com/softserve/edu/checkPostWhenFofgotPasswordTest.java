@@ -1,5 +1,9 @@
 package com.softserve.edu;
 
+//#msg15390981934138804291 > td:nth-child(3) > a:nth-child(1) > span:nth-child(1) > span:nth-child(1)// #msg15390909830923303040 > td:nth-child(2) > span:nth-child(1)
+//.readmsg__body > pre:nth-child(1) > a:nth-child(1)
+//.confirm__content-warn > a:nth-child(1)
+
 import java.util.List;
 
 import java.util.concurrent.TimeUnit;
@@ -8,6 +12,7 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.sikuli.script.FindFailed;
 import org.sikuli.script.Screen;
 
 public class checkPostWhenFofgotPasswordTest {
@@ -28,23 +33,22 @@ public class checkPostWhenFofgotPasswordTest {
 	}
 
 	@BeforeMethod
-	public void logInto() throws Exception {
+	public void logInto() {
 		driver.get("http://atqc-shop.epizy.com/");
 		driver.findElement(By.linkText("My Account")).click();
-		Thread.sleep(1000);
+
 		driver.findElement(By.linkText("Login")).click();
-		Thread.sleep(1000);
+
 		driver.findElement(By.id("input-email")).clear();
 		driver.findElement(By.id("input-email")).sendKeys(EMAIL_ADDRESS);
-		Thread.sleep(1000);
+
 		driver.findElement(By.linkText("Forgotten Password")).click();
-		Thread.sleep(1000);
+
 	}
 
 	@AfterMethod
-	public void logOut() throws Exception {
+	public void logOut() {
 		driver.findElement(By.linkText("My Account")).click();
-		Thread.sleep(1000);
 		driver.findElement(By.linkText("Logout")).click();
 	}
 
@@ -57,14 +61,16 @@ public class checkPostWhenFofgotPasswordTest {
 	/**
 	 * Test check or a letter was sent with a link to update the password at the
 	 * specified email address
+	 * 
+	 * @throws FindFailed
 	 */
 
 	@Test
-	public void testPost() throws Exception {
+	public void checkPostTest() throws FindFailed {
 		driver.findElement(By.id("input-email")).clear();
 		driver.findElement(By.id("input-email")).click();
 		driver.findElement(By.id("input-email")).sendKeys(EMAIL_ADDRESS);
-		Thread.sleep(1000);
+
 		driver.findElement(By.cssSelector("input.btn.btn-primary")).click();
 
 		Assert.assertTrue(driver.findElement(By.cssSelector("div.alert.alert-success")).getText()
@@ -85,24 +91,30 @@ public class checkPostWhenFofgotPasswordTest {
 		driver.findElement(By.id("id-input-password")).click();
 		driver.findElement(By.id("id-input-password")).clear();
 		driver.findElement(By.id("id-input-password")).sendKeys("pridymaisam");
-		Thread.sleep(1000);
+
 		driver.findElement(By.cssSelector("button.form__submit")).click();
-		Thread.sleep(1000);
+
 		driver.findElement(By.cssSelector("a.service__entry.service__entry_mail")).click();
 
 		// use sikuli to check the last incoming letter
 
-		Thread.sleep(5000);
-		Screen sc = new Screen();
-		sc.wait("src//test//resources//yourStore.png");
+//		Screen sc = new Screen();
+//		sc.wait("src//test//resources//yourStore.png");
+//
+//		sc.click("src//test//resources//yourStore.png");
+//
+//		sc.click("src//test//resources//linkFirst.png");
+//		sc.click("src//test//resources//linkTwo.png");
 
-		sc.click("src//test//resources//yourStore.png");
-
-		sc.click("src//test//resources//linkFirst.png");
-		sc.click("src//test//resources//linkTwo.png");
-
-		Thread.sleep(8000);
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		driver.findElement(By.cssSelector("td.msglist__row-unread.noselect.unseen")).click();
+
+		driver.findElement(By.cssSelector(
+				"#readmsg > div.screen__content > section > div.readmsg__content > div.readmsg__body > pre > a"))
+				.click();
+		driver.findElement(By.cssSelector(
+				"#readmsg > div.screen__content > section > div.readmsg__content > div.readmsg__body > pre > a"))
+				.click();
 
 		/*
 		 * the method looks for requested id of among the open pages to log out from
@@ -112,11 +124,11 @@ public class checkPostWhenFofgotPasswordTest {
 
 			driver.switchTo().window(handle);
 			List<WebElement> currentList = driver.findElements(By.cssSelector(".login-button__user"));
-			Thread.sleep(1000);
+
 			if (currentList.size() > 0) {
-				Thread.sleep(1000);
+
 				driver.findElement(By.cssSelector(".login-button__user")).click();
-				Thread.sleep(1000);
+
 				driver.findElement(By.id("login__logout")).click();
 
 				break;
@@ -129,7 +141,7 @@ public class checkPostWhenFofgotPasswordTest {
 		 */
 		for (String handle : driver.getWindowHandles()) {
 			driver.switchTo().window(handle);
-			Thread.sleep(1000);
+
 			List<WebElement> currentList = driver.findElements(By.id("input-password"));
 			if (currentList.size() > 0) {
 				break;
@@ -141,11 +153,11 @@ public class checkPostWhenFofgotPasswordTest {
 		driver.findElement(By.id("input-password")).click();
 		driver.findElement(By.id("input-password")).clear();
 		driver.findElement(By.id("input-password")).sendKeys(PASSWORD);
-		Thread.sleep(1000);
+
 		driver.findElement(By.id("input-confirm")).click();
 		driver.findElement(By.id("input-confirm")).clear();
 		driver.findElement(By.id("input-confirm")).sendKeys(PASSWORD);
-		Thread.sleep(1000);
+
 		driver.findElement(By.cssSelector("button.btn.btn-primary")).click();
 
 		Assert.assertTrue(driver.findElement(By.cssSelector("div.alert.alert-success")).getText()
@@ -155,17 +167,16 @@ public class checkPostWhenFofgotPasswordTest {
 
 		driver.findElement(By.linkText("My Account")).click();
 		driver.findElement(By.linkText("Login")).click();
-		Thread.sleep(500);
+
 		driver.findElement(By.id("input-email")).click();
 		driver.findElement(By.id("input-email")).clear();
 		driver.findElement(By.id("input-email")).sendKeys(EMAIL_ADDRESS);
-		Thread.sleep(500);
+
 		driver.findElement(By.id("input-password")).click();
 		driver.findElement(By.id("input-password")).clear();
 		driver.findElement(By.id("input-password")).sendKeys(PASSWORD);
-		Thread.sleep(500);
+
 		driver.findElement(By.cssSelector("input.btn.btn-primary")).click();
-		Thread.sleep(500);
 
 	}
 }
