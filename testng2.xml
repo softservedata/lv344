@@ -15,10 +15,10 @@
 				<methods>
 					<include name="SmokeTestOpenCart" />
 					<include name="AddItemToCart" />
-					<include name="AddSingleItemToCart" />
-					<include name="ChangeNumOfItemsInCart" />
-					<include name="ErrorMessageChangeNumOfItemsInCart" />
-					<include name="CartAfterRelogin" />
+<!-- 					<include name="AddSingleItemToCart" /> -->
+<!-- 					<include name="ChangeNumOfItemsInCart" /> -->
+<!-- 					<include name="ErrorMessageChangeNumOfItemsInCart" /> -->
+<!-- 					<include name="CartAfterRelogin" /> -->
 				</methods>
 			</class>
 		</classes>

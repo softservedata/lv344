@@ -9,6 +9,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.ITestContext;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -30,52 +33,76 @@ public class Tests {
 			+ "/../following-sibling::p[contains(@class, 'price')]";
 	String testItem = "MacBook";
 	String testItem2 = "iPhone";
-	
+	//========================================================================================================
+	//				From TestRunnet
+	//========================================================================================================
 	@BeforeClass
-	public void connection() {
+	public void beforeClass(ITestContext context) {
 		System.setProperty("webdriver.chrome.driver",
-				Tests.class.getResource("/chromedriver-windows-32bit.exe").getPath());
-	}
-	
-	@BeforeMethod
-	public void setUp() {
-		System.setProperty("webdriver.chrome.driver",
-				Tests.class.getResource("/chromedriver-windows-32bit.exe").getPath());
+				this.getClass().getResource("/chromedriver-windows-32bit.exe").getPath());
 		driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		driver.get("http://atqc-shop.epizy.com");
+		// driver.manage().window().maximize();
 	}
 
-	@AfterMethod
-	public void tearDown() {
+	@AfterClass(alwaysRun = true)
+	public void afterClass() {
 		driver.quit();
 	}
 
+	@BeforeMethod
+	public void beforeMethod() {
+		driver.get("http://atqc-shop.epizy.com/");
+		driver.findElement(By.xpath("//*[contains(@class, 'fa fa-user')]")).click();
+		driver.findElement(By.xpath("//a[contains(text(),'Login')]")).click();
+		driver.findElement(By.id("input-email")).clear();	
+		driver.findElement(By.id("input-email")).sendKeys("YuraStasiv@hotmail.com");
+		driver.findElement(By.id("input-password")).clear();
+		driver.findElement(By.id("input-password")).sendKeys("Q1w2e3r4" + Keys.ENTER);
+		System.out.println("Login succesful");
+		driver.findElement(By.cssSelector("#logo")).click();
+	}
+
+	@AfterMethod // (alwaysRun = true)
+	public void afterMethod(ITestResult result) throws InterruptedException {
+		if (RegexUtils.extractFirstNumber(driver.findElement(By.cssSelector("#cart-total")).getText()) != 0) {
+			driver.findElement(By.name("search")).click();
+			driver.findElement(By.cssSelector("#cart")).click();
+			driver.findElement(By.cssSelector(".fa-times")).click();
+			System.out.println("Cart is empty");
+			
+			driver.findElement(By.xpath("//*[contains(@class, 'fa fa-user')]")).click();
+			driver.findElement(By.xpath("//a[contains(text(),'Logout')]")).click();
+			System.out.println("User Logout");
+		}
+	}
+	//========================================================================================================
+	
 	/** 
 	 * Test for further testing
 	 */
 	@Test(enabled = true)
 	public void SmokeTestOpenCart() throws Exception {
 		System.out.println("SmokeTestOpenCart start");
-		Thread.sleep(4000); // For demonstration
+		Thread.sleep(2000); // For demonstration
 //Verify 1 text element
 		Assert.assertEquals(driver.findElement(By.xpath("//*[@id='content']/h3")).getText(), "Featured");
 		System.out.println(ststus1 + "Element main on page was found...");
-		Thread.sleep(2000); // For demonstration
+		Thread.sleep(1000); // For demonstration
 //Verify 1 button
 		driver.manage().deleteAllCookies();
 		Assert.assertEquals(driver.findElement(By.cssSelector("#cart-total")).getText(), "0 item(s) - $0.00");
 		System.out.println(ststus1 + "Button on page was found...");
-		Thread.sleep(2000); // For demonstration
+		Thread.sleep(1000); // For demonstration
 //Find and verify element at another page
 		//Thread.sleep(2000); // For demonstration
 		driver.findElement(By.linkText("Site Map")).click();
 		Assert.assertEquals(driver.findElement(By.xpath("//*[@id='content']/h1")).getText(), "Site Map");
 		System.out.println(ststus1 + "Element on enother page was found...");
-		Thread.sleep(2000); // For demonstration
+		Thread.sleep(1000); // For demonstration
 //Message about all is great
 		System.out.println("All is great, you can continue.");
-		Thread.sleep(4000); // For demonstration
+		Thread.sleep(2000); // For demonstration
 	}
 	
 	/** 
@@ -84,38 +111,38 @@ public class Tests {
 	@Test(dependsOnMethods = { "SmokeTestOpenCart" }, enabled = true)
 	public void AddItemToCart() throws Exception {
 		System.out.println("AddItemToCart start");
-		Thread.sleep(4000); // For demonstration
+		Thread.sleep(2000); // For demonstration
 //Add McBook to cart
 		driver.findElement(By.xpath(String.format(CART_BUTTON_ByXpath, testItem))).click();
 		System.out.println(ststus1 + "Good was added...");
-		Thread.sleep(2000); // For demonstration
+		Thread.sleep(1000); // For demonstration
 //Check if user see correct message about adding good to cart
 		Assert.assertTrue(driver.findElement(By.cssSelector(".alert-success")).getText()
 				.contains("Success: You have added "+ testItem +" to your shopping cart!"));
 		System.out.println(ststus1 + "User see correct message, good was added...");
-		Thread.sleep(2000); // For demonstration
+		Thread.sleep(1000); // For demonstration
 //Save current price this good
 		double ItemPrice = RegexUtils.extractFirstDouble(driver.findElement(By.xpath(String.format(ITEM_PRICE_ByXpath, testItem))).getText());
 		System.out.println(ststus1 + "Price was find and saved...");
-		Thread.sleep(2000); // For demonstration
+		Thread.sleep(1000); // For demonstration
 //Back to main page
 		driver.findElement(By.cssSelector("#logo")).click();
 //Check if price on cart button is correct
 		Assert.assertEquals(RegexUtils.extractFirstNumber(driver.findElement(By.cssSelector("#cart-total")).getText()), 1);
 		Assert.assertEquals(RegexUtils.extractFirstDouble(driver.findElement(By.cssSelector("#cart-total")).getText()), ItemPrice);
 		System.out.println(ststus1 + "Count and price is correct...");
-		Thread.sleep(2000); // For demonstration
+		Thread.sleep(1000); // For demonstration
 //Check if all sum is correct
 		driver.findElement(By.cssSelector("#cart-total")).click();
 		System.out.println(ststus1 + "Count display correct...");
 		Assert.assertEquals(RegexUtils.extractFirstDouble(
 				driver.findElement(By.xpath("//td/strong[text()='Total']/../../td[contains(text() , '$')]")).getText()), ItemPrice);// Total price
 		System.out.println(ststus1 + "Price display correct...");
-		Assert.assertEquals(RegexUtils.extractFirstDouble(
-				driver.findElement(By.xpath("//td/strong[text()='Eco Tax (-2.00)']/../../td[contains(text() , '$')]")).getText()), 2.0);// eco tax		
-		System.out.println(ststus1 + "Eco Tax display correct...");
+//		Assert.assertEquals(RegexUtils.extractFirstDouble(
+//				driver.findElement(By.xpath("//td/strong[text()='Eco Tax (-2.00)']/../../td[contains(text() , '$')]")).getText()), 2.0);// eco tax		
+//		System.out.println(ststus1 + "Eco Tax display correct...");
 		System.out.println("All data display correct.");
-		Thread.sleep(4000); // For demonstration
+		Thread.sleep(2000); // For demonstration
 	}
 	
 	/** 
@@ -266,11 +293,11 @@ public class Tests {
 		driver.findElement(By.linkText("My Account")).click();
 //Input logged data
 		//Thread.sleep(2000); // For demonstration
-		driver.findElement(By.id("input-email")).clear();	
-		driver.findElement(By.id("input-email")).sendKeys("YuraStasiv@hotmail.com");
-		driver.findElement(By.id("input-password")).clear();
-		driver.findElement(By.id("input-password")).sendKeys("Q1w2e3r4" + Keys.ENTER);
-		System.out.println(ststus1 + "Login succesful...");
+//		driver.findElement(By.id("input-email")).clear();	
+//		driver.findElement(By.id("input-email")).sendKeys("YuraStasiv@hotmail.com");
+//		driver.findElement(By.id("input-password")).clear();
+//		driver.findElement(By.id("input-password")).sendKeys("Q1w2e3r4" + Keys.ENTER);
+//		System.out.println(ststus1 + "Login succesful...");
 		Thread.sleep(2000); // For demonstration
 //Clear cart if we have one or more goods there
 		if(RegexUtils.extractFirstNumber(driver.findElement(By.cssSelector("#cart-total")).getText()) != 0) {
@@ -314,13 +341,13 @@ public class Tests {
 		System.out.println(ststus1 + "Cart contain added good");
 		Thread.sleep(2000); // For demonstration
 //Final clear cart and logout
-		driver.findElement(By.cssSelector("#cart")).click();
-		driver.findElement(By.cssSelector(".fa-times")).click();
-		System.out.println("Cart is empty...");
-		Thread.sleep(2000); // For demonstration
-		driver.findElement(By.linkText("My Account")).click();
-		driver.findElement(By.linkText("Logout")).click();
-		System.out.println("Logout succesful.");
+//		driver.findElement(By.cssSelector("#cart")).click();
+//		driver.findElement(By.cssSelector(".fa-times")).click();
+//		System.out.println("Cart is empty...");
+//		Thread.sleep(2000); // For demonstration
+//		driver.findElement(By.linkText("My Account")).click();
+//		driver.findElement(By.linkText("Logout")).click();
+//		System.out.println("Logout succesful.");
 		Thread.sleep(4000); // For demonstration
 	}
 }
