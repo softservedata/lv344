@@ -32,24 +32,40 @@ public class ProductsListComponent {
 	}
 	
     public ProductComponent getProductComponentByPartialName(String partialProductName) {
-//        WebElement result = null;
-//        for (WebElement current : getListOptions()) {
-//            if (current.getText().toLowerCase().contains(optionName.toLowerCase())) {
-//                result = current;
-//                break;
-//            }
-//        }
-//        return result;
-    	return null;
+        ProductComponent result = null;
+        for (ProductComponent current : getProductComponents()) {
+            if (current.getNameText().toLowerCase()
+            		.contains(partialProductName.toLowerCase())) {
+                result = current;
+                break;
+            }
+        }
+        return result;
     }
 
     public List<String> getProductsNameList() {
-//        List<String> result = new ArrayList<>();
-//        for (WebElement current : getListOptions()) {
-//            result.add(current.getText());
-//        }
-//        return result;
-    	return null;
+        List<String> result = new ArrayList<>();
+        for (ProductComponent current : getProductComponents()) {
+            result.add(current.getNameText());
+        }
+        return result;
     }
 	
+	// Business Logic
+
+	public void addToCartProductByPartialName(String partialProductName) {
+		getProductComponentByPartialName(partialProductName)
+			.clickAddToCartButton();
+	}
+
+	public void addToWishProductByPartialName(String partialProductName) {
+		getProductComponentByPartialName(partialProductName)
+			.clickAddToWishButton();
+	}
+
+	public void addToCompareProductByPartialName(String partialProductName) {
+		getProductComponentByPartialName(partialProductName)
+			.clickAddToCompareButton();
+	}
+
 }

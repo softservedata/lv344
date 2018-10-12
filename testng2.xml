@@ -16,7 +16,8 @@
 			<!-- <class name="com.softserve.edu.AppTest" /> -->
 			<class name="com.softserve.edu.opencart.tests.StartTest">
 				<methods>
-					<include name="checkCurrency" />
+<!-- 					<include name="checkCurrency" /> -->
+					<include name="checkProductCurrency" />
 				</methods>
 			</class>
 		</classes>
