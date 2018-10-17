@@ -1,6 +1,7 @@
 package com.softserve.edu.opencart.data;
 
-public class UserRepository {
+// Using Singletone
+public final class UserRepository {
 
 	private static volatile UserRepository instance = null;
 
@@ -50,6 +51,22 @@ public class UserRepository {
 				.setCountry("country2")
 				.setRegionState("regionState2")
 				.setPassword("password2")
+				.setFax("fax")
+				.build();
+    }
+
+    public IUser customerHahaha() {
+        return User.get()
+				.setFirstName("hahaha")
+				.setLastName("hahaha")
+				.setEMail("hahaha@gmail.com")
+				.setTelephone("1234567")
+				.setAddress1("address12")
+				.setCity("city2")
+				.setPostCode("postCode2")
+				.setCountry("country2")
+				.setRegionState("regionState2")
+				.setPassword("qwerty")
 				.setFax("fax")
 				.build();
     }
