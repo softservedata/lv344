@@ -66,7 +66,7 @@ public class checkPostWhenFofgotPasswordTest {
 	 */
 
 	@Test
-	public void checkPostTest() throws FindFailed {
+	public void checkPostTest() throws FindFailed  {
 		driver.findElement(By.id("input-email")).clear();
 		driver.findElement(By.id("input-email")).click();
 		driver.findElement(By.id("input-email")).sendKeys(EMAIL_ADDRESS);
@@ -98,16 +98,16 @@ public class checkPostWhenFofgotPasswordTest {
 
 		// use sikuli to check the last incoming letter
 
-//		Screen sc = new Screen();
-//		sc.wait("src//test//resources//yourStore.png");
-//
-//		sc.click("src//test//resources//yourStore.png");
+		Screen sc = new Screen();
+		sc.wait("src//test//resources//yourStore.png");
+
+		sc.click("src//test//resources//yourStore.png");
 //
 //		sc.click("src//test//resources//linkFirst.png");
 //		sc.click("src//test//resources//linkTwo.png");
 
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		driver.findElement(By.cssSelector("td.msglist__row-unread.noselect.unseen")).click();
+		//driver.findElement(By.cssSelector("td.msglist__row-unread.noselect.unseen")).click();
 
 		driver.findElement(By.cssSelector(
 				"#readmsg > div.screen__content > section > div.readmsg__content > div.readmsg__body > pre > a"))
