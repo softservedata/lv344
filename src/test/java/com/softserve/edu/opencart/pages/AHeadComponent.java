@@ -63,8 +63,10 @@ public abstract class AHeadComponent {
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	
 	private final String OPTION_NOT_FOUND_MESSAGE = "Option %s not found in %s";
+	private final String LOGIN_ERROR = "Login Error";
 	protected final String TAG_ATTRIBUTE_VALUE = "value";
-	
+	//
+	protected static boolean loggedUser = false;
 	protected WebDriver driver;
 	//
 	private WebElement currency;
@@ -119,6 +121,7 @@ public abstract class AHeadComponent {
     }
 	
 	public void clickCurrencyByPartialName(String optionName) {
+		clickSearchProductField();
         clickCurrency();
         createDropdownOptions(By.cssSelector("div.btn-group.open ul.dropdown-menu li"));
         clickDropdownOptionByPartialName(optionName);
@@ -135,6 +138,13 @@ public abstract class AHeadComponent {
 	
 	public void clickMyAccount() {
         getMyAccount().click();
+    }
+	
+	public void clickAccountOptionByPartialName(String optionName) {
+		clickSearchProductField();
+		clickMyAccount();
+        createDropdownOptions(By.cssSelector(".dropdown-menu.dropdown-menu-right li"));
+        clickDropdownOptionByPartialName(optionName);
     }
 	
 	//wishList
@@ -275,7 +285,7 @@ public abstract class AHeadComponent {
     }
 	
 	// dropdownOptions
-	public DropdownOptions getDropdownOptions() {
+	protected DropdownOptions getDropdownOptions() {
         return dropdownOptions;
     }
 
@@ -305,10 +315,43 @@ public abstract class AHeadComponent {
         	throw new RuntimeException(String.format(OPTION_NOT_FOUND_MESSAGE,
         			optionName, dropdownOptions.getListOptionsText().toString()));
         }
-        dropdownOptions.clickDropdownOptionByPartialName(optionName);
+        getDropdownOptions().clickDropdownOptionByPartialName(optionName);
         dropdownOptions = null;
     }
 	
+	// loggedUser
+	public boolean isLoggedUser() {
+        return loggedUser;
+    }
+
 	// Business Logic
+
+	public LoginPage gotoLogin() {
+		if (isLoggedUser()) {
+			throw new RuntimeException(LOGIN_ERROR);
+		}
+		clickAccountOptionByPartialName("Login");
+        return new LoginPage(driver);
+    }
+	
+	public MyAccountPage gotoMyAccount() {
+		if (!isLoggedUser()) {
+			throw new RuntimeException(LOGIN_ERROR);
+		}
+		clickAccountOptionByPartialName("My Account"); // TODO enum
+        return new MyAccountPage(driver);
+    }
+
+	// TODO Return AccountLogoutPage
+	public HomePage gotoLogout() {
+		if (!isLoggedUser()) {
+			throw new RuntimeException(LOGIN_ERROR);
+		}
+		clickAccountOptionByPartialName("Logout");
+		loggedUser = false;
+		clickLogo();
+		return new HomePage(driver);
+        //return new AccountLogoutPage(driver);
+    }
 	
 }
