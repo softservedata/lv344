@@ -15,6 +15,7 @@ import com.softserve.edu.opencart.pages.HomePage;
 
 public abstract class TestRunner {
 	protected WebDriver driver;
+	protected final double PRECISION = 0.001;
 	
 	@BeforeClass
     public void beforeClass(ITestContext context) {
