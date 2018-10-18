@@ -36,8 +36,8 @@ public abstract class AHeadComponent {
             return listOptions;
         }
 
-        public WebElement getDropdownOptionByPartialName(String optionName) {
-            WebElement result = null;
+        public WebElement getDropdownOptionByPartialName(String optionName) { 
+            WebElement result = null;//выпадайки по навигации                     
             for (WebElement current : getListOptions()) {
                 if (current.getText().toLowerCase().contains(optionName.toLowerCase())) {
                     result = current;
@@ -70,21 +70,21 @@ public abstract class AHeadComponent {
 	protected WebDriver driver;
 	//
 	private WebElement currency;
-	private WebElement myAccount;
+	private WebElement myAccount;// lable
 	private WebElement wishList;
 	private WebElement shoppingCart;
 	private WebElement checkout;
-	private WebElement logo;
-	private WebElement searchProductField;
-	private WebElement searchProductButton;
-	private WebElement cartButton;
-	private List<WebElement> menuTop;
+	private WebElement logo;//opencart дом стр
+	private WebElement searchProductField;//поле
+	private WebElement searchProductButton;//лупа
+	private WebElement cartButton;//корзина
+	private List<WebElement> menuTop;//навигация
 	//
 	//protected List<ProductComponent> productComponents;
-	private DropdownOptions dropdownOptions;
+	private DropdownOptions dropdownOptions;//выпадайки по навигации
 	// private DropdownCart dropdownCart;
 	
-	protected AHeadComponent(WebDriver driver) {
+	protected AHeadComponent(WebDriver driver) {//браузер
         this.driver = driver;
         //
         currency = driver.findElement(By.cssSelector(".btn.btn-link.dropdown-toggle"));
@@ -113,7 +113,7 @@ public abstract class AHeadComponent {
     }
 	
 	public String getCurrencyText() {
-        return getCurrency().getText().substring(0, 1);
+        return getCurrency().getText().substring(0, 1);// $
     }
 	
 	public void clickCurrency() {
@@ -204,7 +204,7 @@ public abstract class AHeadComponent {
         return searchProductField;
     }
 	
-	public String getSearchProductFieldText() {
+	public String getSearchProductFieldText() {//вычитываем информацию из поля, если туда что-то записано
         return getSearchProductField().getAttribute(TAG_ATTRIBUTE_VALUE);
     }
 	
@@ -242,7 +242,7 @@ public abstract class AHeadComponent {
         getCartButton().click();
     }
 	
-	public WebElement getCartTotal() {
+	public WebElement getCartTotal() {// return price(sum) from black cart button
         return getCartButton().findElement(By.id("cart-total"));
     }
 	
@@ -250,7 +250,7 @@ public abstract class AHeadComponent {
 		return getCartTotal().getText();
 	}
 	
-	public int getCartAmount() {
+	public int getCartAmount() {//количество товаров
         return RegexUtils.extractFirstNumber(getCartTotalText());
     }
 
@@ -263,7 +263,7 @@ public abstract class AHeadComponent {
         return menuTop;
     }
 	
-	public List<String> getMenuTopTexts() {
+	public List<String> getMenuTopTexts() {//method return list navi
         List<String> result = new ArrayList<>();
         for (WebElement current : getMenuTop()) {
             result.add(current.findElement(By
@@ -272,8 +272,8 @@ public abstract class AHeadComponent {
         return result;
     }
 	
-	public WebElement getMenuTopByCategoryPartialName(String categoryName) {
-        WebElement result = null;
+	public WebElement getMenuTopByCategoryPartialName(String categoryName) {//method return one item navi
+        WebElement result = null;//??
         for (WebElement current : getMenuTop()) {
             if (current.findElement(By.cssSelector("a.dropdown-toggle")).getText()
                     .toLowerCase().contains(categoryName.toLowerCase())) {

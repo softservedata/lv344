@@ -1,10 +1,10 @@
 package com.softserve.edu;
 
-//#msg15390981934138804291 > td:nth-child(3) > a:nth-child(1) > span:nth-child(1) > span:nth-child(1)// #msg15390909830923303040 > td:nth-child(2) > span:nth-child(1)
-//.readmsg__body > pre:nth-child(1) > a:nth-child(1)
-//.confirm__content-warn > a:nth-child(1)
+
 
 import java.util.List;
+
+
 
 import java.util.concurrent.TimeUnit;
 
@@ -12,8 +12,8 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.sikuli.script.FindFailed;
-import org.sikuli.script.Screen;
+//import org.sikuli.script.FindFailed;
+//import org.sikuli.script.Screen;
 
 public class checkPostWhenFofgotPasswordTest {
 
@@ -66,7 +66,7 @@ public class checkPostWhenFofgotPasswordTest {
 	 */
 
 	@Test
-	public void checkPostTest() throws FindFailed  {
+	public void checkPostTest()    {
 		driver.findElement(By.id("input-email")).clear();
 		driver.findElement(By.id("input-email")).click();
 		driver.findElement(By.id("input-email")).sendKeys(EMAIL_ADDRESS);
@@ -98,10 +98,10 @@ public class checkPostWhenFofgotPasswordTest {
 
 		// use sikuli to check the last incoming letter
 
-		Screen sc = new Screen();
-		sc.wait("src//test//resources//yourStore.png");
-
-		sc.click("src//test//resources//yourStore.png");
+//		Screen sc = new Screen();
+//		sc.wait("src//test//resources//yourStore.png");
+//
+//		sc.click("src//test//resources//yourStore.png");
 //
 //		sc.click("src//test//resources//linkFirst.png");
 //		sc.click("src//test//resources//linkTwo.png");

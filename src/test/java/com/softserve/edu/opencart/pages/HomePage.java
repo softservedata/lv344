@@ -26,7 +26,7 @@ public class HomePage extends AHeadComponent {
 	
 	// Business Logic
 
-	public double getProductPriceAmountByPartialName(String partialProductName) {
+	public double getProductPriceAmountByPartialName(String partialProductName) {//КАША
 		return getProductsListComponent()
 				.getProductComponentByPartialName(partialProductName)
 				.getPriceAmount();
@@ -34,7 +34,7 @@ public class HomePage extends AHeadComponent {
 
 	public HomePage chooseCurrency(Currencies currency) {
         clickCurrencyByPartialName(currency.toString());
-        return new HomePage(driver); 
+        return new HomePage(driver); //рефреш страницы потому возвращаем драйвер
     }
 
 	public HomeMessagePage putToCartProductByPartialName(String partialProductName) {
