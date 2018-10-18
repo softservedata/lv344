@@ -20,8 +20,6 @@ public abstract class TestRunner {
 	@BeforeClass
     public void beforeClass(ITestContext context) {
         System.out.println("@BeforeClass");
-		System.out.println("PATH to Driver: " +
-				this.getClass().getResource("/chromedriver-windows-32bit.exe").getPath());
 		System.setProperty("webdriver.chrome.driver",
 				this.getClass().getResource("/chromedriver-windows-32bit.exe").getPath());
 		driver = new ChromeDriver();
