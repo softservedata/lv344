@@ -20,6 +20,7 @@
 					<include name="checkProductCurrency" />
 				</methods>
 			</class>
+			<class name="com.softserve.edu.opencart.tests.LoginTest" />
 		</classes>
 	</test> <!-- Test -->
 

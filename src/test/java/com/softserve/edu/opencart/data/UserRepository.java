@@ -41,26 +41,26 @@ public final class UserRepository {
 
     public IUser customer() {
         return User.get()
-				.setFirstName("firstName2")
-				.setLastName("lastName2")
-				.setEMail("eMail2")
-				.setTelephone("telephone2")
+				.setFirstName("firstname9")
+				.setLastName("lastname")
+				.setEMail("hahaha@gmail.com")
+				.setTelephone("phone")
 				.setAddress1("address12")
 				.setCity("city2")
 				.setPostCode("postCode2")
 				.setCountry("country2")
 				.setRegionState("regionState2")
-				.setPassword("password2")
+				.setPassword("qwerty")
 				.setFax("fax")
 				.build();
     }
 
     public IUser customerHahaha() {
         return User.get()
-				.setFirstName("hahaha")
-				.setLastName("hahaha")
+				.setFirstName("firstname9")
+				.setLastName("lastname")
 				.setEMail("hahaha@gmail.com")
-				.setTelephone("1234567")
+				.setTelephone("phone")
 				.setAddress1("address12")
 				.setCity("city2")
 				.setPostCode("postCode2")
