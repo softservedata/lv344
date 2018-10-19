@@ -1,4 +1,4 @@
-package com.softserve.edu;
+package com.softserve.edu.opencart.tools;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

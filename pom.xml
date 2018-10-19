@@ -165,18 +165,24 @@
 			<artifactId>gson</artifactId>
 			<version>${google.gson.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
-	<extensions>
+		<extensions>
 			<extension>
 				<groupId>kr.motd.maven</groupId>
 				<artifactId>os-maven-plugin</artifactId>
 				<version>1.6.0</version>
 			</extension>
 		</extensions>
+
 		<plugins>
-		
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
@@ -185,7 +191,7 @@
 					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -197,24 +203,6 @@
 				</configuration>
 			</plugin>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>${maven.surefire.plugin.version}</version>
-				<configuration>
-					<argLine>-Xms512m -Xmx1024m</argLine>
-					<!-- <argLine>-Xms256m -Xmx512m</argLine> -->
-					<systemPropertyVariables>
-						<surefire.reports.directory>
-							${testng.reports.directory}
-						</surefire.reports.directory>
-					</systemPropertyVariables>
-					<suiteXmlFiles>
-						<suiteXmlFile>testAll.xml</suiteXmlFile>
-					</suiteXmlFiles>
-					<reportsDirectory>${testng.reports.directory}</reportsDirectory>
-				</configuration>
-			</plugin>
 			<plugin>
 				<groupId>com.github.webdriverextensions</groupId>
 				<artifactId>webdriverextensions-maven-plugin</artifactId>
@@ -246,6 +234,27 @@
 					</drivers>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven.surefire.plugin.version}</version>
+				<configuration>
+					<argLine>-Xms512m -Xmx1024m</argLine>
+					<!-- <argLine>-Xms256m -Xmx512m</argLine> -->
+					<systemPropertyVariables>
+						<surefire.reports.directory>
+							${testng.reports.directory}
+						</surefire.reports.directory>
+					</systemPropertyVariables>
+					<suiteXmlFiles>
+						<suiteXmlFile>testng2.xml</suiteXmlFile>
+					</suiteXmlFiles>
+					<reportsDirectory>${testng.reports.directory}</reportsDirectory>
+				</configuration>
+			</plugin>
+
+			<!-- - - - Echo - - - -->
 			<plugin>
 				<groupId>com.github.ekryd.echo-maven-plugin</groupId>
 				<artifactId>echo-maven-plugin</artifactId>
@@ -258,7 +267,7 @@
 						</goals>
 						<configuration>
 							<message>+++++Operation System: ${os.detected.name}</message>
-<!-- 							<message>+++++Build Directory: ${project.build.directory}</message> -->
+							<!-- <message>+++++Build Directory: ${project.build.directory}</message> -->
 							<!-- <message>+++++Operation System: ${os.detected.classifier}</message> -->
 							<!-- <message>+++++Local Repository: ${settings.localRepository}</message> -->
 							<!-- <message>+++++TestNG Version: ${org.testng.version}</message> -->
@@ -266,6 +275,7 @@
 					</execution>
 				</executions>
 			</plugin>
+
 		</plugins>
 	</build>
 
