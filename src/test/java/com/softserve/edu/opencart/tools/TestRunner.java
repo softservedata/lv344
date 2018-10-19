@@ -11,6 +11,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
+import com.softserve.edu.opencart.pages.EmptyShoppingCartPage;
 import com.softserve.edu.opencart.pages.HomePage;
 
 public abstract class TestRunner {
@@ -46,6 +47,9 @@ public abstract class TestRunner {
 
     protected HomePage loadApplication() {
         return new HomePage(driver);
+    }
+    protected EmptyShoppingCartPage gotoEmptyShoppingCartPage() {
+    	return new EmptyShoppingCartPage(driver);
     }
 
     protected void delayExecution(long miliseconds) {
