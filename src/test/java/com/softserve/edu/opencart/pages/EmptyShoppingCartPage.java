@@ -25,5 +25,5 @@ public class EmptyShoppingCartPage extends AStatusBarComponent {
 	
 	public String getEmptyCartText() {
 		return getEmptyCartPage().getText();
-	}	
+	}
 }
