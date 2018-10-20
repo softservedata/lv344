@@ -2,6 +2,7 @@ package com.softserve.edu.opencart.pages.search;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.softserve.edu.opencart.data.ProductSubcategories;
@@ -10,7 +11,7 @@ import com.softserve.edu.opencart.data.SortCriterias;
 import com.softserve.edu.opencart.data.Views;
 import com.softserve.edu.opencart.pages.ProductsListComponent;
 
-public class SearchResultPage extends SearchEmptyResultPage{
+public class SearchResultPage extends SearchEmptyResultPage implements ISearchResultPage{
 	private SearchCriteriaComponent searchCriteriaComponent;
 	private SearchFilterComponent searchFilterComponent;
 	private ProductsListComponent productsListComponent;
@@ -33,8 +34,16 @@ public class SearchResultPage extends SearchEmptyResultPage{
 	public ProductsListComponent getProductListComponent() {
 		return productsListComponent;
 	}
-
-	public SearchResultPage setView(Views view) {
+	
+	//Business logic
+	public SearchResultPage getSearchResultPage() {
+		return this;
+	}
+	public ISearchEmptyResultPage getISearchEmptyResultPage() {
+		return this;
+	}
+	
+	public ISearchResultPage chooseView(Views view) {
 		if (view.equals(Views.LIST)) {
 			getSearchFilterComponent().clickListButton();
 		}else {
@@ -43,28 +52,17 @@ public class SearchResultPage extends SearchEmptyResultPage{
 		return new SearchResultPage(driver);
 	}
 	
-	public SearchResultPage searchWithMainForm(String request) {
-		getSearchCriteriaComponent().fillSearchTextField(request);
-		getSearchCriteriaComponent().clickSearchButton();
+	public ISearchResultPage chooseSortOrder(SortCriterias sortCriteria) {
+		getSearchFilterComponent().clickSortByDropDown();
+		getSearchFilterComponent().clickSortByOption(sortCriteria);
 		return new SearchResultPage(driver);
 	}
 	
-	public void chooseProductCategory(ProductSubcategories productSubcategories) {
-		getSearchCriteriaComponent().getSearchTexField().click();
-		getSearchCriteriaComponent().chooseCategory(productSubcategories);
+	public ISearchResultPage chooseShowLimit(ShowLimits showLimit) {
+		getSearchFilterComponent().clickShowDropDown();
+		getSearchFilterComponent().clickShowOption(showLimit);
+		return new SearchResultPage(driver);
 	}
-	
-	public SearchResultPage chooseSortCriteria(SortCriterias sortCriteria) {
-		getSearchCriteriaComponent().getSearchTexField().click();
-		return getSearchFilterComponent().chooseSortOrder(sortCriteria);
-	}
-	
-	public SearchResultPage chooseShowLimit(ShowLimits showLimit) {
-		getSearchCriteriaComponent().getSearchTexField().click();
-		return getSearchFilterComponent().chooseShowLimit(showLimit);
-	}
-	
-	
 	
 	
 	public List<String> getResultNamesList(){

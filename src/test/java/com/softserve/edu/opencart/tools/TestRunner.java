@@ -13,6 +13,10 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
 import com.softserve.edu.opencart.pages.HomePage;
+import com.softserve.edu.opencart.pages.search.ISearchEmptyResultPage;
+import com.softserve.edu.opencart.pages.search.ISearchResultPage;
+import com.softserve.edu.opencart.pages.search.SearchEmptyResultPage;
+import com.softserve.edu.opencart.pages.search.SearchResultPage;
 
 public abstract class TestRunner {
 	protected WebDriver driver;
@@ -51,7 +55,15 @@ public abstract class TestRunner {
     protected HomePage loadApplication() {
         return new HomePage(driver);
     }
-
+    
+    protected ISearchResultPage loadSearchResultPage() {
+        return new SearchResultPage(driver);
+    }
+    
+    protected ISearchEmptyResultPage loadEmptySearchResultPage() {
+        return new SearchEmptyResultPage(driver);
+    }
+    
     protected void delayExecution(long miliseconds) {
         try {
 			Thread.sleep(miliseconds);

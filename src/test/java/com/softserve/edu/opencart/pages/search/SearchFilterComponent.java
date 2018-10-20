@@ -8,7 +8,7 @@ import com.softserve.edu.opencart.data.ProductSubcategories;
 import com.softserve.edu.opencart.data.ShowLimits;
 import com.softserve.edu.opencart.data.SortCriterias;
 
-public class SearchFilterComponent {
+public class SearchFilterComponent{
 	private WebDriver driver;
 	
 	private WebElement listButton;
@@ -27,41 +27,44 @@ public class SearchFilterComponent {
 		showDropDown = driver.findElement(By.id("input-limit"));
 		
 	}
-	 public WebElement getListButton() {
+	public WebElement getListButton() {
 			return listButton;
+	}
+	 
+	public void clickListButton() {
+			getListButton().click();
 	}
 	 
 	public WebElement getGridButton() {
 			return gridButton;
 	}
 	
+	public void clickSortByDropDown() {
+		getSortByDropDown().click();
+	}
+	
+	public void clickSortByOption(SortCriterias sortCriteria) {
+		getSortByDropDown().findElement(By.cssSelector(sortCriteria.toString())).click();
+	}
+	
 	public WebElement getSortByDropDown() {
 			return sortByDropDown;
-	}
-	
-	public WebElement getShowDropDown() {
-			return showDropDown;
-	}
-	
-	public void clickListButton() {
-		getListButton().click();
 	}
 	
 	public void clickGridButton() {
 		getGridButton().click();
 	}
 	
-	
-	
-	public SearchResultPage chooseSortOrder(SortCriterias sortCriteria) {
-		getSortByDropDown().click();
-		getSortByDropDown().findElement(By.cssSelector(sortCriteria.toString())).click();
-		return new SearchResultPage(driver);
+	public WebElement getShowDropDown() {
+			return showDropDown;
 	}
 	
-	public SearchResultPage chooseShowLimit(ShowLimits showLimit) {
-		getSortByDropDown().click();
+	public void clickShowDropDown() {
+		getShowDropDown().click();
+	}
+	
+	public void clickShowOption(ShowLimits showLimit) {
 		getSortByDropDown().findElement(By.xpath(showLimit.toString())).click();
-		return new SearchResultPage(driver);
 	}
+	
 }

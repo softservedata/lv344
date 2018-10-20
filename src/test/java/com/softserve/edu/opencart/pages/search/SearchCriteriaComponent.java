@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 
 import com.softserve.edu.opencart.data.ProductSubcategories;
 
-public class SearchCriteriaComponent {
+public class SearchCriteriaComponent{
 		private WebDriver driver;
 	 	private WebElement searchTexField;
 		private WebElement searchButton;
@@ -31,12 +31,11 @@ public class SearchCriteriaComponent {
 			return searchTexField;
 		}
 	    
-	    public void fillSearchTextField(String text) {
+	    public void clickSearchField() {
 	    	getSearchTexField().click();
-	    	getSearchTexField().clear();
-	    	getSearchTexField().sendKeys(text);
 	    }
 
+	    
 		public WebElement getSearchButton() {
 			return searchButton;
 		}
@@ -45,6 +44,7 @@ public class SearchCriteriaComponent {
 			getSearchButton().click();
 		}
 
+		
 		public WebElement getCategoryDropDown() {
 			return categoryDropDown;
 		}
@@ -53,11 +53,7 @@ public class SearchCriteriaComponent {
 			getCategoryDropDown().click();
 		}
 		
-		public void chooseCategory(ProductSubcategories subcategory) {
-			getCategoryDropDown().click();
-			getCategoryDropDown().findElement(By.cssSelector("["+subcategory.toString()+"]")).click();
-		}
-		
+	
 		public WebElement getDescriptionCheckBox() {
 			return descriptionCheckBox;
 		}
@@ -66,12 +62,25 @@ public class SearchCriteriaComponent {
 			getDescriptionCheckBox().click();
 		}
 
+		
 		public WebElement getSubcategoryCheckBox() {
 			return subcategoryCheckBox;
 		}
 		
 		public void clickSubcategoryCheckBox() {
 			getSubcategoryCheckBox().click();
+		}
+		
+		
+		public void chooseCategory(ProductSubcategories subcategory) {
+			getCategoryDropDown().click();
+			getCategoryDropDown().findElement(By.cssSelector("["+subcategory.toString()+"]")).click();
+		}
+		
+		public void fillSearchTextField(String text) {
+		    	getSearchTexField().click();
+		    	getSearchTexField().clear();
+		    	getSearchTexField().sendKeys(text);
 		}
 		
 	    

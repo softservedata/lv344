@@ -2,9 +2,9 @@ package com.softserve.edu.opencart.pages;
 
 import org.openqa.selenium.WebDriver;
 
-public class UnloggedCartPageextends AStatusBarComponent {
+public class UnloggedCartpage extends AStatusBarComponent {
 
-	public UnloggedCartPage(WebDriver driver) {
+	public UnloggedCartpage(WebDriver driver) {
 		super(driver);
 	}
 
