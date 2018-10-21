@@ -60,7 +60,7 @@ public class ProductsListCartComponent {
 			.clearQuantityField();		
 	}
 	
-	public void changeQuantityProductCartByPartialName(String partialProductCartName) {
+	public void setQuantityProductCartByPartialName(String partialProductCartName) {
 		getProductCartComponentByPartialName(partialProductCartName)
 			.setQuantityField("%s");
 		//TODO уТОЧНИТИ ЯК ПРАВИЛЬНО ПОМІНЯТИ КІЛЬКІСТЬ ТОВАРУ

@@ -30,7 +30,7 @@ public class HomePage extends AHeadComponent {
 	public ProductsListComponent getProductsListComponent() {return productsListComponent;}
 	
 	//productsListComponentTitle
-	public WebElement getTroductsListComponentTitle() {return productsListComponentTitle;}
+	public WebElement getProductsListComponentTitle() {return productsListComponentTitle;}
 	public String getProductsListComponentTitleText() {return productsListComponentTitle.getText();}
 	
 	
