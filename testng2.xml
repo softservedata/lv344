@@ -14,9 +14,9 @@
 <!-- 		<class name="com.softserve.edu.Tests"> -->
 			<class name="com.softserve.edu.opencart.tests.YStasivTest">
 				<methods>
+						<include name="SmokeTestOpenCart" />
 						<include name="CheckEmptyCartPage" />
 						<include name="AddItemToCart" />
-<!--					<include name="AddItemToCart" />-->
 <!-- 					<include name="AddSingleItemToCart" /> -->
 <!-- 					<include name="ChangeNumOfItemsInCart" /> -->
 <!-- 					<include name="ErrorMessageChangeNumOfItemsInCart" /> -->
