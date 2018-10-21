@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import com.softserve.edu.opencart.pages.AStatusBarComponent;
 import com.softserve.edu.opencart.tools.RegexUtils;
 
-public class LoggedShoppinCartPage extends AStatusBarComponent {
+public class ShoppinCartPage extends AStatusBarComponent {
 
 	private WebElement arrayList;
 	private WebElement quantityField;
@@ -25,7 +25,7 @@ public class LoggedShoppinCartPage extends AStatusBarComponent {
 //	private WebElement continueShoppingButton;
 	private WebElement checkoutButton;
 
-	public LoggedShoppinCartPage(WebDriver driver) {
+	public ShoppinCartPage(WebDriver driver) {
 		super(driver);
 		initEmptyCartPageText();
 	}
@@ -34,10 +34,10 @@ public class LoggedShoppinCartPage extends AStatusBarComponent {
 	private void initEmptyCartPageText() {
 //		arrayList
 		// checkEmptyCartPage = driver.findElement(By.cssSelector("#content p"));
-		quantityField = driver.findElement(By.xpath("//div[contains(@class,'table')]//a[text()='%s']/../..//div[contains(@class, 'input-group')]//input"));
+		quantityField = driver.findElement(By.xpath("//div[contains(@class,'table')]//a[text()='MacBook']/../..//div[contains(@class, 'input-group')]//input"));
 		updateButton = driver.findElement(By.xpath("//div[contains(@class,'table')]//a[text()='MacBook']/../..//i[contains(@class,'fa-refresh')]"));
 		removeButton = driver.findElement(By.xpath("//div[contains(@class,'table')]//a[text()='MacBook']/../..//i[contains(@class,'fa-times-circle')]"));
-		totalPrice = driver.findElement(By.xpath("//td/strong[text()='Total:']/../../td[contains(text() , '%s')]"));
+		totalPrice = driver.findElement(By.xpath("//td/strong[text()='Total:']/../../td[contains(text() , '')]"));
 //		continueShoppingButton = driver.findElement(By.cssSelector("a.btn.btn-default"));
 		checkoutButton = driver.findElement(By.cssSelector("a.btn.btn-primary"));
 	}

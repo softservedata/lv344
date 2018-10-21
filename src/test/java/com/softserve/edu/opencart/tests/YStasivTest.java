@@ -5,36 +5,67 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.softserve.edu.opencart.data.Currencies;
+import com.softserve.edu.opencart.pages.HomeMessagePage;
 import com.softserve.edu.opencart.pages.HomePage;
 import com.softserve.edu.opencart.tools.TestRunner;
 
-public class YStasivTest extends TestRunner{
+public class YStasivTest extends TestRunner {
 
-	@DataProvider//(parallel = true)
-    public Object[][] currencyData() {
-        // Read from ...
-        return new Object[][] { 
-            { Currencies.US_DOLLAR, "$" },
-            };
-    }
+	@DataProvider // (parallel = true)
+	public Object[][] currenciesType() {
+		// Read from ...
+		return new Object[][] { 
+			{ Currencies.US_DOLLAR }, 
+			{ Currencies.EURO }, 
+			{ Currencies.POUND_STERLING }, };
+	}
 
-    @Test(dataProvider = "currencyData")
-    public void t1(Currencies currency, String expectedCurrencyText) {
-        //
-        // Precondition
+	@Test(dataProvider = "currenciesType")
+//CheckEmptyCartPageWithDifferentCurrencies
+	public void CheckEmptyCartPage(Currencies currency) {
+//Precondition: Load Application
+		HomePage homePage = loadApplication();
+		delayExecution(1000); //ForDemonstration
+//Steps: Choose currencies and go to Shopping Cart
+		homePage.chooseCurrency(currency).clickShoppingCart();;
+		delayExecution(1000); //ForDemonstration
+//Check if user see Empty Cart Page
+		Assert.assertEquals(gotoEmptyShoppingCartPage().getEmptyCartText(),
+				gotoEmptyShoppingCartPage().EXPECT_EMPTY_CART_TEXT);
+		delayExecution(2000); //ForDemonstration
+	}//TODO Логер + репортер
+	
+	
+	
+		@DataProvider//(parallel = true)
+	    public Object[][] productNames() {
+	        // Read from ...
+	        return new Object[][] { 
+	            { "MacBook" },
+	            { "iPhone" },
+	            };
+	    }
+
+	@Test(dataProvider = "productNames")
+	public void AddItemToCart(String partialProductName) {
+//Precondition: Load Application
         HomePage homePage = loadApplication();
-        delayExecution(1000);
+        delayExecution(1000); //ForDemonstration
+//Steps: Add product to cart
+        HomeMessagePage homeMessagePage = homePage.putToCartProductByPartialName(partialProductName);
+        delayExecution(1000); //ForDemonstration
         //
-        // Steps
+//Check if AlertMessage contains current text
+        Assert.assertTrue(homeMessagePage.getAlertMessageText().contains(String.format(homeMessagePage.EXPECTED_MESSAGE_CART, partialProductName)));
+        
+        //TODO SoftAssert
+        
+        delayExecution(1000); //ForDemonstration
+// Go to ShoppingCart and check if goods was added
         homePage.clickShoppingCart();
-        delayExecution(1000);
-        //
-        // Check
-        Assert.assertEquals(gotoEmptyShoppingCartPage().getEmptyCartText(), gotoEmptyShoppingCartPage().EXPECT_EMPTY_CART_TEXT);
-        System.out.println("Все ЗБС");
-        delayExecution(2000);
-        //
-        // Return to previous state
-        gotoEmptyShoppingCartPage().clickLogo();
+        Assert.assertTrue(gotoProductsListCartComponent().getProductsCartNameList().contains(partialProductName));
+        delayExecution(2000); //ForDemonstration
+        
+        //TODO ВИНЕСТИ В ТЕСТРАНЕР "Return to previous state"
     }
 }
