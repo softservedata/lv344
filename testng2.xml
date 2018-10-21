@@ -18,7 +18,7 @@
 						<include name="CheckEmptyCartPage" />
 						<include name="AddItemToCart" />
 <!-- 					<include name="AddSingleItemToCart" /> -->
-<!-- 					<include name="ChangeNumOfItemsInCart" /> -->
+						<include name="ChangeNumOfItemsInCart" /> 
 <!-- 					<include name="ErrorMessageChangeNumOfItemsInCart" /> -->
 <!-- 					<include name="CartAfterRelogin" /> -->
 				</methods>

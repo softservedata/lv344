@@ -8,11 +8,18 @@ import org.testng.asserts.SoftAssert;
 import com.softserve.edu.opencart.data.Currencies;
 import com.softserve.edu.opencart.pages.HomeMessagePage;
 import com.softserve.edu.opencart.pages.HomePage;
+import com.softserve.edu.opencart.pages.cart.functional.ShoppingCartMessagePage;
+import com.softserve.edu.opencart.pages.cart.functional.ProductCartComponent;
+import com.softserve.edu.opencart.pages.cart.functional.ProductsListCartComponent;
 import com.softserve.edu.opencart.tools.TestRunner;
 
 public class YStasivTest extends TestRunner {
 	
-	@Test//TODO УТОЧНИТИ ЯК ПОПРАВИТИ ЦЮ ФІГНЮ!!!
+//TestData
+	String testItem1 = "MacBook";
+	String testItem2 = "iPhone";
+	
+	//@Test(enabled = true)
 	public void SmokeTestOpenCart() {
 		SoftAssert softAssert = new SoftAssert();
 //Precondition: Load Application
@@ -49,7 +56,7 @@ public class YStasivTest extends TestRunner {
 			};
 	}
 
-	@Test(dataProvider = "currenciesType")
+	//@Test(dataProvider = "currenciesType", enabled = true)
 //CheckEmptyCartPageWithDifferentCurrencies
 	public void CheckEmptyCartPage(Currencies currency) {
 //Precondition: Load Application
@@ -73,12 +80,12 @@ public class YStasivTest extends TestRunner {
 	    public Object[][] productNames() {
 	        // Read from ...
 	        return new Object[][] { 
-	            { "MacBook" },
-	            { "iPhone" },
+	            { testItem1 },
+	            { testItem2 },
 	            };
 	    }
 
-	@Test(dataProvider = "productNames", groups = {"addItemToCart"})//TODO УТОЧНИТИ ЯК ПОПРАВИТИ ЦЮ ФІГНЮ!!!
+	//@Test(dataProvider = "productNames", enabled = true, groups = {"addItemToCart"})//TODO УТОЧНИТИ ЯК ПОПРАВИТИ ЦЮ ФІГНЮ!!!
 	public void AddItemToCart(String partialProductName) {
 //Precondition: Load Application
         HomePage homePage = loadApplication();
@@ -99,6 +106,32 @@ public class YStasivTest extends TestRunner {
         Assert.assertTrue(gotoProductsListCartComponent().getProductsCartNameList().contains(partialProductName));
         delayExecution(2000); //ForDemonstration
     }//TODO Логер + репортер
+	
+	
+	
+	@Test(enabled = true)
+	public void ChangeNumOfItemsInCart() throws Exception {
+//Precondition: Load Application
+        HomePage homePage = loadApplication();
+        delayExecution(1000); //ForDemonstration
+//Steps: Add product to cart
+        HomeMessagePage homeMessagePage = homePage.putToCartProductByPartialName(testItem1);
+        delayExecution(1000); //ForDemonstration
+//Check if AlertMessage contains current text
+        Assert.assertTrue(homeMessagePage.getAlertMessageText().contains(String.format(homeMessagePage.EXPECTED_MESSAGE_CART, testItem1)));
+//GoToShoppingCart
+        homePage.clickShoppingCart();
+//Check if goods was added
+        Assert.assertTrue(gotoProductsListCartComponent().getProductsCartNameList().contains(testItem1));
+        delayExecution(1000); //ForDemonstration
+//Set quantity
+        
+//Update product
+        ShoppingCartMessagePage cartMessagePage = gotoShoppinCartPage().updateProductQuantityByPartialName(testItem1);
+//Check if AlertMessage contains current text
+        Assert.assertTrue(homeMessagePage.getAlertMessageText().contains(cartMessagePage.EXPECTED_UPDATE_MESSAGE_CART));
+        
+	}
 	
 
 	
