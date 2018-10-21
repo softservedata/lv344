@@ -31,6 +31,7 @@ public class ShoppinCartPage extends AStatusBarComponent {
 	}
 
 //TODO ДОПИСАТИ ПЕРЕВІРКУ ЧИ МИ НА СТОРІНЦІ
+	//TODO УТОЧНИТИ ЯК ПРАВИЛЬНО ШУКАТИ ЕЛЕМЕНТИ
 	private void initEmptyCartPageText() {
 //		arrayList
 		// checkEmptyCartPage = driver.findElement(By.cssSelector("#content p"));
