@@ -27,7 +27,7 @@ public class ProductCartComponent {
 			//productListComponent = productLayout.findElement(By.cssSelector(".table-responsive tbody tr"));
 			name = cartProductLayout.findElement(By.cssSelector("form .text-left a"));
 			//unitPrice = cartProductLayout.findElement(By.cssSelector(".price"));
-			totalPrice = cartProductLayout.findElement(By.xpath("//div[contains(@class,'table')]//a[text()='MacBook']/../..//td[contains(text(),'$')]"));
+			//totalPrice = cartProductLayout.findElement(By.xpath("//div[contains(@class,'table')]//a[text()='MacBook']/../..//td[contains(text(),'$')]"));
 			quantityField = cartProductLayout.findElement(By.cssSelector(".input-group.btn-block input"));
 			updateButton = cartProductLayout.findElement(By.cssSelector(".fa.fa-refresh"));
 			removeButton = cartProductLayout.findElement(By.cssSelector(".fa.fa-times-circle"));

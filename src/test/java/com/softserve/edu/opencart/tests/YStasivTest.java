@@ -16,8 +16,9 @@ public class YStasivTest extends TestRunner {
 		// Read from ...
 		return new Object[][] { 
 			{ Currencies.US_DOLLAR }, 
-			{ Currencies.EURO }, 
-			{ Currencies.POUND_STERLING }, };
+//			{ Currencies.EURO }, 
+//			{ Currencies.POUND_STERLING }, 
+			};
 	}
 
 	@Test(dataProvider = "currenciesType")
@@ -46,7 +47,7 @@ public class YStasivTest extends TestRunner {
 	            };
 	    }
 
-	@Test(dataProvider = "productNames")
+	@Test(dataProvider = "productNames", groups = {"addItemToCart"})//TODO УТОЧНИТИ ЯК ПОПРАВИТИ ЦЮ ФІГНЮ!!!
 	public void AddItemToCart(String partialProductName) {
 //Precondition: Load Application
         HomePage homePage = loadApplication();
