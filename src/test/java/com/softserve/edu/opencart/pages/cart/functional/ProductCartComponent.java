@@ -62,4 +62,5 @@ public class ProductCartComponent {
 	    public double getTotalPriceAmount() {return RegexUtils.extractFirstDouble(getTotalPriceText());}
 
 		// Business Logic
+	    
 	}

@@ -7,6 +7,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.softserve.edu.opencart.pages.cart.functional.EmptyShoppingCartPage;
+import com.softserve.edu.opencart.pages.cart.functional.ProductsListCartComponent;
+import com.softserve.edu.opencart.pages.cart.functional.ShoppingCartPage;
 import com.softserve.edu.opencart.tools.RegexUtils;
 
 public abstract class AHeadComponent {
@@ -355,4 +358,16 @@ public abstract class AHeadComponent {
  		clickLogo();
 		return new HomePage(driver);
 }
+ 	
+ 	public EmptyShoppingCartPage gotoEmptyShoppingCartPage() {
+ 		clickShoppingCart();
+    	return new EmptyShoppingCartPage(driver);
+    }
+ 
+ 	public ShoppingCartPage gotoShoppinCartPage() {
+    	clickShoppingCart();
+    	return new ShoppingCartPage(driver);
+    }
+ 	
+ 	
 }

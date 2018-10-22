@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class ProductsListCartComponent {
+public class ProductsListCartComponent{
 	
 	private WebDriver driver;
 	private List<ProductCartComponent> productCartComponents;
@@ -60,10 +60,9 @@ public class ProductsListCartComponent {
 			.clearQuantityField();		
 	}
 	
-	public void setQuantityProductCartByPartialName(String partialProductCartName) {
+	public void setQuantityProductCartByPartialName(String partialProductCartName, String numOfItems) {
 		getProductCartComponentByPartialName(partialProductCartName)
-			.setQuantityField("%s");
-		//TODO уТОЧНИТИ ЯК ПРАВИЛЬНО ПОМІНЯТИ КІЛЬКІСТЬ ТОВАРУ
+			.setQuantityField(numOfItems);
 	}
 	
 	public void updateProductCartByPartialName(String partialProductCartName) {
