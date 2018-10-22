@@ -25,10 +25,9 @@ public class LoginMessagePage extends LoginPage {
 		return alertMessage;
 	}
 
-    public String getAlertMessageText() {
-        return getAlertMessage().getText();
-    }
 
-    // Business Logic
-
+	public String getAlertMessageText() {
+		return getAlertMessage().getText();
+	}
+	// Business Logic
 }

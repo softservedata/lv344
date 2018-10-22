@@ -258,5 +258,5 @@ public class User implements IFirstName, ILastName, IEMail, ITelephone,
 	public boolean getSubscribe() {
 		return subscribe;
 	}
-
 }
+

@@ -10,9 +10,9 @@ import com.softserve.edu.opencart.pages.AccountInformationPage;
 import com.softserve.edu.opencart.pages.AccountLogoutPage;
 import com.softserve.edu.opencart.tools.TestRunner;
 
-public class LoginTest extends TestRunner {
+ public class LoginTest extends TestRunner {
+ 	@DataProvider//(parallel = true)
 
-	@DataProvider//(parallel = true)
     public Object[][] validUsers() {
         // Read from ...
         return new Object[][] { 
@@ -21,6 +21,7 @@ public class LoginTest extends TestRunner {
     }
 
     @Test(dataProvider = "validUsers")
+
     public void checkLogin(IUser validUser) {
         //
         // Precondition
@@ -49,4 +50,6 @@ public class LoginTest extends TestRunner {
         accountLogoutPage.gotoHome();
         delayExecution(1000);
     }
+
 }
+

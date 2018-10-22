@@ -22,7 +22,7 @@ public class LoginPage extends AUnloggedRighMenuComponent {
 		passwordField = driver.findElement(By.id("input-password"));
 		loginButton = driver.findElement(By.cssSelector("input.btn.btn-primary"));
 	}
-	
+
 	// PageObject Atomic Operation
 
 	// emailField
@@ -102,4 +102,5 @@ public class LoginPage extends AUnloggedRighMenuComponent {
         fillLoginForm(invalidUser);
         return new LoginMessagePage(driver);
     }
+
 }

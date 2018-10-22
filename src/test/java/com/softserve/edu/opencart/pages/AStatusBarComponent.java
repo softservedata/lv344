@@ -58,4 +58,7 @@ public abstract class AStatusBarComponent extends AHeadComponent {
 	// Business Logic
 
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> yStasiv

@@ -2,6 +2,7 @@ package com.softserve.edu.opencart.tools;
 
 import java.util.concurrent.TimeUnit;
 
+<<<<<<< HEAD
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -9,14 +10,31 @@ import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
+=======
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.ITestContext;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterGroups;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
+>>>>>>> yStasiv
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
 import com.softserve.edu.opencart.pages.HomePage;
+<<<<<<< HEAD
 import com.softserve.edu.opencart.pages.search.ISearchEmptyResultPage;
 import com.softserve.edu.opencart.pages.search.ISearchResultPage;
 import com.softserve.edu.opencart.pages.search.SearchEmptyResultPage;
 import com.softserve.edu.opencart.pages.search.SearchResultPage;
+=======
+import com.softserve.edu.opencart.pages.cart.functional.EmptyShoppingCartPage;
+import com.softserve.edu.opencart.pages.cart.functional.ProductsListCartComponent;
+import com.softserve.edu.opencart.pages.cart.functional.ShoppingCartPage;
+
 
 public abstract class TestRunner {
 	protected WebDriver driver;
@@ -25,14 +43,13 @@ public abstract class TestRunner {
 	@BeforeClass
     public void beforeClass(ITestContext context) {
         System.out.println("@BeforeClass");
-		System.out.println("PATH to Driver: " +
-				this.getClass().getResource("/chromedriver-windows-32bit.exe").getPath());
+
 		System.setProperty("webdriver.chrome.driver",
 				this.getClass().getResource("/chromedriver-windows-32bit.exe").getPath());
-		ChromeOptions options = new ChromeOptions();
-		options.addArguments("--start-maximized");
-	    driver = new ChromeDriver(options);
+		driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		driver.manage().window().maximize();
+
     }
 
     @AfterClass(alwaysRun = true)
@@ -52,6 +69,17 @@ public abstract class TestRunner {
         System.out.println("@AfterMethod");
     }
 
+    @AfterGroups(groups = {"addItemToCart"})
+    protected void AfterGroup() {
+    	//Clear cart if we have one or more goods there
+  		if(RegexUtils.extractFirstNumber(driver.findElement(By.cssSelector("#cart-total")).getText()) != 0) {
+  			do{
+  				driver.findElement(By.cssSelector("#cart")).click();
+  				driver.findElement(By.cssSelector(".fa-times")).click();
+  			}while(RegexUtils.extractFirstNumber(driver.findElement(By.cssSelector("#cart-total")).getText()) != 0);
+  		}
+    }
+    
     protected HomePage loadApplication() {
         return new HomePage(driver);
     }
@@ -60,7 +88,9 @@ public abstract class TestRunner {
         try {
 			Thread.sleep(miliseconds);
 		} catch (InterruptedException e) {
+
 			System.err.println("Cannot thread sleep!");
+
 		}
     }
 

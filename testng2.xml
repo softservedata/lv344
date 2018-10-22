@@ -13,11 +13,16 @@
 	<test verbose="9" name="Test1">
 		<parameter name="number" value="2" />
 		<classes>
-			<!-- <class name="com.softserve.edu.AppTest" /> -->
-			<class name="com.softserve.edu.opencart.tests.StartTest">
+<!-- 		<class name="com.softserve.edu.Tests"> -->
+			<class name="com.softserve.edu.opencart.tests.YStasivTest">
 				<methods>
-<!-- 					<include name="checkCurrency" /> -->
-					<include name="checkProductCurrency" />
+						<include name="SmokeTestOpenCart" />
+						<include name="CheckEmptyCartPage" />
+						<include name="AddItemToCart" />
+<!-- 					<include name="AddSingleItemToCart" /> -->
+						<include name="ChangeNumOfItemsInCart" /> 
+<!-- 					<include name="ErrorMessageChangeNumOfItemsInCart" /> -->
+<!-- 					<include name="CartAfterRelogin" /> -->
 				</methods>
 			</class>
 			<class name="com.softserve.edu.opencart.tests.LoginTest" />

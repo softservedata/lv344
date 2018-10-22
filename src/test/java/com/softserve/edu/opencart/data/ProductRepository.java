@@ -30,6 +30,7 @@ public final class ProductRepository {
         		.addPriceExTax(Currencies.EURO, 94.11)
         		.addPriceExTax(Currencies.POUND_STERLING, 81.81)
         		.addPriceExTax(Currencies.US_DOLLAR, 101.00);
+
     }
     public static Product iMac() {
         return new Product("iMac",
@@ -86,5 +87,6 @@ public final class ProductRepository {
         		+ "sold by Amazon.com (check above)Stylish, att..")
     			.addPrice(Currencies.US_DOLLAR, 9.99); 
     }
-
 }
+
+
