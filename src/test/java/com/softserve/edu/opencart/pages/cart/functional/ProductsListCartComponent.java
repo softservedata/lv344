@@ -50,7 +50,7 @@ public class ProductsListCartComponent{
     }
 	
 	// Business Logic
-	public void chooseQuantityProductCartByPartialName(String partialProductCartName) {
+	public void clickQuantityProductCartByPartialName(String partialProductCartName) {
 		getProductCartComponentByPartialName(partialProductCartName)
 			.clickQuantityField();		
 	}
