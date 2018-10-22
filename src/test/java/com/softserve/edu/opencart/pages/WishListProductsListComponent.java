@@ -13,24 +13,26 @@ public class WishListProductsListComponent {
 	private List<WishListProductComponent> wishListProductComponents;
 	
 	public WishListProductsListComponent(WebDriver driver) {
+		
         this.driver = driver;
         initWishListProductsListComponents();
 	}
 	
     private void initWishListProductsListComponents() {
     	wishListProductComponents = new ArrayList<>(); 
-    	for (WebElement current : driver.findElements(By.cssSelector("tr"))) {
+    	for (WebElement current : driver.findElements(By.cssSelector(".table-responsive tbody tr"))) {
     		wishListProductComponents.add(new WishListProductComponent(current));
         }
     }
     
+ 
     
  // PageObject Atomic Operation
   //productComponents
   	public List<WishListProductComponent> getWishListProductComponents() {
   		return wishListProductComponents;
   	}
-    
+
   	
   	 public WishListProductComponent getWishListProductComponentByPartialName(String partialProductName) {
   		WishListProductComponent result = null;
@@ -43,6 +45,7 @@ public class WishListProductsListComponent {
          }
          return result;
      }
+  	 
 	
      public List<String> getWishListProductsNameList() {
          List<String> result = new ArrayList<>();
@@ -51,6 +54,7 @@ public class WishListProductsListComponent {
          }
          return result;
      }
+     
      
   // Business Logic
 
@@ -63,6 +67,7 @@ public class WishListProductsListComponent {
  		getWishListProductComponentByPartialName(partialProductName)
  			.clickremoveFromWishListButton();
  	}
+
 
      
 	

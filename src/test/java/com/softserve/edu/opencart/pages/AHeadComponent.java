@@ -355,4 +355,16 @@ public abstract class AHeadComponent {
  		clickLogo();
 		return new HomePage(driver);
 }
+ 	
+
+    public WishListPage gotoWishListPage() {
+    	return new WishListPage(driver);
+    }
+ 	
+//    protected EmptyWishListPage gotoEmptyWishListPage() {
+//    	return new EmptyWishListPage(driver);
+//    }
+//    
+
+// 	
 }

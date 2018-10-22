@@ -58,9 +58,9 @@ public abstract class TestRunner {
     	return new EmptyWishListPage(driver);
     }
     
-    protected WishListPage gotoWishListPage() {
-    	return new WishListPage(driver);
-    }
+//    protected WishListPage gotoWishListPage() {
+//    	return new WishListPage(driver);
+//    }
 
     protected void delayExecution(long miliseconds) {
         try {

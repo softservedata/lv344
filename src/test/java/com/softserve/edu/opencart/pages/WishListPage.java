@@ -9,7 +9,7 @@ public class WishListPage extends AStatusBarComponent {
 	public final String EXPECTED_MESSAGE_WISH_REMOVE = "Success: You have modified your wish list!";
 
 	private WishListProductsListComponent wishListProductListComponent;
-	private WebElement WishListButtonContinue;
+	private WebElement wishListButtonContinue;
 
 	public WishListPage(WebDriver driver) {
 		super(driver);
@@ -17,11 +17,12 @@ public class WishListPage extends AStatusBarComponent {
 	}
 
 	private void initWishListPage() {
-		WishListButtonContinue = driver.findElement(By.cssSelector(".pull-right > a"));
+		wishListButtonContinue = driver.findElement(By.cssSelector(".pull-right > a"));
+		wishListProductListComponent = new  WishListProductsListComponent(driver);
 	}
 
 	public WebElement getWishListButtonContinue() {
-		return WishListButtonContinue;
+		return wishListButtonContinue;
 	}
 
 	public MyAccountPage clickWishListButtonContinue() {
@@ -43,18 +44,18 @@ public class WishListPage extends AStatusBarComponent {
 				.getproductNameWishListText();
 	}
 	
-	public HomeMessagePage putFromWishListToCartProductByPartialName(String partialProductName)
+	public WishListMessagePage putFromWishListToCartProductByPartialName(String partialProductName)  //HomeMessagePage
 	{
 		getWishListProductsListComponent()
 		.addToCartProductFromWishListByPartialName(partialProductName);
-		return new HomeMessagePage(driver); 
+		return new WishListMessagePage(driver); 
 	}
 	
-	public HomeMessagePage removeFromWishListProductByPartialName(String partialProductName)
+	public WishListMessagePage removeFromWishListProductByPartialName(String partialProductName)
 	{
 		getWishListProductsListComponent()
-		.removeProductFromWishListByPartialName(partialProductName);
-		return new HomeMessagePage(driver); 
+			.removeProductFromWishListByPartialName(partialProductName);
+		return new WishListMessagePage(driver); 
 	}
 		
 	
