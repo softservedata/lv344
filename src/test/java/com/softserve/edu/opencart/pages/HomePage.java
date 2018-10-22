@@ -34,7 +34,7 @@ public class HomePage extends AHeadComponent {
 
 	public HomePage chooseCurrency(Currencies currency) {
         clickCurrencyByPartialName(currency.toString());
-        return new HomePage(driver); //рефреш страницы потому возвращаем драйвер
+        return new HomePage(driver); //рефреш страницы, потому возвращаем драйвер
     }
 
 	public HomeMessagePage putToCartProductByPartialName(String partialProductName) {

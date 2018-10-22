@@ -12,24 +12,39 @@
 		<parameter name="number" value="2" />
 		<classes>
 
-			<class name="com.softserve.edu.checkChangePasswordTest">
+
+			<class name="com.softserve.edu.opencart.tests.password.WarnningMessageWithNotValidCredentialsTest">
 				<methods>
-					<include name="changePasswordTest" />
+					<include name="warningMessage" />
 				</methods>
 			</class>
 
-			<class name="com.softserve.edu.errorMessageWhenChangingPasswordTest">
+       <class name="com.softserve.edu.opencart.tests.password.ErrorMessageWhenChangePasswordTest">
 				<methods>
-					<include name="errorMessegeTest" />
+					<include name="shortLongPassword" />
+				</methods>
+				<methods>
+					<include name="notMatchPassword" />
+				</methods>
+				<methods>
+					<include name="emptyPassword" />
+				</methods>				
+			</class>
+			
+			<class name="com.softserve.edu.opencart.pages.password.SuccessMessageWhenChangePasswordTest">
+				<methods>
+					<include name="successWhenChangePassword" />
 				</methods>
 			</class>
 
-
-<!-- 			<class name="com.softserve.edu.checkPostWhenFofgotPasswordTest"> -->
+<!-- 			<class name="com.softserve.edu.opencart.pages.password.CheckPostWhenFofgotPasswordTest"> -->
 <!-- 				<methods> -->
-<!-- 					<include name="checkPostTest" /> -->
+<!-- 					<include name="" /> -->
 <!-- 				</methods> -->
 <!-- 			</class> -->
+
+
+
 
 		</classes>
 	</test> <!-- Test -->

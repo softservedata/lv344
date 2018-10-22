@@ -36,8 +36,8 @@ public abstract class AHeadComponent {
             return listOptions;
         }
 
-        public WebElement getDropdownOptionByPartialName(String optionName) { 
-            WebElement result = null;//выпадайки по навигации                     
+        public WebElement getDropdownOptionByPartialName(String optionName) {
+            WebElement result = null;//выпадайки по навигации
             for (WebElement current : getListOptions()) {
                 if (current.getText().toLowerCase().contains(optionName.toLowerCase())) {
                     result = current;
@@ -68,7 +68,7 @@ public abstract class AHeadComponent {
 	//
 	protected static boolean loggedUser = false;
 	protected WebDriver driver;
-	//
+	//	
 	private WebElement currency;
 	private WebElement myAccount;// lable
 	private WebElement wishList;
@@ -84,7 +84,7 @@ public abstract class AHeadComponent {
 	private DropdownOptions dropdownOptions;//выпадайки по навигации
 	// private DropdownCart dropdownCart;
 	
-	protected AHeadComponent(WebDriver driver) {//браузер
+	protected AHeadComponent(WebDriver driver) {
         this.driver = driver;
         //
         currency = driver.findElement(By.cssSelector(".btn.btn-link.dropdown-toggle"));
@@ -204,8 +204,8 @@ public abstract class AHeadComponent {
         return searchProductField;
     }
 	
-	public String getSearchProductFieldText() {//вычитываем информацию из поля, если туда что-то записано
-        return getSearchProductField().getAttribute(TAG_ATTRIBUTE_VALUE);
+	public String getSearchProductFieldText() {
+        return getSearchProductField().getAttribute(TAG_ATTRIBUTE_VALUE);//вычитываем информацию из поля, если туда что-то записано
     }
 	
 	public void setSearchProductField(String text) {
@@ -273,7 +273,7 @@ public abstract class AHeadComponent {
     }
 	
 	public WebElement getMenuTopByCategoryPartialName(String categoryName) {//method return one item navi
-        WebElement result = null;//??
+        WebElement result = null;
         for (WebElement current : getMenuTop()) {
             if (current.findElement(By.cssSelector("a.dropdown-toggle")).getText()
                     .toLowerCase().contains(categoryName.toLowerCase())) {
@@ -328,6 +328,7 @@ public abstract class AHeadComponent {
 
 	public LoginPage gotoLogin() {
 		if (isLoggedUser()) {
+		    // TODO Develop Custom Exceptions 
 			throw new RuntimeException(LOGIN_ERROR);
 		}
 		clickAccountOptionByPartialName("Login");
@@ -342,16 +343,17 @@ public abstract class AHeadComponent {
         return new MyAccountPage(driver);
     }
 
-	// TODO Return AccountLogoutPage
-	public HomePage gotoLogout() {
+	public AccountLogoutPage gotoLogout() {
 		if (!isLoggedUser()) {
 			throw new RuntimeException(LOGIN_ERROR);
 		}
 		clickAccountOptionByPartialName("Logout");
 		loggedUser = false;
+        return new AccountLogoutPage(driver);
+    }
+
+	public HomePage gotoHome() {
 		clickLogo();
 		return new HomePage(driver);
-        //return new AccountLogoutPage(driver);
-    }
-	
+	}
 }

@@ -4,10 +4,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class LoginPage extends AUnloggedRighMenuComponent{
+import com.softserve.edu.opencart.data.IUser;
+
+public class LoginPage extends AUnloggedRighMenuComponent {
 
 	private WebElement emailField;
 	private WebElement passwordField;
+	private WebElement loginButton;
+	private WebElement linkForgottenPassword;
 
 	public LoginPage(WebDriver driver) {
 		super(driver);
@@ -17,6 +21,8 @@ public class LoginPage extends AUnloggedRighMenuComponent{
 	private void initLoginComponent() {
 		emailField = driver.findElement(By.id("input-email"));
 		passwordField = driver.findElement(By.id("input-password"));
+		loginButton = driver.findElement(By.cssSelector("input.btn.btn-primary"));
+		linkForgottenPassword = driver.findElement(By.linkText("Forgotten Password"));
 	}
 	
 	// PageObject Atomic Operation
@@ -63,6 +69,53 @@ public class LoginPage extends AUnloggedRighMenuComponent{
 		getPasswordField().click();
     }
 
-	// Business Logic
+	// loginButton
+	public WebElement getLoginButton() {
+        return loginButton;
+    }
 
+	public String getLoginButtonText() {
+        return getLoginButton().getAttribute(TAG_ATTRIBUTE_VALUE);
+    }
+	 
+	public void clickLoginButton() {
+		getLoginButton().click();
+    }
+	//linkForgottenPassword
+	
+	public WebElement getLinkForgottenPassword() {
+        return linkForgottenPassword;
+    }
+
+	public String getLinkForgottenPasswordText() {
+        return getLinkForgottenPassword().getText();
+    }
+	 
+	public void clickLinkForgottenPassword() {
+		getLinkForgottenPassword().click();
+    }
+
+	
+	// Business Logic
+	
+	private void fillLoginForm(IUser user) {
+        clickEmailField();
+        clearEmailField();
+        setEmailField(user.getEMail());
+        clickPasswordField();
+        clearPasswordField();
+        setPasswordField(user.getPassword());
+        clickLoginButton();
+    }
+	
+	public MyAccountPage successLogin(IUser user) {
+        fillLoginForm(user);
+        loggedUser = true;
+        return new MyAccountPage(driver);
+    }
+
+	public LoginMessagePage unsuccessfullLogin(IUser invalidUser) {
+        fillLoginForm(invalidUser);
+        return new LoginMessagePage(driver);
+    }
 }

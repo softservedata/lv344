@@ -27,7 +27,7 @@ public class StartTest extends TestRunner {
     public void checkCurrency(Currencies currency, String expectedCurrencyText) {
         //
         // Precondition
-        HomePage homePage = loadApplication();        
+        HomePage homePage = loadApplication();
         delayExecution(1000);
         //
         // Steps
