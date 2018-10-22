@@ -357,3 +357,4 @@ public abstract class AHeadComponent {
 		return new HomePage(driver);
 	}
 }
+

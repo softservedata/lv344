@@ -1,32 +1,35 @@
 package com.softserve.edu;
- 
+
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
 import com.softserve.edu.opencart.tools.RegexUtils;
 
-public class AppTest 
-{
+public class AppTest {
 	private static final String CARTBUTTON_BYXPATH = "//div[contains(@class,'product-layout')]//a[text()='%s']/../../following-sibling::div/button[contains(@onclick,'cart')]";
-	
+
 	@Test
 	public void cartAdd() throws Exception {
-		System.out.println("PATH to Driver: " +
-				AppTest.class.getResource("/chromedriver-windows-32bit.exe").getPath());
+		System.out.println("PATH to Driver: " + AppTest.class.getResource("/chromedriver-windows-32bit.exe").getPath());
 		System.setProperty("webdriver.chrome.driver",
 				AppTest.class.getResource("/chromedriver-windows-32bit.exe").getPath());
-				//"./target/test-classes/chromedriver-windows-32bit.exe");
-				//"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe");
-		WebDriver driver = new ChromeDriver();
+		// "./target/test-classes/chromedriver-windows-32bit.exe");
+		// "C:\\Program Files
+		// (x86)\\Google\\Chrome\\Application\\chromedriver.exe");
+
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--start-maximized");
+		WebDriver driver = new ChromeDriver(options);
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		driver.manage().window().maximize();
+
 		driver.get("http://atqc-shop.epizy.com/");
 		//
 		WebElement cart = driver.findElement(By.cssSelector("#cart-total"));
@@ -43,30 +46,31 @@ public class AppTest
 		String dataTest2 = "iPhone";
 		//
 		driver.findElement(By.xpath(String.format(CARTBUTTON_BYXPATH, dataTest1))).click();
-		//Thread.sleep(2000); // DO NOT USE
+		// Thread.sleep(2000); // DO NOT USE
 		//
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-		//(new WebDriverWait(driver, 10)).until(
-		//		ExpectedConditions.stalenessOf(cart));
+		// (new WebDriverWait(driver, 10)).until(
+		// ExpectedConditions.stalenessOf(cart));
 		//
-		//(new WebDriverWait(driver, 10)).until(
-		//		ExpectedConditions.invisibilityOfElementLocated(
-        //				By.xpath("//span[contains(text(), '0 item')]")));
+		// (new WebDriverWait(driver, 10)).until(
+		// ExpectedConditions.invisibilityOfElementLocated(
+		// By.xpath("//span[contains(text(), '0 item')]")));
 		//
-		//(new WebDriverWait(driver, 10)).until(
-		//		ExpectedConditions.elementToBeClickable(By.xpath(String.format(CARTBUTTON_BYXPATH, dataTest2))));
+		// (new WebDriverWait(driver, 10)).until(
+		// ExpectedConditions.elementToBeClickable(By.xpath(String.format(CARTBUTTON_BYXPATH,
+		// dataTest2))));
 		//
-		(new WebDriverWait(driver, 10)).until(
-				ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".alert.alert-success")));
+		(new WebDriverWait(driver, 10))
+				.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".alert.alert-success")));
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		//
-		//driver.navigate().refresh();
-		//Thread.sleep(1000); // DO NOT USE
+		// driver.navigate().refresh();
+		// Thread.sleep(1000); // DO NOT USE
 		//
 		driver.findElement(By.xpath(String.format(CARTBUTTON_BYXPATH, dataTest2))).click();
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-		(new WebDriverWait(driver, 10)).until(
-				ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".alert.alert-success")));
+		(new WebDriverWait(driver, 10))
+				.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".alert.alert-success")));
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		//
 		driver.findElement(By.xpath(String.format(CARTBUTTON_BYXPATH, dataTest2))).click();
@@ -85,3 +89,4 @@ public class AppTest
 		driver.quit();
 	}
 }
+
