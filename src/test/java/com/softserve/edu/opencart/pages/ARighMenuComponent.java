@@ -9,7 +9,4 @@ public class ARighMenuComponent extends AStatusBarComponent {
 	}
 
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> yStasiv

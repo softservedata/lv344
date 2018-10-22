@@ -6,13 +6,10 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import com.softserve.edu.opencart.data.Currencies;
-import com.softserve.edu.opencart.pages.AHeadComponent;
 import com.softserve.edu.opencart.pages.HomeMessagePage;
 import com.softserve.edu.opencart.pages.HomePage;
-import com.softserve.edu.opencart.pages.cart.functional.ShoppingCartMessagePage;
 import com.softserve.edu.opencart.pages.cart.functional.EmptyShoppingCartPage;
-import com.softserve.edu.opencart.pages.cart.functional.ProductCartComponent;
-import com.softserve.edu.opencart.pages.cart.functional.ProductsListCartComponent;
+import com.softserve.edu.opencart.pages.cart.functional.ShoppingCartMessagePage;
 import com.softserve.edu.opencart.pages.cart.functional.ShoppingCartPage;
 import com.softserve.edu.opencart.tools.TestRunner;
 

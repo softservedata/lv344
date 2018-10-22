@@ -7,12 +7,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-<<<<<<< HEAD
-=======
 import com.softserve.edu.opencart.pages.cart.functional.EmptyShoppingCartPage;
-import com.softserve.edu.opencart.pages.cart.functional.ProductsListCartComponent;
 import com.softserve.edu.opencart.pages.cart.functional.ShoppingCartPage;
->>>>>>> yStasiv
 import com.softserve.edu.opencart.tools.RegexUtils;
 
 public abstract class AHeadComponent {
@@ -334,11 +330,7 @@ public abstract class AHeadComponent {
 
 	public LoginPage gotoLogin() {
 		if (isLoggedUser()) {
-<<<<<<< HEAD
 		    // TODO Develop Custom Exceptions 
-=======
-			 // TODO Develop Custom Exceptions
->>>>>>> yStasiv
 			throw new RuntimeException(LOGIN_ERROR);
 		}
 		clickAccountOptionByPartialName("Login");
@@ -361,15 +353,7 @@ public abstract class AHeadComponent {
 		loggedUser = false;
         return new AccountLogoutPage(driver);
     }
-<<<<<<< HEAD
 
-	public HomePage gotoHome() {
-		clickLogo();
-		return new HomePage(driver);
-	}
-}
-
-=======
  	public HomePage gotoHome() {
  		clickLogo();
 		return new HomePage(driver);
@@ -387,4 +371,3 @@ public abstract class AHeadComponent {
  	
  	
 }
->>>>>>> yStasiv

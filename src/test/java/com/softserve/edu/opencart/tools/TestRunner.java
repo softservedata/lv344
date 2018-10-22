@@ -2,15 +2,6 @@ package com.softserve.edu.opencart.tools;
 
 import java.util.concurrent.TimeUnit;
 
-<<<<<<< HEAD
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.ITestContext;
-import org.testng.ITestResult;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-=======
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -19,21 +10,10 @@ import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterGroups;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
->>>>>>> yStasiv
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
 import com.softserve.edu.opencart.pages.HomePage;
-<<<<<<< HEAD
-import com.softserve.edu.opencart.pages.search.ISearchEmptyResultPage;
-import com.softserve.edu.opencart.pages.search.ISearchResultPage;
-import com.softserve.edu.opencart.pages.search.SearchEmptyResultPage;
-import com.softserve.edu.opencart.pages.search.SearchResultPage;
-=======
-import com.softserve.edu.opencart.pages.cart.functional.EmptyShoppingCartPage;
-import com.softserve.edu.opencart.pages.cart.functional.ProductsListCartComponent;
-import com.softserve.edu.opencart.pages.cart.functional.ShoppingCartPage;
 
 
 public abstract class TestRunner {
