@@ -1,0 +1,39 @@
+package com.softserve.edu.opencart.pages.password;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+public class ErrorMessageConfirmPasswordPage extends ChangePasswordPage {
+
+	public final String ERROR_MESSAGE_CONFIRM_PASSWORD = "Password confirmation does not match password!";
+
+	private WebDriver driver;
+	private WebElement alertMessage;
+
+
+	public ErrorMessageConfirmPasswordPage(WebDriver driver) {
+		super(driver);
+		initAlertMessage();
+	}
+
+	private void initAlertMessage() {
+		System.out.println("++++ class  ErrorMessageConfirmPasswordPage    initAlertMessage()");
+		System.out.println("driver = " + driver);
+		alertMessage = driver.findElement(By.cssSelector("input[name='confirm'] + div"));
+	}
+
+	public WebElement getAlertMessage() {
+		return alertMessage;
+	}
+
+	public String getAlertMessageText() {
+		return getAlertMessage().getText();
+	}
+
+	// busness logic
+	public ErrorMessageChangePasswordPage gotoErrorMessageChangePasswordPage() {
+		return new ErrorMessageChangePasswordPage(driver);
+	}
+	
+}
