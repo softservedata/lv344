@@ -4,8 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class ShoppingCartMessagePage extends ShoppinCartPage {
-	public final String EXPECTED_UPDATE_MESSAGE_CART = " Success: You have modified your shopping cart!";
+public class ShoppingCartMessagePage extends ShoppingCartPage {
+	public final String EXPECTED_UPDATE_MESSAGE_CART = "Success: You have modified your shopping cart!";
 
 	private WebElement alertMessage;
 
@@ -23,7 +23,7 @@ public class ShoppingCartMessagePage extends ShoppinCartPage {
 
     public String getAlertMessageText() {
     	String textMessage = getAlertMessage().getText();
-    	// Remove x Symbol from Message
+    	// Remove x Symbol and space from Message
         return textMessage.substring(0, textMessage.length() - 2);
     }
 
