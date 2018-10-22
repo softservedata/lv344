@@ -17,7 +17,7 @@ import org.testng.annotations.BeforeMethod;
 import com.softserve.edu.opencart.pages.HomePage;
 import com.softserve.edu.opencart.pages.cart.functional.EmptyShoppingCartPage;
 import com.softserve.edu.opencart.pages.cart.functional.ProductsListCartComponent;
-import com.softserve.edu.opencart.pages.cart.functional.ShoppinCartPage;
+import com.softserve.edu.opencart.pages.cart.functional.ShoppingCartPage;
 
 public abstract class TestRunner {
 	protected WebDriver driver;
@@ -62,16 +62,6 @@ public abstract class TestRunner {
     
     protected HomePage loadApplication() {
         return new HomePage(driver);
-    }
-    protected EmptyShoppingCartPage gotoEmptyShoppingCartPage() {
-    	return new EmptyShoppingCartPage(driver);
-    }
-    
-    protected ProductsListCartComponent gotoProductsListCartComponent() {
-    	return new ProductsListCartComponent(driver);
-    }
-    protected ShoppinCartPage gotoShoppinCartPage() {
-    	return new ShoppinCartPage(driver);
     }
     
     protected void delayExecution(long miliseconds) {
