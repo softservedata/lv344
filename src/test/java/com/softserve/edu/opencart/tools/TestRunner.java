@@ -56,14 +56,6 @@ public abstract class TestRunner {
         return new HomePage(driver);
     }
     
-    protected ISearchResultPage loadSearchResultPage() {
-        return new SearchResultPage(driver);
-    }
-    
-    protected ISearchEmptyResultPage loadEmptySearchResultPage() {
-        return new SearchEmptyResultPage(driver);
-    }
-    
     protected void delayExecution(long miliseconds) {
         try {
 			Thread.sleep(miliseconds);
