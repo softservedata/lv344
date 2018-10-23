@@ -6,13 +6,13 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import com.softserve.edu.opencart.data.Currencies;
-import com.softserve.edu.opencart.pages.AHeadComponent;
+import com.softserve.edu.opencart.data.IUser;
+import com.softserve.edu.opencart.data.UserRepository;
 import com.softserve.edu.opencart.pages.HomeMessagePage;
 import com.softserve.edu.opencart.pages.HomePage;
-import com.softserve.edu.opencart.pages.cart.functional.ShoppingCartMessagePage;
+import com.softserve.edu.opencart.pages.MyAccountPage;
 import com.softserve.edu.opencart.pages.cart.functional.EmptyShoppingCartPage;
-import com.softserve.edu.opencart.pages.cart.functional.ProductCartComponent;
-import com.softserve.edu.opencart.pages.cart.functional.ProductsListCartComponent;
+import com.softserve.edu.opencart.pages.cart.functional.ShoppingCartMessagePage;
 import com.softserve.edu.opencart.pages.cart.functional.ShoppingCartPage;
 import com.softserve.edu.opencart.tools.TestRunner;
 
@@ -101,8 +101,8 @@ public class YStasivTest extends TestRunner {
     }//TODO Логер + репортер
 	
 	
-	//
-	@Test(enabled = true)
+	
+	//@Test(enabled = true)
 	public void ChangeNumOfItemsInCart() throws Exception {
 //Precondition: Load Application
         HomePage homePage = loadApplication();
@@ -127,10 +127,97 @@ public class YStasivTest extends TestRunner {
 //Check if AlertMessage contains current text
         Assert.assertEquals(cartMessagePage.getAlertMessageText(), cartMessagePage.EXPECTED_UPDATE_MESSAGE_CART);
         System.out.println("weeee2");
-        delayExecution(5000); //ForDemonstration
-        
+        delayExecution(5000); //ForDemonstration 
+	}
+	//====================================================================================================
+	
+	@DataProvider // (parallel = true)
+	public Object[][] validUsers() {
+		// Read from ...
+		return new Object[][] { { UserRepository.get().yStasiv() }, };
+	}
+
+	@DataProvider // (parallel = true)
+	public Object[][] SomeProduct() {
+		// Read from ...
+		return new Object[][] { { UserRepository.get().yStasiv(), "MacBook" }, };
 	}
 	
+	
+	
+	@Test(enabled = true)
+	public void CartAfterRelogin(IUser validUser) throws Exception {
+// Precondition
+				// Steps
+				MyAccountPage myAccountPage = loadApplication().gotoLogin().successLogin(validUser);
+				delayExecution(1000); //ForDemonstration 
+	
+				HomePage homePage = myAccountPage.gotoHome();
+				
+				
+				HomeMessagePage homeMessagePage = homePage.putToCartProductByPartialName("MacBook");
+		        delayExecution(1000); //ForDemonstration
+		//Check if AlertMessage contains current text
+		        Assert.assertTrue(homeMessagePage.getAlertMessageText().contains(String.format(homeMessagePage.EXPECTED_MESSAGE_CART, "MacBook")));
+		//GoToShoppingCart
+		       // ShoppingCartPage shoppingCartPage = homePage.gotoShoppinCartPage();
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+	
+	//====================================================================================================
+	//@Test(enabled = true)TODO ПИТАННЯ
+	public void ErrorMessage() throws Exception {
+		//Precondition: Load Application
+        HomePage homePage = loadApplication();
+        delayExecution(1000); //ForDemonstration
+//Steps: Add product to cart
+        HomeMessagePage homeMessagePage = homePage.putToCartProductByPartialName("MacBook");
+        delayExecution(1000); //ForDemonstration
+//Check if AlertMessage contains current text
+        Assert.assertTrue(homeMessagePage.getAlertMessageText().contains(String.format(homeMessagePage.EXPECTED_MESSAGE_CART, "MacBook")));
+//GoToShoppingCart
+        ShoppingCartPage shoppingCartPage = homePage.gotoShoppinCartPage();
+//Check if goods was added
+        Assert.assertTrue(shoppingCartPage.getProductsCartListComponent().getProductsCartNameList().contains("MacBook"));
+        delayExecution(1000); //ForDemonstration
+//Set quantity
+        shoppingCartPage.clearQuantityProductCartByPartialName("MacBook");
+        shoppingCartPage.clearQuantityProductCartByPartialName("MacBook");
+        shoppingCartPage.setProductQuantityByPartialName("MacBook", "5");
+//Update product
+        ShoppingCartMessagePage cartMessagePage = shoppingCartPage.updateProductQuantityByPartialName("MacBook");
+        System.out.println("weeeee");
+//Check if AlertMessage contains current text
+        Assert.assertEquals(cartMessagePage.getAlertMessageText(), cartMessagePage.EXPECTED_UPDATE_MESSAGE_CART);
+        System.out.println("weeee2");
+        delayExecution(5000); //ForDemonstration 
+	}
 
 	
 }
