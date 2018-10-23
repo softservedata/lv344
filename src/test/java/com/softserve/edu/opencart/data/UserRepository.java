@@ -94,7 +94,7 @@ public final class UserRepository {
 				.setEMail("yurastasiv@hotmail.com")
 				.setTelephone("+380972537286")
 				.setAddress1("Lviv, ukraine")
-				.setCity("city3")
+				.setCity("Lviv")
 				.setPostCode("79054")
 				.setCountry("Ukraine")
 				.setRegionState("L'vivs'ka Oblast'")
