@@ -87,7 +87,7 @@ public class Tests {
 		Thread.sleep(2000); // For demonstration
 //Verify 1 text element
 		Assert.assertEquals(driver.findElement(By.xpath("//*[@id='content']/h3")).getText(), "Featured");
-		System.out.println(ststus1 + "Element main on page was found...");
+		System.out.println(ststus1 + "Element on main page was found...");
 		Thread.sleep(1000); // For demonstration
 //Verify 1 button
 		driver.manage().deleteAllCookies();
