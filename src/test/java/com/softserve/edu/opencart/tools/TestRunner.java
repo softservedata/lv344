@@ -50,7 +50,7 @@ public abstract class TestRunner {
     @AfterMethod//(alwaysRun = true)
     public void afterMethod(ITestResult result) {
     	if (result.isSuccess()) {
-    		log.info("test " + result.getName() + " done");
+    		log.info("test " + result.getName() + " completed successfully");
     	} else {
     		log.error("test " + result.getName() + " failed" 
     				+ "\n\t" + result.getThrowable().toString());
