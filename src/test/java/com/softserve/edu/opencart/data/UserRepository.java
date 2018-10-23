@@ -86,6 +86,23 @@ public final class UserRepository {
 				.setFax("fax3")
 				.build();
     }
+    
+    public IUser yStasiv() {
+        return User.get()
+				.setFirstName("Yurii")
+				.setLastName("Stasiv")
+				.setEMail("yurastasiv@hotmail.com")
+				.setTelephone("+380972537286")
+				.setAddress1("")
+				.setCity("")
+				.setPostCode("")
+				.setCountry("")
+				.setRegionState("")
+				.setPassword("Q1w2e3r4")
+				.setFax("")
+				.build();
+    }
+
 
     //public IUser admin() {}
     //public List<IUser> fromExcel() {}
