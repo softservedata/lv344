@@ -6,8 +6,12 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import com.softserve.edu.opencart.data.Currencies;
+import com.softserve.edu.opencart.data.IUser;
+import com.softserve.edu.opencart.data.UserRepository;
+import com.softserve.edu.opencart.pages.AccountLogoutPage;
 import com.softserve.edu.opencart.pages.HomeMessagePage;
 import com.softserve.edu.opencart.pages.HomePage;
+import com.softserve.edu.opencart.pages.MyAccountPage;
 import com.softserve.edu.opencart.pages.cart.functional.EmptyShoppingCartPage;
 import com.softserve.edu.opencart.pages.cart.functional.ShoppingCartMessagePage;
 import com.softserve.edu.opencart.pages.cart.functional.ShoppingCartPage;
@@ -99,31 +103,102 @@ public class YStasivTest extends TestRunner {
 	
 	
 	//
-	@Test(enabled = true)
-	public void ChangeNumOfItemsInCart() throws Exception {
+	//@Test(dataProvider = "productNames", enabled = true)
+	public void ChangeNumOfItemsInCart(String partialProductName) {
 //Precondition: Load Application
         HomePage homePage = loadApplication();
         delayExecution(1000); //ForDemonstration
 //Steps: Add product to cart
-        HomeMessagePage homeMessagePage = homePage.putToCartProductByPartialName("MacBook");
+        HomeMessagePage homeMessagePage = homePage.putToCartProductByPartialName(partialProductName);
         delayExecution(1000); //ForDemonstration
 //Check if AlertMessage contains current text
-        Assert.assertTrue(homeMessagePage.getAlertMessageText().contains(String.format(homeMessagePage.EXPECTED_MESSAGE_CART, "MacBook")));
+        Assert.assertTrue(homeMessagePage.getAlertMessageText()
+        		.contains(String.format(homeMessagePage.EXPECTED_MESSAGE_CART, partialProductName)));
 //GoToShoppingCart
         ShoppingCartPage shoppingCartPage = homePage.gotoShoppinCartPage();
 //Check if goods was added
-        Assert.assertTrue(shoppingCartPage.getProductsCartListComponent().getProductsCartNameList().contains("MacBook"));
+        Assert.assertTrue(shoppingCartPage.getProductsCartListComponent().getProductsCartNameList().contains(partialProductName));
         delayExecution(1000); //ForDemonstration
 //Set quantity and Update product
-        ShoppingCartMessagePage cartMessagePage = shoppingCartPage.updateProductQuantityByPartialName("MacBook", "5");
-        System.out.println("weeeee");
+        ShoppingCartMessagePage cartMessagePage = shoppingCartPage.updateProductQuantityByPartialName(partialProductName, "5");
 //Check if AlertMessage contains current text
         Assert.assertEquals(cartMessagePage.getAlertMessageText(), cartMessagePage.EXPECTED_UPDATE_MESSAGE_CART);
-        System.out.println("weeee2");
+        delayExecution(5000); //ForDemonstration
+	}
+	
+//@Test(dataProvider = "productNames", enabled = true)
+	public void ErrorMessageChangeNumOfItemsInCart(String partialProductName) {
+//Precondition: Load Application
+        HomePage homePage = loadApplication();
+        delayExecution(1000); //ForDemonstration
+//Steps: Add product to cart
+        HomeMessagePage homeMessagePage = homePage.putToCartProductByPartialName(partialProductName);
+        delayExecution(1000); //ForDemonstration
+//Check if AlertMessage contains current text
+        Assert.assertTrue(homeMessagePage.getAlertMessageText()
+        		.contains(String.format(homeMessagePage.EXPECTED_MESSAGE_CART, partialProductName)));
+//GoToShoppingCart
+        ShoppingCartPage shoppingCartPage = homePage.gotoShoppinCartPage();
+//Check if goods was added
+        Assert.assertTrue(shoppingCartPage.getProductsCartListComponent().getProductsCartNameList().contains(partialProductName));
+        delayExecution(1000); //ForDemonstration
+//Set quantity and Update product
+        ShoppingCartMessagePage cartMessagePage = shoppingCartPage.updateProductQuantityByPartialName(partialProductName, "test");
+//Check if AlertMessage contains current text
+        Assert.assertEquals(cartMessagePage.getAlertMessageText(), cartMessagePage.EXPECTED_UPDATE_MESSAGE_CART);
         delayExecution(5000); //ForDemonstration
         
 	}
 	
+	@DataProvider // (parallel = true)
+	public Object[][] SomeProduct() {
+		// Read from ...
+		return new Object[][] { 
+			{ UserRepository.get().yStasiv(), "MacBook" },
+			};
+	}
+	@Test(dataProvider = "SomeProduct", enabled = true)
+	public void CartAfterRelogin(IUser validUser, String partialProductName) {
+//Precondition: Login
+		MyAccountPage myAccountPage = loadApplication().gotoLogin().successLogin(validUser);
+		delayExecution(1000);
+	
+//back to main page
+		HomePage homePage = myAccountPage.gotoHome();
+		delayExecution(1000);
+		
+//Add product to cart 
+		HomeMessagePage homeMessagePage = homePage.putToCartProductByPartialName(partialProductName);
+        delayExecution(1000); //ForDemonstration
 
+//Check if AlertMessage contains current text
+        Assert.assertTrue(homeMessagePage.getAlertMessageText()
+        		.contains(String.format(homeMessagePage.EXPECTED_MESSAGE_CART, partialProductName)));
+        delayExecution(1000); //ForDemonstration
+        
+//Close message
+      	homePage = homeMessagePage.closeAlertMessage();
+      	delayExecution(1000);
+
+//Go to ShoppingCart and check if goods was added
+        ShoppingCartPage shoppingCartPage = homePage.gotoShoppinCartPage(); 
+        Assert.assertTrue(shoppingCartPage.getProductsCartListComponent().getProductsCartNameList().contains(partialProductName));
+        delayExecution(2000); //ForDemonstration
+
+		
+//Return to previous state
+//Remove ProductName from cart List
+        shoppingCartPage.removeProductQuantityByPartialName(partialProductName);
+        shoppingCartPage.gotoEmptyShoppingCartPage().clickContinueButton();
+		delayExecution(1000);
+
+//Logout		
+		AccountLogoutPage accountLogoutPage = myAccountPage.gotoLogout();
+		accountLogoutPage.gotoHome();
+		delayExecution(3000);
+		
+
+	}
+	
 	
 }
