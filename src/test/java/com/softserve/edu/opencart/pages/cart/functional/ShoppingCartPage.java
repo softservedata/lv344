@@ -47,10 +47,9 @@ public class ShoppingCartPage extends AStatusBarComponent {
         return new ShoppingCartMessagePage(driver); 
     }
 	
-	public ShoppingCartMessagePage removeProductQuantityByPartialName(String partialProductName) {
+	public void removeProductQuantityByPartialName(String partialProductName) {
 		getProductsCartListComponent()
 			.removeProductCartByPartialName(partialProductName);
-        return new ShoppingCartMessagePage(driver); 
     }
 	
 	
