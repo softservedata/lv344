@@ -57,7 +57,7 @@ public final class UserRepository {
 
     public IUser customerHahaha() {
         return User.get()
-				.setFirstName("hahaha")
+				.setFirstName("firstname9")
 				.setLastName("hahaha")
 				.setEMail("hahaha@gmail.com")
 				.setTelephone("1234567")
