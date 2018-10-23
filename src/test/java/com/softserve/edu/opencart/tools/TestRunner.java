@@ -19,7 +19,7 @@ import com.softserve.edu.opencart.pages.HomePage;
 
 
 public abstract class TestRunner {
-	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+	protected final Logger log = LoggerFactory.getLogger(this.getClass());
 	protected WebDriver driver;
 	protected final double PRECISION = 0.001;
 	
@@ -50,9 +50,9 @@ public abstract class TestRunner {
     @AfterMethod//(alwaysRun = true)
     public void afterMethod(ITestResult result) {
     	if (result.isSuccess()) {
-    		logger.info("test " + result.getName() + " done");
+    		log.info("test " + result.getName() + " done");
     	} else {
-    		logger.error("test " + result.getName() + " failed" 
+    		log.error("test " + result.getName() + " failed" 
     				+ "\n\t" + result.getThrowable().toString());
     	}
         System.out.println("@AfterMethod");
