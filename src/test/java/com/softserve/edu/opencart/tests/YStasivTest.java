@@ -20,8 +20,13 @@ import com.softserve.edu.opencart.tools.TestRunner;
 public class YStasivTest extends TestRunner {
 	
 
-	//@Test(enabled = true)
-	public void SmokeTestOpenCart() {
+	
+//=====================================================================================================
+//											SmokeTestOpenCart
+//=====================================================================================================
+	@Test(enabled = true)
+	public void smokeTestOpenCart() {
+	log.info("SmokeTestOpenCart start");
 		SoftAssert softAssert = new SoftAssert();
 //Precondition: Load Application
 		HomePage homePage = loadApplication();
@@ -30,17 +35,23 @@ public class YStasivTest extends TestRunner {
 //Steps: Add product to cart
 		homePage.getProductsListComponentTitleText();
 		delayExecution(1000); //ForDemonstration
-
+		
 //Check if page contains curent data
 		softAssert.assertEquals(homePage.getProductsListComponentTitleText(),homePage.EXPECT_PRODUCT_LIST_TITLE);
+	log.info("Element on main page was found...");
 		delayExecution(1000); //ForDemonstration
 		softAssert.assertEquals(homePage.getCartSum(), 0.0); softAssert.assertEquals(homePage.getCartAmount(), 0);
+	log.info("Current data on page was found...");
 		delayExecution(1000); //ForDemonstration
 		Assert.assertTrue(homePage.gotoLogin().getLastBreadcrumbText().contains("Login"));	
+	log.info("Element on enother page was found...");
 		delayExecution(2000); //ForDemonstration
 		softAssert.assertAll();
-	}//TODO Логер + репортер
-
+	}//TODO  + репортер?
+//=====================================================================================================
+//											CheckEmptyCartPage
+//=====================================================================================================
+	
 	@DataProvider // (parallel = true)
 	public Object[][] currenciesType() {
 		// Read from ...
@@ -80,7 +91,7 @@ public class YStasivTest extends TestRunner {
 	            };
 	    }
 
-	//@Test(dataProvider = "productNames", enabled = true, groups = {"addItemToCart"})
+		//@Test(dataProvider = "productNames", enabled = true, groups = {"addItemToCart"})
 	public void AddItemToCart(String partialProductName) {
 //Precondition: Load Application
         HomePage homePage = loadApplication();
@@ -102,7 +113,7 @@ public class YStasivTest extends TestRunner {
     }//TODO Логер + репортер
 	
 	
-	//
+	
 	//@Test(dataProvider = "productNames", enabled = true)
 	public void ChangeNumOfItemsInCart(String partialProductName) {
 //Precondition: Load Application
@@ -126,7 +137,7 @@ public class YStasivTest extends TestRunner {
         delayExecution(5000); //ForDemonstration
 	}
 	
-//@Test(dataProvider = "productNames", enabled = true)
+	//@Test(dataProvider = "productNames", enabled = true)
 	public void ErrorMessageChangeNumOfItemsInCart(String partialProductName) {
 //Precondition: Load Application
         HomePage homePage = loadApplication();
@@ -157,7 +168,7 @@ public class YStasivTest extends TestRunner {
 			{ UserRepository.get().yStasiv(), "MacBook" },
 			};
 	}
-	@Test(dataProvider = "SomeProduct", enabled = true)
+	//@Test(dataProvider = "SomeProduct", enabled = true)
 	public void CartAfterRelogin(IUser validUser, String partialProductName) {
 //Precondition: Login
 		MyAccountPage myAccountPage = loadApplication().gotoLogin().successLogin(validUser);
