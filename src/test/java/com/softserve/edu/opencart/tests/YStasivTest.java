@@ -114,12 +114,8 @@ public class YStasivTest extends TestRunner {
 //Check if goods was added
         Assert.assertTrue(shoppingCartPage.getProductsCartListComponent().getProductsCartNameList().contains("MacBook"));
         delayExecution(1000); //ForDemonstration
-//Set quantity
-        shoppingCartPage.clearQuantityProductCartByPartialName("MacBook");
-        shoppingCartPage.clearQuantityProductCartByPartialName("MacBook");
-        shoppingCartPage.setProductQuantityByPartialName("MacBook", "5");
-//Update product
-        ShoppingCartMessagePage cartMessagePage = shoppingCartPage.updateProductQuantityByPartialName("MacBook");
+//Set quantity and Update product
+        ShoppingCartMessagePage cartMessagePage = shoppingCartPage.updateProductQuantityByPartialName("MacBook", "5");
         System.out.println("weeeee");
 //Check if AlertMessage contains current text
         Assert.assertEquals(cartMessagePage.getAlertMessageText(), cartMessagePage.EXPECTED_UPDATE_MESSAGE_CART);
