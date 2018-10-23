@@ -145,7 +145,7 @@ public class YStasivTest extends TestRunner {
 	
 	
 	
-	@Test(enabled = true)
+	@Test(dataProvider = "validUsers", enabled = true)
 	public void CartAfterRelogin(IUser validUser) throws Exception {
 // Precondition
 				// Steps
