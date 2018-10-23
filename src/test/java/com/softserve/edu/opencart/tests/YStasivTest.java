@@ -7,6 +7,7 @@ import org.testng.asserts.SoftAssert;
 
 import com.softserve.edu.opencart.data.Currencies;
 import com.softserve.edu.opencart.data.IUser;
+import com.softserve.edu.opencart.data.ProductRepository;
 import com.softserve.edu.opencart.data.UserRepository;
 import com.softserve.edu.opencart.pages.AccountLogoutPage;
 import com.softserve.edu.opencart.pages.HomeMessagePage;
@@ -24,7 +25,7 @@ public class YStasivTest extends TestRunner {
 //=====================================================================================================
 //											SmokeTestOpenCart
 //=====================================================================================================
-	@Test(enabled = true)
+	//@Test(enabled = true)
 	public void smokeTestOpenCart() {
 	log.info("SmokeTestOpenCart start");
 		SoftAssert softAssert = new SoftAssert();
@@ -64,53 +65,60 @@ public class YStasivTest extends TestRunner {
 
 	//@Test(dataProvider = "currenciesType", enabled = true)
 //CheckEmptyCartPageWithDifferentCurrencies
-	public void CheckEmptyCartPage(Currencies currency) {
+	public void checkEmptyCartPage(Currencies currency) {
+	log.info("CheckEmptyCartPage start");
 //Precondition: Load Application
 		HomePage homePage = loadApplication();
 		delayExecution(1000); //ForDemonstration
 		
 //Steps: Choose currencies and go to Shopping Cart
 		homePage = homePage.chooseCurrency(currency);
+	log.info("US_DOLLAR was chosen...");
 		delayExecution(1000); //ForDemonstration
 		
-		EmptyShoppingCartPage emptyShoppingCartPage = homePage.gotoEmptyShoppingCartPage();
 //Check if user see Empty Cart Page
+		EmptyShoppingCartPage emptyShoppingCartPage = homePage.gotoEmptyShoppingCartPage();
 		Assert.assertEquals(emptyShoppingCartPage.getEmptyCartText(), emptyShoppingCartPage.EXPECT_EMPTY_CART_TEXT);
+	log.info("Expected message about cart is empty was displayed...");
 		delayExecution(2000); //ForDemonstration
 //TODO ПОМІНЯТИ НАЗАД НА ДОЛАР
-	}//TODO Логер + репортер
-	
+	}//TODO репортер?
+//=====================================================================================================
 	
 	
 		@DataProvider//(parallel = true)
 	    public Object[][] productNames() {
 	        // Read from ...
 	        return new Object[][] { 
-	            { "MacBook" },
+	            { ProductRepository.macBook().getName()},
 //	            { "iPhone" },
 	            };
 	    }
 
-		//@Test(dataProvider = "productNames", enabled = true, groups = {"addItemToCart"})
-	public void AddItemToCart(String partialProductName) {
+		@Test(dataProvider = "productNames", enabled = true, groups = {"addItemToCart"})
+	public void addItemToCart(String partialProductName) {
+	log.info("AddItemToCart start with test item \"" + partialProductName + "\"");
 //Precondition: Load Application
         HomePage homePage = loadApplication();
         delayExecution(1000); //ForDemonstration
         
 //Steps: Add product to cart
         HomeMessagePage homeMessagePage = homePage.putToCartProductByPartialName(partialProductName);
+    log.info("\"" + partialProductName + "\" was added to cart...");
         delayExecution(1000); //ForDemonstration
-
+        
 //Check if AlertMessage contains current text
-        Assert.assertTrue(homeMessagePage.getAlertMessageText().contains(String.format(homeMessagePage.EXPECTED_MESSAGE_CART, partialProductName)));
-        //TODO УТОЧНИТИ ЧИ СОФТ АСЕРТ АКТУАЛЬНИЙ ТУТ
+        Assert.assertTrue(homeMessagePage.getAlertMessageText()
+        		.contains(String.format(homeMessagePage.EXPECTED_MESSAGE_CART, partialProductName)));
+    log.info("User see correct message, \"" + partialProductName + "\" was added...");
         delayExecution(1000); //ForDemonstration
         
 //Go to ShoppingCart and check if goods was added
         ShoppingCartPage shoppingCartPage = homePage.gotoShoppinCartPage(); 
         Assert.assertTrue(shoppingCartPage.getProductsCartListComponent().getProductsCartNameList().contains(partialProductName));
+    log.info("\"" + partialProductName + "\" displayed correctly on cart page...");
         delayExecution(2000); //ForDemonstration
-    }//TODO Логер + репортер
+    }//TODO  репортер?
 	
 	
 	
