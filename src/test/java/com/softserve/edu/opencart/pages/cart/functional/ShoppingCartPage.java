@@ -51,9 +51,6 @@ public class ShoppingCartPage extends AStatusBarComponent {
 		getProductsCartListComponent()
 			.removeProductCartByPartialName(partialProductName);
     }
-	
-	
-	
-	
+
  	public ProductsListCartComponent gotoProductsListCartComponent() {return new ProductsListCartComponent(driver);}
 }

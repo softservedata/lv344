@@ -10,7 +10,7 @@ public class EmptyShoppingCartPage extends AStatusBarComponent {
 	
 	public final String EXPECT_EMPTY_CART_TEXT = "Your shopping cart is empty!";
 	
-	public WebElement checkoutButton;
+	public WebElement continueButton;
 	private WebElement checkEmptyCartPage;
 
 	public EmptyShoppingCartPage(WebDriver driver) {
@@ -20,7 +20,7 @@ public class EmptyShoppingCartPage extends AStatusBarComponent {
 	
 	private void initEmptyCartPageText() {
 		checkEmptyCartPage = driver.findElement(By.cssSelector("#content p"));
-		checkoutButton = driver.findElement(By.cssSelector("a.btn.btn-primary"));
+		continueButton = driver.findElement(By.cssSelector("a.btn.btn-primary"));
 	}
 	
 	// CheckEmptyCartPage
@@ -28,9 +28,9 @@ public class EmptyShoppingCartPage extends AStatusBarComponent {
 	public String getEmptyCartText() {return getEmptyCartPage().getText();}
 	
 	//CheckoutButton
-	public WebElement getCheckoutButton() {return checkoutButton;}
-	public String getCheckoutButtonText() {return getCheckoutButton().getAttribute(TAG_ATTRIBUTE_VALUE);}
-	public void clickCheckouteButton() {getCheckoutButton().click();}
+	public WebElement getContinueButton() {return continueButton;}
+	public String getContinueButtonText() {return getContinueButton().getAttribute(TAG_ATTRIBUTE_VALUE);}
+	public void clickContinueButton() {getContinueButton().click();}
 	
 	
 }
