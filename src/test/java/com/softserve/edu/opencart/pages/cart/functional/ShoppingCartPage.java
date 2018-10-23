@@ -39,24 +39,11 @@ public class ShoppingCartPage extends AStatusBarComponent {
 
 	// Business Logic
 	
-	public void clickQuantityProductCartByPartialName(String partialProductCartName) {
-		getProductsCartListComponent()
-			.clickQuantityProductCartByPartialName(partialProductCartName);	
-	}
-	
-	public void clearQuantityProductCartByPartialName(String partialProductCartName) {
-		getProductsCartListComponent()
-			.clearQuantityProductCartByPartialName(partialProductCartName);		
-	}
-	
-	public void setProductQuantityByPartialName(String partialProductName, String numOfItems) {
-		getProductsCartListComponent()
-			.setQuantityProductCartByPartialName(partialProductName, numOfItems);
-    }
-	
-	public ShoppingCartMessagePage updateProductQuantityByPartialName(String partialProductName) {
-		getProductsCartListComponent()
-			.updateProductCartByPartialName(partialProductName);
+	public ShoppingCartMessagePage updateProductQuantityByPartialName(String partialProductCartName, String numOfItems) {
+		getProductsCartListComponent().clickQuantityProductCartByPartialName(partialProductCartName);
+		getProductsCartListComponent().clearQuantityProductCartByPartialName(partialProductCartName);
+		getProductsCartListComponent().setQuantityProductCartByPartialName(partialProductCartName, numOfItems);
+		getProductsCartListComponent().updateProductCartByPartialName(partialProductCartName);
         return new ShoppingCartMessagePage(driver); 
     }
 	
