@@ -39,6 +39,8 @@ public class ShoppingCartPage extends AStatusBarComponent {
 
 	// Business Logic
 	
+	
+	/*
 	public void clickQuantityProductCartByPartialName(String partialProductCartName) {
 		getProductsCartListComponent()
 			.clickQuantityProductCartByPartialName(partialProductCartName);	
@@ -58,7 +60,7 @@ public class ShoppingCartPage extends AStatusBarComponent {
 		getProductsCartListComponent()
 			.updateProductCartByPartialName(partialProductName);
         return new ShoppingCartMessagePage(driver); 
-    }
+    }*/
 	
 	public ShoppingCartMessagePage removeProductQuantityByPartialName(String partialProductName) {
 		getProductsCartListComponent()
@@ -66,6 +68,13 @@ public class ShoppingCartPage extends AStatusBarComponent {
         return new ShoppingCartMessagePage(driver); 
     }
 	
+	public ShoppingCartMessagePage updateProductQuantityByPartialName(String partialProductCartName, String numOfItems) {
+		getProductsCartListComponent().clickQuantityProductCartByPartialName(partialProductCartName);
+		getProductsCartListComponent().clearQuantityProductCartByPartialName(partialProductCartName);
+		getProductsCartListComponent().setQuantityProductCartByPartialName(partialProductCartName, numOfItems);
+		getProductsCartListComponent().updateProductCartByPartialName(partialProductCartName);
+		return new ShoppingCartMessagePage(driver);
+	}
 	
 	
 	

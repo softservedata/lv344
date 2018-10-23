@@ -102,7 +102,7 @@ public class YStasivTest extends TestRunner {
 	
 	
 	
-	//@Test(enabled = true)
+	@Test(enabled = true)
 	public void ChangeNumOfItemsInCart() throws Exception {
 //Precondition: Load Application
         HomePage homePage = loadApplication();
@@ -117,12 +117,9 @@ public class YStasivTest extends TestRunner {
 //Check if goods was added
         Assert.assertTrue(shoppingCartPage.getProductsCartListComponent().getProductsCartNameList().contains("MacBook"));
         delayExecution(1000); //ForDemonstration
-//Set quantity
-        shoppingCartPage.clearQuantityProductCartByPartialName("MacBook");
-        shoppingCartPage.clearQuantityProductCartByPartialName("MacBook");
-        shoppingCartPage.setProductQuantityByPartialName("MacBook", "5");
+
 //Update product
-        ShoppingCartMessagePage cartMessagePage = shoppingCartPage.updateProductQuantityByPartialName("MacBook");
+        ShoppingCartMessagePage cartMessagePage = shoppingCartPage.updateProductQuantityByPartialName("MacBook", "5");
         System.out.println("weeeee");
 //Check if AlertMessage contains current text
         Assert.assertEquals(cartMessagePage.getAlertMessageText(), cartMessagePage.EXPECTED_UPDATE_MESSAGE_CART);
@@ -145,7 +142,7 @@ public class YStasivTest extends TestRunner {
 	
 	
 	
-	@Test(dataProvider = "validUsers", enabled = true)
+	//@Test(dataProvider = "validUsers", enabled = true)
 	public void CartAfterRelogin(IUser validUser) throws Exception {
 // Precondition
 				// Steps
@@ -206,12 +203,8 @@ public class YStasivTest extends TestRunner {
 //Check if goods was added
         Assert.assertTrue(shoppingCartPage.getProductsCartListComponent().getProductsCartNameList().contains("MacBook"));
         delayExecution(1000); //ForDemonstration
-//Set quantity
-        shoppingCartPage.clearQuantityProductCartByPartialName("MacBook");
-        shoppingCartPage.clearQuantityProductCartByPartialName("MacBook");
-        shoppingCartPage.setProductQuantityByPartialName("MacBook", "5");
 //Update product
-        ShoppingCartMessagePage cartMessagePage = shoppingCartPage.updateProductQuantityByPartialName("MacBook");
+        ShoppingCartMessagePage cartMessagePage = shoppingCartPage.updateProductQuantityByPartialName("MacBook", "test");
         System.out.println("weeeee");
 //Check if AlertMessage contains current text
         Assert.assertEquals(cartMessagePage.getAlertMessageText(), cartMessagePage.EXPECTED_UPDATE_MESSAGE_CART);
