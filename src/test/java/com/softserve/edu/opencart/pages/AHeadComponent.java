@@ -6,6 +6,8 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.softserve.edu.opencart.tools.RegexUtils;
 
@@ -62,6 +64,7 @@ public abstract class AHeadComponent {
 
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	
+	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 	private final String OPTION_NOT_FOUND_MESSAGE = "Option %s not found in %s";
 	private final String LOGIN_ERROR = "Login Error";
 	protected final String TAG_ATTRIBUTE_VALUE = "value";
@@ -109,6 +112,7 @@ public abstract class AHeadComponent {
 	
 	//currency
 	public WebElement getCurrency() {
+		logger.trace("getCurrency() running return currency;");
         return currency;
     }
 	
@@ -344,11 +348,16 @@ public abstract class AHeadComponent {
     }
 
 	public AccountLogoutPage gotoLogout() {
+		logger.debug("gotoLogout() start");
 		if (!isLoggedUser()) {
+			logger.error("gotoLogout() throw new RuntimeException(" + LOGIN_ERROR + ");");
 			throw new RuntimeException(LOGIN_ERROR);
 		}
+		logger.trace("gotoLogout() running clickAccountOptionByPartialName();");
 		clickAccountOptionByPartialName("Logout");
+		logger.trace("gotoLogout() running loggedUser = false;");
 		loggedUser = false;
+		logger.debug("gotoLogout() done");
         return new AccountLogoutPage(driver);
     }
 

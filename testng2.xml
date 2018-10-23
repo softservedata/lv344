@@ -14,12 +14,12 @@
 		<parameter name="number" value="2" />
 		<classes>
 			<!-- <class name="com.softserve.edu.AppTest" /> -->
-			<class name="com.softserve.edu.opencart.tests.StartTest">
-				<methods>
+<!-- 			<class name="com.softserve.edu.opencart.tests.StartTest"> -->
+<!-- 				<methods> -->
 <!-- 					<include name="checkCurrency" /> -->
-					<include name="checkProductCurrency" />
-				</methods>
-			</class>
+<!-- 					<include name="checkProductCurrency" /> -->
+<!-- 				</methods> -->
+<!-- 			</class> -->
 			<class name="com.softserve.edu.opencart.tests.LoginTest" />
 		</classes>
 	</test> <!-- Test -->

@@ -4,6 +4,8 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
@@ -14,8 +16,11 @@ import org.testng.annotations.BeforeMethod;
 import com.softserve.edu.opencart.pages.HomePage;
 
 public abstract class TestRunner {
+	//protected static final Logger logger = LoggerFactory.getLogger(TestRunner.class);
+	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 	protected WebDriver driver;
 	protected final double PRECISION = 0.001;
+	//protected boolean isTestSuccess;
 	
 	@BeforeClass
     public void beforeClass(ITestContext context) {
@@ -37,12 +42,20 @@ public abstract class TestRunner {
 
     @BeforeMethod
     public void beforeMethod() {
+    	//isTestSuccess = false;
         System.out.println("@BeforeMethod");
 		driver.get("http://atqc-shop.epizy.com/");
     }
 
     @AfterMethod//(alwaysRun = true)
     public void afterMethod(ITestResult result) {
+    	//if (isTestSuccess) {
+    	if (result.isSuccess()) {
+    		logger.info("test " + result.getName() + " done");
+    	} else {
+    		logger.error("test " + result.getName() + " failed" 
+    				+ "\n\t" + result.getThrowable().toString());
+    	}
         System.out.println("@AfterMethod");
     }
 

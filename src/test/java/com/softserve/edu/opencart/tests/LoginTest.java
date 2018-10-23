@@ -1,5 +1,7 @@
 package com.softserve.edu.opencart.tests;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -9,8 +11,10 @@ import com.softserve.edu.opencart.data.UserRepository;
 import com.softserve.edu.opencart.pages.AccountInformationPage;
 import com.softserve.edu.opencart.pages.AccountLogoutPage;
 import com.softserve.edu.opencart.tools.TestRunner;
+import com.softserve.training.Calc;
 
 public class LoginTest extends TestRunner {
+	//private static final Logger logger = LoggerFactory.getLogger(LoginTest.class); // LoggerFactory
 
 	@DataProvider//(parallel = true)
     public Object[][] validUsers() {
@@ -22,6 +26,7 @@ public class LoginTest extends TestRunner {
 
     @Test(dataProvider = "validUsers")
     public void checkLogin(IUser validUser) {
+    	//logger.info("checkLogin start");
         //
         // Precondition
         // Steps
@@ -48,5 +53,9 @@ public class LoginTest extends TestRunner {
         // Return to previous state
         accountLogoutPage.gotoHome();
         delayExecution(1000);
+        //
+        //logger.info("checkLogin done");
+        //isTestSuccess = true;
     }
+
 }
