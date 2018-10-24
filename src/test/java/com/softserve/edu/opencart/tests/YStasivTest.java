@@ -95,7 +95,7 @@ public class YStasivTest extends TestRunner {
 	            };
 	    }
 
-		@Test(dataProvider = "productNames", enabled = true, groups = {"addItemToCart"})
+	//@Test(dataProvider = "productNames", enabled = true, groups = {"addItemToCart"})
 	public void addItemToCart(String partialProductName) {
 	log.info("AddItemToCart start with test item \"" + partialProductName + "\"");
 //Precondition: Load Application
@@ -123,25 +123,32 @@ public class YStasivTest extends TestRunner {
 	
 	
 	//@Test(dataProvider = "productNames", enabled = true)
-	public void ChangeNumOfItemsInCart(String partialProductName) {
+	public void changeNumOfItemsInCart(String partialProductName) {
+	log.info("ChangeNumOfItemsInCart start with test item \"" + partialProductName + "\"");
 //Precondition: Load Application
         HomePage homePage = loadApplication();
         delayExecution(1000); //ForDemonstration
 //Steps: Add product to cart
         HomeMessagePage homeMessagePage = homePage.putToCartProductByPartialName(partialProductName);
+    log.info("\"" + partialProductName + "\" was added to cart...");
         delayExecution(1000); //ForDemonstration
 //Check if AlertMessage contains current text
         Assert.assertTrue(homeMessagePage.getAlertMessageText()
         		.contains(String.format(homeMessagePage.EXPECTED_MESSAGE_CART, partialProductName)));
+    log.info("User see correct message, \"" + partialProductName + "\" was added...");
 //GoToShoppingCart
         ShoppingCartPage shoppingCartPage = homePage.gotoShoppinCartPage();
 //Check if goods was added
         Assert.assertTrue(shoppingCartPage.getProductsCartListComponent().getProductsCartNameList().contains(partialProductName));
+    log.info("\"" + partialProductName + "\" displayed correctly on cart page...");
         delayExecution(1000); //ForDemonstration
 //Set quantity and Update product
         ShoppingCartMessagePage cartMessagePage = shoppingCartPage.updateProductQuantityByPartialName(partialProductName, "5");
+    log.info("Count changed correctly...");
+    	delayExecution(1000); //ForDemonstration
 //Check if AlertMessage contains current text
         Assert.assertEquals(cartMessagePage.getAlertMessageText(), cartMessagePage.EXPECTED_UPDATE_MESSAGE_CART);
+    log.info("User see correct message...");
         delayExecution(5000); //ForDemonstration
 	}
 	
