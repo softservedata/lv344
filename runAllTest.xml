@@ -22,22 +22,18 @@
        <class name="com.softserve.edu.opencart.tests.password.ErrorMessageWhenChangePasswordTest">
 				<methods>
 					<include name="shortLongPassword" />
-				</methods>
-				<methods>
 					<include name="notMatchPassword" />
-				</methods>
-				<methods>
 					<include name="emptyPassword" />
 				</methods>				
 			</class>
 			
-			<class name="com.softserve.edu.opencart.pages.password.SuccessMessageWhenChangePasswordTest">
+			<class name="com.softserve.edu.opencart.tests.password.SuccessMessageWhenChangePasswordTest">
 				<methods>
 					<include name="successWhenChangePassword" />
 				</methods>
 			</class>
 
-<!-- 			<class name="com.softserve.edu.opencart.pages.password.CheckPostWhenFofgotPasswordTest"> -->
+ <!-- 			<class name="com.softserve.edu.opencart.pages.password.CheckPostWhenFofgotPasswordTest"> -->
 <!-- 				<methods> -->
 <!-- 					<include name="" /> -->
 <!-- 				</methods> -->
@@ -47,6 +43,6 @@
 
 
 		</classes>
-	</test> <!-- Test -->
+	</test>
 
-</suite> <!-- Suite -->
+</suite>

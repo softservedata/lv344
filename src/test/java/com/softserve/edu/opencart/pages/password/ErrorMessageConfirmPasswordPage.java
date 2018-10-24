@@ -8,7 +8,7 @@ public class ErrorMessageConfirmPasswordPage extends ChangePasswordPage {
 
 	public final String ERROR_MESSAGE_CONFIRM_PASSWORD = "Password confirmation does not match password!";
 
-	private WebDriver driver;
+	
 	private WebElement alertMessage;
 
 
@@ -18,8 +18,6 @@ public class ErrorMessageConfirmPasswordPage extends ChangePasswordPage {
 	}
 
 	private void initAlertMessage() {
-		System.out.println("++++ class  ErrorMessageConfirmPasswordPage    initAlertMessage()");
-		System.out.println("driver = " + driver);
 		alertMessage = driver.findElement(By.cssSelector("input[name='confirm'] + div"));
 	}
 

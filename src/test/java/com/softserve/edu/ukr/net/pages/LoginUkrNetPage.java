@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.softserve.edu.opencart.data.IUser;
+import com.softserve.edu.opencart.pages.HomePage;
 import com.softserve.edu.opencart.pages.LoginMessagePage;
 import com.softserve.edu.opencart.pages.MyAccountPage;
 
@@ -73,11 +74,7 @@ public class LoginUkrNetPage {
 	public void clickLoginButton() {
 		getLoginButton().click();
     }
-	
 
-	
-	// Business Logic
-	
 	private void fillLoginForm(IUser user) {
         clickEmailField();
         clearEmailField();

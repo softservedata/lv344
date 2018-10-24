@@ -91,7 +91,8 @@ public class ChangePasswordPage extends ARighMenuComponent {
 		getPasswordConfirmField().clear();
 		getPasswordConfirmField().sendKeys(confirmPassword);
 	}
-public void fillPasswordWithValidCredentialsField(String password, String confirmPassword) {
+	
+	public void fillPasswordWithValidCredentialsField(String password, String confirmPassword) {
 		
 		getPasswordField().click();
 		getPasswordField().clear();
@@ -107,6 +108,10 @@ public void fillPasswordWithValidCredentialsField(String password, String confir
 		return continueButton;
 	}
 
+	public void clickContinueButton() {
+		getContinueButton().click();
+	}
+	
 	// backButton
 
 	public WebElement getBackButton() {
@@ -119,19 +124,23 @@ public void fillPasswordWithValidCredentialsField(String password, String confir
 
 	// busness logic
 
-	public ErrorMessageChangePasswordPage clickChangeContinueButton() {
-		getContinueButton().click();
+	public MyAccountMessagePage sucesessfulChangePassword(String password, String confirmPassword) {
+		fillPasswordWithValidCredentialsField(password, confirmPassword);
+		clickContinueButton();
+		return new MyAccountMessagePage(driver);
+	}
+
+
+	public ErrorMessageChangePasswordPage unsucesessfulChangePassword(String password, String confirmPassword) {
+		fillPasswordWithValidCredentialsField(password, confirmPassword);
+		clickContinueButton();
 		return new ErrorMessageChangePasswordPage(driver);
 	}
-
-	public ErrorMessageConfirmPasswordPage clickConfirmContinueButton() {
-		getContinueButton().click();
-		return new ErrorMessageConfirmPasswordPage(driver);
-	}
-
-	public MyAccountMessagePage clickSucsessContinueButton() {
-		getContinueButton().click();
-		return new MyAccountMessagePage(driver);
+		
+	public ErrorMessageConfirmPasswordPage unsucesessfulConfirmPassword(String password, String confirmPassword) {
+			fillPasswordWithValidCredentialsField(password, confirmPassword);
+			clickContinueButton();
+			return new ErrorMessageConfirmPasswordPage(driver);
 	}
 
 }

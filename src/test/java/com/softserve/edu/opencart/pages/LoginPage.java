@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.softserve.edu.opencart.data.IUser;
+import com.softserve.edu.opencart.pages.password.ForgottenPasswordPage;
+import com.softserve.edu.opencart.pages.password.ResetPasswordPage;
 
 public class LoginPage extends AUnloggedRighMenuComponent {
 
@@ -47,6 +49,11 @@ public class LoginPage extends AUnloggedRighMenuComponent {
 	public void clickEmailField() {
 		getEmailField().click();
     }
+	public void fillEmailField(IUser user) {
+        clickEmailField();
+        clearEmailField();
+        setEmailField(user.getEMail());
+	}
 
 	// passwordField
 	public WebElement getPasswordField() {
@@ -117,5 +124,13 @@ public class LoginPage extends AUnloggedRighMenuComponent {
 	public LoginMessagePage unsuccessfullLogin(IUser invalidUser) {
         fillLoginForm(invalidUser);
         return new LoginMessagePage(driver);
-    }
+        
+	}
+        
+        public ForgottenPasswordPage fillLoginFormAndClickForgottenPassword(IUser user) {
+        	fillEmailField(user);  
+            clickLinkForgottenPassword();
+            return new ForgottenPasswordPage(driver);
+        }
+       
 }

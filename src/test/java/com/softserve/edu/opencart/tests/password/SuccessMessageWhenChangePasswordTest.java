@@ -15,32 +15,33 @@ public class SuccessMessageWhenChangePasswordTest extends TestRunner {
 
 	@DataProvider
 	public Object[][] loginWithValidCredentials() {
-		return new Object[][] { { UserRepository.get().customerIra(), "qwerty", "qwerty" } };
+		return new Object[][] {{ UserRepository.get().customerIra(), "qwerty", "qwerty" } };
 	}
 
 	@Test(dataProvider = "loginWithValidCredentials")
 	public void successWhenChangePassword(IUser validUser, String password, String confirmPassword) {
-		//
-		// Precondition
-		// Steps
+			
+			// Precondition
+			// Steps
 
 		ChangePasswordPage changePasswordPage = loadApplication()
 				.gotoLogin()
 				.successLogin(validUser)
 				.gotoChangePassword();
 
-		changePasswordPage.fillPasswordWithValidCredentialsField(password, confirmPassword);
 
-		MyAccountMessagePage myAccountMessagePage = changePasswordPage.clickSucsessContinueButton();
-
+		MyAccountMessagePage myAccountMessagePage = changePasswordPage.sucesessfulChangePassword(password, confirmPassword);
 		delayExecution(1000);
 
-		// Check
+			// Check
 		Assert.assertEquals(myAccountMessagePage.getAlertMessageText(),
 				myAccountMessagePage.EXPECTED_SUCCESS_CHANGE_PASSWORD);
 		delayExecution(1000);
 
-		myAccountMessagePage.gotoLogout().gotoLogin().successLogin(validUser);
+		myAccountMessagePage.gotoLogout()
+		.gotoLogin()
+		.successLogin(validUser)
+		.gotoLogout();
 
 	}
 }

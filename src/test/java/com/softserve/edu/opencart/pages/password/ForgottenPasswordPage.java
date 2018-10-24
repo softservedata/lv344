@@ -4,7 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.softserve.edu.opencart.data.IUser;
 import com.softserve.edu.opencart.pages.ARighMenuComponent;
+import com.softserve.edu.opencart.pages.LoginMessagePage;
+import com.softserve.edu.opencart.pages.LoginMessagePageError;
 
 public class ForgottenPasswordPage extends ARighMenuComponent{
 	
@@ -39,7 +42,7 @@ public class ForgottenPasswordPage extends ARighMenuComponent{
 		getEmailAdressField().sendKeys(text);
 	}
 
-	public void cleargetEmailAdressField() {
+	public void clearEmailAdressField() {
 		getEmailAdressField().clear();
 	}
 
@@ -47,11 +50,12 @@ public class ForgottenPasswordPage extends ARighMenuComponent{
 		getEmailAdressField().click();
 	}
 	
-	 public void fillEmailAdressField(String text) {
-		 getEmailAdressField().click();
-		 getEmailAdressField().clear();
-		 getEmailAdressField().sendKeys(text);
+	 public void fillEmailAdressField(IUser user) {
+		 clickEmailAdressField();
+		 clearEmailAdressField();
+		 setEmailAdressField(user.getEMail());
 	    }
+	 
 	
 	// continueButton
 	public WebElement getContinueButton() {
@@ -70,6 +74,13 @@ public class ForgottenPasswordPage extends ARighMenuComponent{
 	public void clickBackButton() {
 		getBackButton().click();
 	}
+	//bussnes logic
 	
+	  public LoginMessagePage fillEmailAdressFieldResetPassword(IUser user) {
+		  fillEmailAdressField(user);  
+		  clickContinueButton();
+          return new LoginMessagePage(driver);
+	
+	  }
 
 }

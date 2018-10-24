@@ -97,4 +97,7 @@ public class ResetPasswordPage extends ARighMenuComponent{
 		public void clickBackButton() {
 			getBackButton().click();
 		}
+		//bussnes logic
+		
+		
 }

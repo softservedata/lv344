@@ -15,7 +15,7 @@ public class WarnningMessageWithNotValidCredentialsTest extends TestRunner {
 
 	@DataProvider
 	  public Object[][] loginWithNotValidCredentials() {
-	    return new Object[][] { { UserRepository.get().notExist() }, };
+	    return new Object[][] {{UserRepository.get().notExist() }, };
 	  }
 
 	  @Test(dataProvider = "loginWithNotValidCredentials")
@@ -23,16 +23,15 @@ public class WarnningMessageWithNotValidCredentialsTest extends TestRunner {
 	    //
 	    // Precondition
 	    // Steps  
-	 HomePage homePage = loadApplication();   
-	        
+	   HomePage homePage = loadApplication();           
 	    
-	    LoginMessagePage loginMessagePage =  
+	   LoginMessagePage loginMessagePage =  
 	    		homePage.gotoLogin()
 	           .unsuccessfullLogin(invalidUser);
 	            delayExecution(1000);
 	    //
 	    // Check
-	    Assert.assertEquals(loginMessagePage.getAlertMessageDengerText(), loginMessagePage.EXPECTED_WARNING_LOGIN);
+	    Assert.assertEquals(loginMessagePage.getAlertMessageText(), loginMessagePage.EXPECTED_WARNING_LOGIN);
 	    delayExecution(1000);
 
 	 

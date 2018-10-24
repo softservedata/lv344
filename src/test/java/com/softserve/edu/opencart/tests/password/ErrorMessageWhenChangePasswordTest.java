@@ -15,69 +15,72 @@ import com.softserve.edu.opencart.tools.TestRunner;
 public class ErrorMessageWhenChangePasswordTest extends TestRunner {
 
 	 @DataProvider
-	 public Object[][]errorMessageWhenPasswordShortLong() {
-		 
-	 return new Object[][] {{ UserRepository.get().customerIra(),"aaa", "aaa"} ,
-		                   /* { UserRepository.get().customerIra(),  "aaaaaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaaa"} */ };
+	 public Object[][] errorMessageWhenPasswordShortLong() {
+	 return new Object[][] {{ UserRepository.get().customerIra(), "aaa", "aaa"} ,
+		                   { UserRepository.get().customerIra(),  "aaaaaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaaa"} 
+	 	};
 	 }
 	 
 	
-	 //@Test(dataProvider = "errorMessageWhenPasswordShortLong")
+	@Test(dataProvider = "errorMessageWhenPasswordShortLong")
 	 public void shortLongPassword(IUser validUser, String password, String confirmPassword) {
 	
 	// Precondition
 	// Steps
 
 	 ChangePasswordPage changePasswordPage = loadApplication()
-	 .gotoLogin()
-	 .successLogin(validUser)
-	 .gotoChangePassword();
-	 
-	 changePasswordPage.fillPasswordWithInvalidCredentialsField(password, confirmPassword);
+			 .gotoLogin()
+			 .successLogin(validUser)
+			 .gotoChangePassword();
 	 
     // Steps
-		ErrorMessageChangePasswordPage errorMessageChangePasswordPage = changePasswordPage.clickChangeContinueButton();
+	 ErrorMessageChangePasswordPage errorMessageChangePasswordPage = changePasswordPage.unsucesessfulChangePassword(password, confirmPassword);
 		delayExecution(1000);
 
 	 //Check
 	 Assert.assertEquals(errorMessageChangePasswordPage.getAlertMessageText(),
-	 errorMessageChangePasswordPage.ERROR_MESSAGE_CHANGE_PASSWORD);
+			 errorMessageChangePasswordPage.ERROR_MESSAGE_CHANGE_PASSWORD);
 	 delayExecution(1000);
 	 
-	// changePasswordPage.gotoLogout();
+	 errorMessageChangePasswordPage.gotoLogout();
+	 
 	 }
 
 	 @DataProvider
-	 public Object[][] ErrorMessageWhenNotMatchPassword() {
-	 return new Object[][] {{ UserRepository.get().customerIra(),"aaaa", "aaaaa"}};
+	 public Object[][] errorMessageWhenNotMatchPassword() {
+		 return new Object[][] {{UserRepository.get().customerIra(),"aaaa", "aaaaa"}};
 	 }
 
-//	 @Test(dataProvider = "ErrorMessageWhenNotMatchPassword")
+	 @Test(dataProvider = "errorMessageWhenNotMatchPassword")
 	 public void notMatchPassword(IUser validUser, String password, String confirmPassword) {
 	
 	// Precondition		 
 	// Steps
 	 ChangePasswordPage changePasswordPage = loadApplication()
-	 .gotoLogin()
-	 .successLogin(validUser)
-	 .gotoChangePassword();	
-	  
-	 changePasswordPage.fillPasswordWithInvalidCredentialsField(password, confirmPassword);
+			 .gotoLogin()
+			 .successLogin(validUser)
+			 .gotoChangePassword();		  
 
 	 // Steps
-	ErrorMessageConfirmPasswordPage errorMessageConfirmPasswordPage = changePasswordPage.clickConfirmContinueButton();
+	ErrorMessageConfirmPasswordPage errorMessageConfirmPasswordPage = changePasswordPage.unsucesessfulConfirmPassword(password, confirmPassword);
 	delayExecution(1000);
 
+	
   //Check
     Assert.assertEquals(errorMessageConfirmPasswordPage.getAlertMessageText(),
-    errorMessageConfirmPasswordPage.ERROR_MESSAGE_CONFIRM_PASSWORD);
+    		errorMessageConfirmPasswordPage.ERROR_MESSAGE_CONFIRM_PASSWORD);
     delayExecution(1000);
+    
+    errorMessageConfirmPasswordPage.gotoLogout();
+    
+    
 }
 
 	@DataProvider
 	public Object[][] errorMessageWhithEmptyPassword() {
-		return new Object[][] { { UserRepository.get().customerIra(), "", "aaa" },
-				/*{ UserRepository.get().customerIra(), "aaa", "" }*/ };
+		return new Object[][] {{ UserRepository.get().customerIra(), "", "aaa" },
+				               { UserRepository.get().customerIra(), "aaa", "" }
+		};
 	}
 
 	@Test(dataProvider = "errorMessageWhithEmptyPassword")
@@ -91,9 +94,9 @@ public class ErrorMessageWhenChangePasswordTest extends TestRunner {
 				.successLogin(validUser)
 				.gotoChangePassword();
 		
-		changePasswordPage.fillPasswordWithInvalidCredentialsField(password, confirmPassword);
 
-		ErrorMessageChangePasswordPage errorMessageChangePasswordPage = changePasswordPage.clickChangeContinueButton();
+		
+		ErrorMessageChangePasswordPage errorMessageChangePasswordPage = changePasswordPage.unsucesessfulChangePassword(password, confirmPassword);
 		delayExecution(1000);
 
 		// Check
@@ -108,6 +111,8 @@ public class ErrorMessageWhenChangePasswordTest extends TestRunner {
 		Assert.assertEquals(errorMessageConfirmPasswordPage.getAlertMessageText(),
 				errorMessageConfirmPasswordPage.ERROR_MESSAGE_CONFIRM_PASSWORD);
 		delayExecution(1000);
+		
+		errorMessageChangePasswordPage.gotoLogout();
 
 	}
 }
