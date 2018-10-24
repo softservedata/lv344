@@ -247,6 +247,12 @@
 						<surefire.reports.directory>
 							${testng.reports.directory}
 						</surefire.reports.directory>
+						<selenium.version>
+							${org.seleniumhq.selenium.version}
+						</selenium.version>
+						<database.password>
+							settings.databasepassword
+						</database.password>
 					</systemPropertyVariables>
 					<suiteXmlFiles>
 						<suiteXmlFile>testng2.xml</suiteXmlFile>

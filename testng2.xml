@@ -3,10 +3,8 @@
 
 <suite name="Suite1">
 
-	<parameter name="loginurl"
-		value="http://registrator.herokuapp.com/login" />
-	<parameter name="logouturl"
-		value="http://registrator.herokuapp.com/logout" />
+	<parameter name="loginurl" value="http://registrator.herokuapp.com/login" />
+	<parameter name="logouturl" value="http://registrator.herokuapp.com/logout" />
 	<parameter name="browserName" value="chrome" />
 
 	<!-- 3 ERROR 5 WARNING 7 INFO 9 DEBUG -->
@@ -20,7 +18,8 @@
 <!-- 					<include name="checkProductCurrency" /> -->
 <!-- 				</methods> -->
 <!-- 			</class> -->
-			<class name="com.softserve.edu.opencart.tests.LoginTest" />
+<!-- 			<class name="com.softserve.edu.opencart.tests.LoginTest" /> -->
+			<class name="com.softserve.edu.AppTestReport" />
 		</classes>
 	</test> <!-- Test -->
 
