@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+
 import com.softserve.edu.opencart.data.Currencies;
 
 public class HomePage extends AHeadComponent {
@@ -26,13 +27,13 @@ public class HomePage extends AHeadComponent {
 	
 	// PageObject
 	
+
 	//productsListComponent
 	public ProductsListComponent getProductsListComponent() {return productsListComponent;}
 	
 	//productsListComponentTitle
 	public WebElement getProductsListComponentTitle() {return productsListComponentTitle;}
 	public String getProductsListComponentTitleText() {return productsListComponentTitle.getText();}
-	
 	
 	// Business Logic
 
@@ -66,4 +67,3 @@ public class HomePage extends AHeadComponent {
     }
 
 }
-

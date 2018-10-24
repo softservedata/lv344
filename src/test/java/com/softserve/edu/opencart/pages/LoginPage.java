@@ -5,12 +5,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.softserve.edu.opencart.data.IUser;
+import com.softserve.edu.opencart.pages.password.ForgottenPasswordPage;
+import com.softserve.edu.opencart.pages.password.ResetPasswordPage;
 
 public class LoginPage extends AUnloggedRighMenuComponent {
 
 	private WebElement emailField;
 	private WebElement passwordField;
 	private WebElement loginButton;
+	private WebElement linkForgottenPassword;
 
 	public LoginPage(WebDriver driver) {
 		super(driver);
@@ -21,8 +24,9 @@ public class LoginPage extends AUnloggedRighMenuComponent {
 		emailField = driver.findElement(By.id("input-email"));
 		passwordField = driver.findElement(By.id("input-password"));
 		loginButton = driver.findElement(By.cssSelector("input.btn.btn-primary"));
+		linkForgottenPassword = driver.findElement(By.linkText("Forgotten Password"));
 	}
-
+	
 	// PageObject Atomic Operation
 
 	// emailField
@@ -45,6 +49,11 @@ public class LoginPage extends AUnloggedRighMenuComponent {
 	public void clickEmailField() {
 		getEmailField().click();
     }
+	public void fillEmailField(IUser user) {
+        clickEmailField();
+        clearEmailField();
+        setEmailField(user.getEMail());
+	}
 
 	// passwordField
 	public WebElement getPasswordField() {
@@ -79,6 +88,20 @@ public class LoginPage extends AUnloggedRighMenuComponent {
 	public void clickLoginButton() {
 		getLoginButton().click();
     }
+	//linkForgottenPassword
+	
+	public WebElement getLinkForgottenPassword() {
+        return linkForgottenPassword;
+    }
+
+	public String getLinkForgottenPasswordText() {
+        return getLinkForgottenPassword().getText();
+    }
+	 
+	public void clickLinkForgottenPassword() {
+		getLinkForgottenPassword().click();
+    }
+
 	
 	// Business Logic
 	
@@ -101,6 +124,13 @@ public class LoginPage extends AUnloggedRighMenuComponent {
 	public LoginMessagePage unsuccessfullLogin(IUser invalidUser) {
         fillLoginForm(invalidUser);
         return new LoginMessagePage(driver);
-    }
-
+        
+	}
+        
+        public ForgottenPasswordPage fillLoginFormAndClickForgottenPassword(IUser user) {
+        	fillEmailField(user);  
+            clickLinkForgottenPassword();
+            return new ForgottenPasswordPage(driver);
+        }
+       
 }

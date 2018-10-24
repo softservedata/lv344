@@ -6,7 +6,6 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
 import com.softserve.edu.opencart.pages.cart.functional.EmptyShoppingCartPage;
 import com.softserve.edu.opencart.pages.cart.functional.ShoppingCartPage;
 import com.softserve.edu.opencart.tools.RegexUtils;
@@ -70,7 +69,9 @@ public abstract class AHeadComponent {
 	//
 	protected static boolean loggedUser = false;
 	protected WebDriver driver;
-	//
+
+	//	
+
 	private WebElement currency;
 	private WebElement myAccount;
 	private WebElement wishList;
@@ -329,6 +330,7 @@ public abstract class AHeadComponent {
 	// Business Logic
 
 	public LoginPage gotoLogin() {
+
 		if (isLoggedUser()) {
 		    // TODO Develop Custom Exceptions 
 			throw new RuntimeException(LOGIN_ERROR);
@@ -354,6 +356,7 @@ public abstract class AHeadComponent {
         return new AccountLogoutPage(driver);
     }
 
+
  	public HomePage gotoHome() {
  		clickLogo();
 		return new HomePage(driver);
@@ -367,7 +370,6 @@ public abstract class AHeadComponent {
  	public ShoppingCartPage gotoShoppinCartPage() {
     	clickShoppingCart();
     	return new ShoppingCartPage(driver);
-    }
- 	
- 	
+    }	
 }
+

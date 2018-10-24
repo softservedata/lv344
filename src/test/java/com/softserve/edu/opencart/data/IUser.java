@@ -31,3 +31,4 @@ public interface IUser {
 	boolean getSubscribe();
 
 }
+

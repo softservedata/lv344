@@ -94,4 +94,6 @@ public class Appl {
 		IUser user = UserRepository.get().customer();
 		System.out.println("user.firstName = " + user.getFirstName());
 	}
+
 }
+

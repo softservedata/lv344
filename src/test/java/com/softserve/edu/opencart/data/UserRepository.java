@@ -42,6 +42,7 @@ public final class UserRepository {
     public IUser customer() {
         return User.get()
         		.setFirstName("firstname9")
+
 				.setLastName("lastname")
 				.setEMail("hahaha@gmail.com")
 				.setTelephone("phone")
@@ -56,6 +57,7 @@ public final class UserRepository {
     }
 
     public IUser customerHahaha() {
+
         return User.get()
 				.setFirstName("firstname9")
 				.setLastName("hahaha")
@@ -86,6 +88,7 @@ public final class UserRepository {
 				.setFax("fax3")
 				.build();
     }
+
     
     public IUser searchUser() {
         return User.get()
@@ -118,6 +121,39 @@ public final class UserRepository {
 				.setFax("")
 				.build();
     }
+
+    public IUser notExist() {
+        return User.get()
+				.setFirstName("firsefilwghf")
+				.setLastName("lastName3")
+				.setEMail("firsefilwghf")
+				.setTelephone("telephone3")
+				.setAddress1("address13")
+				.setCity("city3")
+				.setPostCode("postCode3")
+				.setCountry("country3")
+				.setRegionState("regionState3")
+				.setPassword("passwghuehrord3")
+				.setFax("fax3")
+				.build();
+    }
+    
+    public IUser customerIra() {
+        return User.get()
+				.setFirstName("Ira")
+				.setLastName("Yeltsova")
+				.setEMail("test-atqc-shop@ukr.net")
+				.setTelephone("630000000")
+				.setAddress1("address12")
+				.setCity("city2")
+				.setPostCode("postCode2")
+				.setCountry("country2")
+				.setRegionState("regionState2")
+				.setPassword("qwerty")
+				.setFax("fax")
+				.build();
+    }
+
 
     //public IUser admin() {}
     //public List<IUser> fromExcel() {}

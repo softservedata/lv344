@@ -7,8 +7,7 @@ import org.openqa.selenium.WebElement;
 public class AccountInformationPage extends ARighMenuComponent {
 
 	private WebElement firstnameField;
-
-
+	
 	public AccountInformationPage(WebDriver driver) {
 		super(driver);
 		initLoginComponent();
@@ -22,23 +21,24 @@ public class AccountInformationPage extends ARighMenuComponent {
 
 	// firstnameField
 	public WebElement getFirstnameField() {
-		return firstnameField;
-	}
+        return firstnameField;
+    }
 
 	public String getFirstnameFieldText() {
-		return getFirstnameField().getAttribute(TAG_ATTRIBUTE_VALUE);
-	}
-
+        return getFirstnameField().getAttribute(TAG_ATTRIBUTE_VALUE);
+    }
+	
 	public void setFirstnameField(String text) {
 		getFirstnameField().sendKeys(text);
-	}
-
+    }
+	 
 	public void clearFirstnameField() {
 		getFirstnameField().clear();
-	}
-
+    }
+	 
 	public void clickFirstnameField() {
 		getFirstnameField().click();
-	}
+    }
+
 }
 

@@ -1,6 +1,7 @@
 package com.softserve.edu.opencart.data;
 
 import java.util.HashMap;
+
 import java.util.Map;
 
 public class Product {
@@ -53,3 +54,4 @@ public class Product {
 	}
 
 }
+
