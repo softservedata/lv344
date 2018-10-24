@@ -17,7 +17,6 @@ public class SuccessMessageWhenChangePasswordTest extends TestRunner {
 	public Object[][] loginWithValidCredentials() {
 		return new Object[][] {{ UserRepository.get().customerIra(), "qwerty", "qwerty" } };
 	}
-	
 
 	@Test(dataProvider = "loginWithValidCredentials")
 	public void successWhenChangePassword(IUser validUser, String password, String confirmPassword) {
