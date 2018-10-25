@@ -19,6 +19,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
+import com.softserve.edu.opencart.pages.AHeadComponent;
 import com.softserve.edu.opencart.pages.HomePage;
 
 public abstract class TestRunner {
@@ -52,7 +53,8 @@ public abstract class TestRunner {
     }
 
     @AfterMethod//(alwaysRun = true)
-    public void afterMethod(ITestResult result) {
+    public void afterMethod(ITestResult result) {    	
+//Log test status
     	if (result.isSuccess()) {
     		log.info("test " + result.getName() + " completed successfully");
     	} else {
@@ -60,20 +62,7 @@ public abstract class TestRunner {
     				+ "\n\t" + result.getThrowable().toString());
     	}
         System.out.println("@AfterMethod");
-    }
-    
-    @AfterGroups(groups = {"addItemToCart"})
-    protected void AfterGroup() {
-    	//Clear cart if we have one or more goods there
-  		if(RegexUtils.extractFirstNumber(driver.findElement(By.cssSelector("#cart-total")).getText()) != 0) {
-  			do{
-  				driver.findElement(By.cssSelector("#cart")).click();
-  				driver.findElement(By.cssSelector(".fa-times")).click();
-  			}while(RegexUtils.extractFirstNumber(driver.findElement(By.cssSelector("#cart-total")).getText()) != 0);
-  		}
-    }
-
-    
+    }  
 
     protected HomePage loadApplication() {
         return new HomePage(driver);
