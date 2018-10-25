@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class MyAccountMessagePage extends MyAccountPage {
+public class MyAccountMessagePage extends MyAccountPage implements IMyAccountMessagePage {
 
 	public final String EXPECTED_SUCCESS_CHANGE_PASSWORD = "Success: Your password has been successfully updated.";
 
@@ -31,5 +31,8 @@ public class MyAccountMessagePage extends MyAccountPage {
 	}
 
 	// Business Logic
-
+	
+	public MyAccountMessagePage getMyAccountMessagePage() {
+	    return this;
+	}
 }

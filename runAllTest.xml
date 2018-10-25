@@ -33,9 +33,9 @@
 				</methods>
 			</class>
 
- <!-- 			<class name="com.softserve.edu.opencart.pages.password.CheckPostWhenFofgotPasswordTest"> -->
-<!-- 				<methods> -->
-<!-- 					<include name="" /> -->
+ <!-- 			<class name="com.softserve.edu.opencart.tests.password.CheckPostWhenFofgotPasswordTest"> -->
+<!-- 				<methods>-->
+<!-- 					<include name="loginWhenFofgotPassword" /> -->
 <!-- 				</methods> -->
 <!-- 			</class> -->
 

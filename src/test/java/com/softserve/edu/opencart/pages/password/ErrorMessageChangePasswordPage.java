@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class ErrorMessageChangePasswordPage extends ChangePasswordPage {
+public class ErrorMessageChangePasswordPage extends ChangePasswordPage implements IErrorMessageChangePasswordPage {
 
 	public final String ERROR_MESSAGE_CHANGE_PASSWORD = "Password must be between 4 and 20 characters!";
 
@@ -26,8 +26,13 @@ public class ErrorMessageChangePasswordPage extends ChangePasswordPage {
 	public String getAlertMessageText() {
 		return getAlertMessage().getText();
 	}
-	
+
 	// busness logic
+
+	public ErrorMessageChangePasswordPage getErrorMessageChangePasswordPage() {
+		return this;
+	}
+
 	public ErrorMessageConfirmPasswordPage gotoErrorMessageConfirmPasswordPage() {
 		return new ErrorMessageConfirmPasswordPage(driver);
 	}

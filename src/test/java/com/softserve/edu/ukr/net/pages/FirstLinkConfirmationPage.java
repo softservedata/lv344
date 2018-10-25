@@ -14,7 +14,7 @@ public class FirstLinkConfirmationPage {
 		initFirstLinkComponent();
 	}
 	private void initFirstLinkComponent() {
-		firstLink = driver.findElement(By.id("id-input-login"));//??
+		firstLink = driver.findElement(By.id((".readmsg__body a")));
 	}
 	
 	public WebElement getFirstLink() {
