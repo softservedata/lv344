@@ -254,13 +254,11 @@ public class YStasivTest extends TestRunner {
         delayExecution(1000); //ForDemonstration
                            
 //Logout and login again
-        //TODO ПРОЧЕКАТИ ШО ПО ЧЬОМ
         shoppingCartPage = shoppingCartPage.clickFirstBreadcrumb().gotoLogout().gotoLogin().successLogin(validUser)
         		.gotoHome().gotoShoppinCartPage();
     log.info("The user was relogged in...");
     
-//Check if goods left
-    	
+//Check if goods left  	
        Assert.assertTrue(shoppingCartPage.getProductsCartListComponent().getProductsCartNameList().contains(partialProductName));
    log.info("The \"" + partialProductName + "\" left and displayed correctly on cart page...");
 		delayExecution(1000);
