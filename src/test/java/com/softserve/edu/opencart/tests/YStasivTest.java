@@ -1,5 +1,6 @@
 package com.softserve.edu.opencart.tests;
 
+import org.seleniumhq.jetty9.server.session.HouseKeeper;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -12,6 +13,7 @@ import com.softserve.edu.opencart.data.UserRepository;
 import com.softserve.edu.opencart.pages.AccountLogoutPage;
 import com.softserve.edu.opencart.pages.HomeMessagePage;
 import com.softserve.edu.opencart.pages.HomePage;
+import com.softserve.edu.opencart.pages.LoginPage;
 import com.softserve.edu.opencart.pages.MyAccountPage;
 import com.softserve.edu.opencart.pages.cart.functional.EmptyShoppingCartPage;
 import com.softserve.edu.opencart.pages.cart.functional.ShoppingCartMessagePage;
@@ -25,7 +27,7 @@ public class YStasivTest extends TestRunner {
 //=====================================================================================================
 //											SmokeTestOpenCart
 //=====================================================================================================
-	//@Test(enabled = true)
+	@Test(enabled = true)
 	public void smokeTestOpenCart() {
 	log.info("SmokeTestOpenCart start");
 		SoftAssert softAssert = new SoftAssert();
@@ -46,13 +48,13 @@ public class YStasivTest extends TestRunner {
 		delayExecution(1000); //ForDemonstration
 		Assert.assertTrue(homePage.gotoLogin().getLastBreadcrumbText().contains("Login"));	
 	log.info("Element on enother page was found...");
-		delayExecution(2000); //ForDemonstration
+		delayExecution(3000); //ForDemonstration
 		softAssert.assertAll();
 	}//TODO  + репортер?
+	
 //=====================================================================================================
 //											CheckEmptyCartPage
 //=====================================================================================================
-	
 	@DataProvider // (parallel = true)
 	public Object[][] currenciesType() {
 		// Read from ...
@@ -63,7 +65,7 @@ public class YStasivTest extends TestRunner {
 			};
 	}
 
-	//@Test(dataProvider = "currenciesType", enabled = true)
+	@Test(dataProvider = "currenciesType", dependsOnMethods = { "smokeTestOpenCart" }, enabled = true)
 //CheckEmptyCartPageWithDifferentCurrencies
 	public void checkEmptyCartPage(Currencies currency) {
 	log.info("CheckEmptyCartPage start");
@@ -80,22 +82,22 @@ public class YStasivTest extends TestRunner {
 		EmptyShoppingCartPage emptyShoppingCartPage = homePage.gotoEmptyShoppingCartPage();
 		Assert.assertEquals(emptyShoppingCartPage.getEmptyCartText(), emptyShoppingCartPage.EXPECT_EMPTY_CART_TEXT);
 	log.info("Expected message about cart is empty was displayed...");
-		delayExecution(2000); //ForDemonstration
-//TODO ПОМІНЯТИ НАЗАД НА ДОЛАР
+		delayExecution(3000); //ForDemonstration
 	}//TODO репортер?
+	
 //=====================================================================================================
-	
-	
+//												AddItemToCart
+//=====================================================================================================	
 		@DataProvider//(parallel = true)
 	    public Object[][] productNames() {
 	        // Read from ...
 	        return new Object[][] { 
 	            { ProductRepository.macBook().getName()},
-//	            { "iPhone" },
+//	            { ProductRepository.iPhone().getName() },
 	            };
 	    }
 
-	//@Test(dataProvider = "productNames", enabled = true, groups = {"addItemToCart"})
+	@Test(dataProvider = "productNames", dependsOnMethods = { "smokeTestOpenCart" }, enabled = true)
 	public void addItemToCart(String partialProductName) {
 	log.info("AddItemToCart start with test item \"" + partialProductName + "\"");
 //Precondition: Load Application
@@ -117,77 +119,122 @@ public class YStasivTest extends TestRunner {
         ShoppingCartPage shoppingCartPage = homePage.gotoShoppinCartPage(); 
         Assert.assertTrue(shoppingCartPage.getProductsCartListComponent().getProductsCartNameList().contains(partialProductName));
     log.info("\"" + partialProductName + "\" displayed correctly on cart page...");
-        delayExecution(2000); //ForDemonstration
+        delayExecution(1000); //ForDemonstration
+        
+//Return to previous state: remove ProductName from cart List
+        shoppingCartPage.removeProductQuantityByPartialName(partialProductName);
+        log.info("The \"" + partialProductName + "\" was remove from cart page...");
+        delayExecution(3000); //ForDemonstration
     }//TODO  репортер?
 	
 	
-	
-	//@Test(dataProvider = "productNames", enabled = true)
+//=====================================================================================================
+//												ChangeNumOfItemsInCart
+//=====================================================================================================	
+	@Test(dataProvider = "productNames", dependsOnMethods = { "smokeTestOpenCart", "addItemToCart" }, enabled = true)
 	public void changeNumOfItemsInCart(String partialProductName) {
 	log.info("ChangeNumOfItemsInCart start with test item \"" + partialProductName + "\"");
+	
 //Precondition: Load Application
         HomePage homePage = loadApplication();
         delayExecution(1000); //ForDemonstration
+        
 //Steps: Add product to cart
         HomeMessagePage homeMessagePage = homePage.putToCartProductByPartialName(partialProductName);
     log.info("\"" + partialProductName + "\" was added to cart...");
+        delayExecution(1000); //ForDemonstration
+        
+//Check if AlertMessage contains current text
+        Assert.assertTrue(homeMessagePage.getAlertMessageText()
+        		.contains(String.format(homeMessagePage.EXPECTED_MESSAGE_CART, partialProductName)));
+    log.info("User see correct message, \"" + partialProductName + "\" was added...");
+    
+//GoToShoppingCart
+        ShoppingCartPage shoppingCartPage = homePage.gotoShoppinCartPage();
+        
+//Check if goods was added
+        Assert.assertTrue(shoppingCartPage.getProductsCartListComponent().getProductsCartNameList().contains(partialProductName));
+    log.info("\"" + partialProductName + "\" displayed correctly on cart page...");
+        delayExecution(1000); //ForDemonstration
+        
+//Set quantity and Update product
+        ShoppingCartMessagePage cartMessagePage = shoppingCartPage.updateProductQuantityByPartialName(partialProductName, "5");
+    log.info("Count changed correctly...");
+    	delayExecution(1000); //ForDemonstration
+    	
+//Check if AlertMessage contains current text
+        Assert.assertEquals(cartMessagePage.getAlertMessageText(), cartMessagePage.EXPECTED_UPDATE_MESSAGE_CART);
+    log.info("User see correct message...");
+        delayExecution(1000); //ForDemonstration
+        
+ //Return to previous state: remove ProductName from cart List
+        cartMessagePage.closeAlertMessage().removeProductQuantityByPartialName(partialProductName);
+    log.info("The \"" + partialProductName + "\" was remove from cart page...");
+        delayExecution(3000); //ForDemonstration
+    }//TODO  репортер?
+	
+//=====================================================================================================
+//												ErrorMessageChangeNumOfItemsInCart
+//=====================================================================================================
+	@Test(dataProvider = "productNames", dependsOnMethods = { "smokeTestOpenCart", "addItemToCart" }, enabled = true)
+	public void errorMessageChangeNumOfItemsInCart(String partialProductName) {
+	log.info("ErrorMessageChangeNumOfItemsInCart start with test item \"" + partialProductName + "\"");
+	
+//Precondition: Load Application
+        HomePage homePage = loadApplication();
+        delayExecution(1000); //ForDemonstration
+        
+//Steps: Add product to cart
+        HomeMessagePage homeMessagePage = homePage.putToCartProductByPartialName(partialProductName);
+    log.info("\"" + partialProductName + "\" was added to cart...");
+    
         delayExecution(1000); //ForDemonstration
 //Check if AlertMessage contains current text
         Assert.assertTrue(homeMessagePage.getAlertMessageText()
         		.contains(String.format(homeMessagePage.EXPECTED_MESSAGE_CART, partialProductName)));
     log.info("User see correct message, \"" + partialProductName + "\" was added...");
+    
 //GoToShoppingCart
         ShoppingCartPage shoppingCartPage = homePage.gotoShoppinCartPage();
+        
 //Check if goods was added
         Assert.assertTrue(shoppingCartPage.getProductsCartListComponent().getProductsCartNameList().contains(partialProductName));
     log.info("\"" + partialProductName + "\" displayed correctly on cart page...");
         delayExecution(1000); //ForDemonstration
+        
 //Set quantity and Update product
-        ShoppingCartMessagePage cartMessagePage = shoppingCartPage.updateProductQuantityByPartialName(partialProductName, "5");
+        ShoppingCartMessagePage cartMessagePage = shoppingCartPage.updateProductQuantityByPartialName(partialProductName, "test");
     log.info("Count changed correctly...");
-    	delayExecution(1000); //ForDemonstration
+    
 //Check if AlertMessage contains current text
         Assert.assertEquals(cartMessagePage.getAlertMessageText(), cartMessagePage.EXPECTED_UPDATE_MESSAGE_CART);
     log.info("User see correct message...");
-        delayExecution(5000); //ForDemonstration
-	}
-	
-	//@Test(dataProvider = "productNames", enabled = true)
-	public void ErrorMessageChangeNumOfItemsInCart(String partialProductName) {
-//Precondition: Load Application
-        HomePage homePage = loadApplication();
-        delayExecution(1000); //ForDemonstration
-//Steps: Add product to cart
-        HomeMessagePage homeMessagePage = homePage.putToCartProductByPartialName(partialProductName);
-        delayExecution(1000); //ForDemonstration
-//Check if AlertMessage contains current text
-        Assert.assertTrue(homeMessagePage.getAlertMessageText()
-        		.contains(String.format(homeMessagePage.EXPECTED_MESSAGE_CART, partialProductName)));
-//GoToShoppingCart
-        ShoppingCartPage shoppingCartPage = homePage.gotoShoppinCartPage();
-//Check if goods was added
-        Assert.assertTrue(shoppingCartPage.getProductsCartListComponent().getProductsCartNameList().contains(partialProductName));
-        delayExecution(1000); //ForDemonstration
-//Set quantity and Update product
-        ShoppingCartMessagePage cartMessagePage = shoppingCartPage.updateProductQuantityByPartialName(partialProductName, "test");
-//Check if AlertMessage contains current text
-        Assert.assertEquals(cartMessagePage.getAlertMessageText(), cartMessagePage.EXPECTED_UPDATE_MESSAGE_CART);
-        delayExecution(5000); //ForDemonstration
+        delayExecution(1000); //ForDemonstration 
         
+ //Return to previous state: remove ProductName from cart List
+        cartMessagePage.closeAlertMessage().removeProductQuantityByPartialName(partialProductName);
+    log.info("The \"" + partialProductName + "\" was remove from cart page...");
+        delayExecution(3000); //ForDemonstration
 	}
 	
+//=====================================================================================================
+//												CartAfterRelogin
+//=====================================================================================================	
 	@DataProvider // (parallel = true)
 	public Object[][] SomeProduct() {
 		// Read from ...
 		return new Object[][] { 
-			{ UserRepository.get().yStasiv(), "MacBook" },
+			{ UserRepository.get().yStasiv(), ProductRepository.macBook().getName() },
 			};
 	}
-	//@Test(dataProvider = "SomeProduct", enabled = true)
-	public void CartAfterRelogin(IUser validUser, String partialProductName) {
+	@Test(dataProvider = "SomeProduct", dependsOnMethods = { "smokeTestOpenCart", "addItemToCart" }, enabled = true)
+	public void cartAfterRelogin(IUser validUser, String partialProductName) {
+	log.info("CartAfterRelogin start with test item \"" + partialProductName + "\" and validUser");
+	
 //Precondition: Login
 		MyAccountPage myAccountPage = loadApplication().gotoLogin().successLogin(validUser);
 		delayExecution(1000);
+	log.info("The user was logged in...");
 	
 //back to main page
 		HomePage homePage = myAccountPage.gotoHome();
@@ -196,35 +243,44 @@ public class YStasivTest extends TestRunner {
 //Add product to cart 
 		HomeMessagePage homeMessagePage = homePage.putToCartProductByPartialName(partialProductName);
         delayExecution(1000); //ForDemonstration
-
+    log.info("The \"" + partialProductName + "\" was added to catr...");
 //Check if AlertMessage contains current text
         Assert.assertTrue(homeMessagePage.getAlertMessageText()
         		.contains(String.format(homeMessagePage.EXPECTED_MESSAGE_CART, partialProductName)));
+    log.info("The user see correct message, \"" + partialProductName + "\" was added...");
         delayExecution(1000); //ForDemonstration
         
 //Close message
       	homePage = homeMessagePage.closeAlertMessage();
-      	delayExecution(1000);
+      	delayExecution(1000); //ForDemonstration
 
 //Go to ShoppingCart and check if goods was added
         ShoppingCartPage shoppingCartPage = homePage.gotoShoppinCartPage(); 
         Assert.assertTrue(shoppingCartPage.getProductsCartListComponent().getProductsCartNameList().contains(partialProductName));
-        delayExecution(2000); //ForDemonstration
-
-		
-//Return to previous state
-//Remove ProductName from cart List
-        shoppingCartPage.removeProductQuantityByPartialName(partialProductName);
-        shoppingCartPage.gotoEmptyShoppingCartPage().clickContinueButton();
+    log.info("The \"" + partialProductName + "\" displayed correctly on cart page...");
+        delayExecution(1000); //ForDemonstration
+                           
+//Logout and login again
+        shoppingCartPage.clickFirstBreadcrumb().gotoLogout().gotoLogin().successLogin(validUser).gotoHome().gotoShoppinCartPage();
+    log.info("The user was relogged in...");
+    
+//Check if goods left
+    	ShoppingCartPage shoppingCartPage2 = new ShoppingCartPage(driver);
+       Assert.assertTrue(shoppingCartPage2.getProductsCartListComponent().getProductsCartNameList().contains(partialProductName));
+   log.info("The \"" + partialProductName + "\" left and displayed correctly on cart page...");
 		delayExecution(1000);
+		
+//Return to previous state: remove ProductName from cart List
+        shoppingCartPage2.removeProductQuantityByPartialName(partialProductName);
+    log.info("The \"" + partialProductName + "\" was remove from cart page...");
+        homePage = shoppingCartPage2.gotoEmptyShoppingCartPage().clickContinueButton();
+		delayExecution(1000); //ForDemonstration
 
 //Logout		
-		AccountLogoutPage accountLogoutPage = myAccountPage.gotoLogout();
-		accountLogoutPage.gotoHome();
-		delayExecution(3000);
-		
-
+		homePage.gotoLogout().gotoHome();
+		log.info("The user was logged out...");
+		//TODO
+		delayExecution(3000); //ForDemonstration
 	}
-	
-	
+
 }
