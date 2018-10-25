@@ -36,7 +36,7 @@ public class YStasivTest extends TestRunner {
 		
 //Check if page contains curent data
 		softAssert.assertEquals(homePage.getProductsListComponentTitleText(),homePage.EXPECT_PRODUCT_LIST_TITLE);
-	log.info("Element on main page was found...");
+	log.info("Element on main page was found...");//debug
 		delayExecution(1000); //ForDemonstration
 		softAssert.assertEquals(homePage.getCartSum(), 0.0); softAssert.assertEquals(homePage.getCartAmount(), 0);
 	log.info("Current data on page was found...");
@@ -54,9 +54,7 @@ public class YStasivTest extends TestRunner {
 	public Object[][] currenciesType() {
 		// Read from ...
 		return new Object[][] { 
-			{ Currencies.US_DOLLAR }, 
-//			{ Currencies.EURO }, 
-//			{ Currencies.POUND_STERLING }, 
+			{ Currencies.US_DOLLAR },  
 			};
 	}
 
@@ -256,25 +254,26 @@ public class YStasivTest extends TestRunner {
         delayExecution(1000); //ForDemonstration
                            
 //Logout and login again
-        shoppingCartPage.clickFirstBreadcrumb().gotoLogout().gotoLogin().successLogin(validUser).gotoHome().gotoShoppinCartPage();
+        //TODO ПРОЧЕКАТИ ШО ПО ЧЬОМ
+        shoppingCartPage = shoppingCartPage.clickFirstBreadcrumb().gotoLogout().gotoLogin().successLogin(validUser)
+        		.gotoHome().gotoShoppinCartPage();
     log.info("The user was relogged in...");
     
 //Check if goods left
-    	ShoppingCartPage shoppingCartPage2 = new ShoppingCartPage(driver);
-       Assert.assertTrue(shoppingCartPage2.getProductsCartListComponent().getProductsCartNameList().contains(partialProductName));
+    	
+       Assert.assertTrue(shoppingCartPage.getProductsCartListComponent().getProductsCartNameList().contains(partialProductName));
    log.info("The \"" + partialProductName + "\" left and displayed correctly on cart page...");
 		delayExecution(1000);
 		
 //Return to previous state: remove ProductName from cart List
-        shoppingCartPage2.removeProductQuantityByPartialName(partialProductName);
+        shoppingCartPage.removeProductQuantityByPartialName(partialProductName);
     log.info("The \"" + partialProductName + "\" was remove from cart page...");
-        homePage = shoppingCartPage2.gotoEmptyShoppingCartPage().clickContinueButton();
+        homePage = shoppingCartPage.gotoEmptyShoppingCartPage().clickContinueButton();
 		delayExecution(1000); //ForDemonstration
 
 //Logout		
 		homePage.gotoLogout().gotoHome();
 		log.info("The user was logged out...");
-		//TODO
 		delayExecution(3000); //ForDemonstration
 	}
 
