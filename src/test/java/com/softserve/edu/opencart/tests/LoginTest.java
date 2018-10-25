@@ -24,7 +24,7 @@ public class LoginTest extends TestRunner {
             };
     }
 
-    @Test(dataProvider = "validUsers")
+    //@Test(dataProvider = "validUsers")
     public void checkLogin(IUser validUser) {
     	//logger.info("checkLogin start");
         //
@@ -58,4 +58,24 @@ public class LoginTest extends TestRunner {
         //isTestSuccess = true;
     }
 
+    @Test(dataProvider = "validUsers")
+    public void checkLoginLogout(IUser validUser) {
+        // Precondition
+        // Steps
+    	AccountInformationPage accountInformationPage = loadApplication()
+        		.gotoLogin()
+        		.successLogin(validUser)
+        		.gotoAccountInformation();
+        delayExecution(1000);
+        //
+        // Check
+        Assert.assertEquals(accountInformationPage.getFirstnameFieldText(),
+        		validUser.getFirstName());
+        delayExecution(1000);
+        //
+        accountInformationPage.clickWishList();
+        delayExecution(2000);
+        // Return to previous state
+    }
+    
 }

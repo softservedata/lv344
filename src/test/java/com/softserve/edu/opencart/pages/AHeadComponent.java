@@ -338,7 +338,15 @@ public abstract class AHeadComponent {
 		clickAccountOptionByPartialName("Login");
         return new LoginPage(driver);
     }
-	
+
+	public HomePage gotoHomeWithLogout() {
+		AHeadComponent headComponent = this;
+		if (isLoggedUser()) {
+			headComponent = gotoLogout();
+		}
+		return headComponent.gotoHome();
+    }
+
 	public MyAccountPage gotoMyAccount() {
 		if (!isLoggedUser()) {
 			throw new RuntimeException(LOGIN_ERROR);

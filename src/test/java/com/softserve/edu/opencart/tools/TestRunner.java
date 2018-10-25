@@ -13,6 +13,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
+import com.softserve.edu.opencart.pages.AHeadComponent;
 import com.softserve.edu.opencart.pages.HomePage;
 
 public abstract class TestRunner {
@@ -56,6 +57,8 @@ public abstract class TestRunner {
     		logger.error("test " + result.getName() + " failed" 
     				+ "\n\t" + result.getThrowable().toString());
     	}
+    	logoutApplication();
+    	delayExecution(2000);
         System.out.println("@AfterMethod");
     }
 
@@ -63,6 +66,11 @@ public abstract class TestRunner {
         return new HomePage(driver);
     }
 
+    protected HomePage logoutApplication() {
+        //return new HeadComponent(driver).gotoHomeWithLogout();
+    	return (new AHeadComponent(driver){}).gotoHomeWithLogout();
+    }
+    
     protected void delayExecution(long miliseconds) {
         try {
 			Thread.sleep(miliseconds);
