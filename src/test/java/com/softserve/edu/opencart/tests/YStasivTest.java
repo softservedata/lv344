@@ -1,19 +1,15 @@
 package com.softserve.edu.opencart.tests;
 
-import org.seleniumhq.jetty9.server.session.HouseKeeper;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
 import com.softserve.edu.opencart.data.Currencies;
 import com.softserve.edu.opencart.data.IUser;
 import com.softserve.edu.opencart.data.ProductRepository;
 import com.softserve.edu.opencart.data.UserRepository;
-import com.softserve.edu.opencart.pages.AccountLogoutPage;
 import com.softserve.edu.opencart.pages.HomeMessagePage;
 import com.softserve.edu.opencart.pages.HomePage;
-import com.softserve.edu.opencart.pages.LoginPage;
 import com.softserve.edu.opencart.pages.MyAccountPage;
 import com.softserve.edu.opencart.pages.cart.functional.EmptyShoppingCartPage;
 import com.softserve.edu.opencart.pages.cart.functional.ShoppingCartMessagePage;
@@ -30,7 +26,6 @@ public class YStasivTest extends TestRunner {
 	@Test(enabled = true)
 	public void smokeTestOpenCart() {
 	log.info("SmokeTestOpenCart start");
-		SoftAssert softAssert = new SoftAssert();
 //Precondition: Load Application
 		HomePage homePage = loadApplication();
 		delayExecution(1000); //ForDemonstration
