@@ -1,12 +1,14 @@
 package com.softserve.edu.opencart.pages.password;
 
 import org.openqa.selenium.By;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.softserve.edu.opencart.pages.ARighMenuComponent;
+import com.softserve.edu.opencart.pages.LoginMessagePage;
 
-public class ResetPasswordPage extends ARighMenuComponent{
+public class ResetPasswordPage extends ARighMenuComponent {
 
 	private WebElement passwordField;
 	private WebElement passwordConfirmField;
@@ -16,7 +18,7 @@ public class ResetPasswordPage extends ARighMenuComponent{
 	public ResetPasswordPage(WebDriver driver) {
 		super(driver);
 		initResetComponent();
-		
+
 	}
 
 	private void initResetComponent() {
@@ -25,79 +27,95 @@ public class ResetPasswordPage extends ARighMenuComponent{
 		continueButton = driver.findElement(By.cssSelector("input.btn.btn-primary"));
 		backButton = driver.findElement(By.cssSelector("a.btn.btn-default"));
 	}
+
 	// passwordField
-		public WebElement getPasswordField() {
-			return passwordField;
-		}
+	public WebElement getPasswordField() {
+		return passwordField;
+	}
 
-		public String getPasswordFieldText() {
-			return getPasswordField().getAttribute(TAG_ATTRIBUTE_VALUE);
-		}
+	public String getPasswordFieldText() {
+		return getPasswordField().getAttribute(TAG_ATTRIBUTE_VALUE);
+	}
 
-		
-		public void setPasswordField(String text) {
-			getPasswordField().sendKeys(text);
-		}
+	public void setPasswordField(String text) {
+		getPasswordField().sendKeys(text);
+	}
 
-		public void clearPasswordField() {
-			getPasswordField().clear();
-		}
+	public void clearPasswordField() {
+		getPasswordField().clear();
+	}
 
-		public void clickPasswordField() {
-			getPasswordField().click();
-		}
-		
-		 public void fillPasswordField(String text) {
-			 getPasswordField().click();
-			 getPasswordField().clear();
-			 getPasswordField().sendKeys(text);
-		    }
-		// passwordConfirmField
+	public void clickPasswordField() {
+		getPasswordField().click();
+	}
 
-		public WebElement getPasswordConfirmField() {
-			return passwordConfirmField;
-		}
+	public void fillPasswordField(String text) {
+		getPasswordField().click();
+		getPasswordField().clear();
+		getPasswordField().sendKeys(text);
+	}
 
-		public String getPasswordConfirmFieldText() {
-			return getPasswordConfirmField().getAttribute(TAG_ATTRIBUTE_VALUE);
-		}
+	public void fillPasswordFieldResetPassword(String password, String confirmPassword) {
+		clickPasswordField();
+		clearPasswordField();
+		getPasswordField().sendKeys(password);
 
-		public void setPasswordConfirmField(String text) {
-			getPasswordConfirmField().sendKeys(text);
-		}
+		clickPasswordConfirmField();
+		clearPasswordConfirmField();
+		getPasswordConfirmField().sendKeys(confirmPassword);
+	}
 
-		public void clearPasswordConfirmField() {
-			getPasswordConfirmField().clear();
-		}
+	// passwordConfirmField
 
-		public void clickPasswordConfirmField() {
-			getPasswordConfirmField().click();
-		}
-		
-		public void fillPasswordConfirmField(String text) {
-			getPasswordConfirmField().click();
-			getPasswordConfirmField().clear();
-			getPasswordConfirmField().sendKeys(text);
-		    }
+	public WebElement getPasswordConfirmField() {
+		return passwordConfirmField;
+	}
 
-		// continueButton
-		public WebElement getContinueButton() {
-			return continueButton;
-		}
+	public String getPasswordConfirmFieldText() {
+		return getPasswordConfirmField().getAttribute(TAG_ATTRIBUTE_VALUE);
+	}
 
-		public void clickContinueButton() {
-			getContinueButton().click();
-		}
-		// backButton
+	public void setPasswordConfirmField(String text) {
+		getPasswordConfirmField().sendKeys(text);
+	}
 
-		public WebElement getBackButton() {
-			return backButton;
-		}
+	public void clearPasswordConfirmField() {
+		getPasswordConfirmField().clear();
+	}
 
-		public void clickBackButton() {
-			getBackButton().click();
-		}
-		//bussnes logic
-		
-		
+	public void clickPasswordConfirmField() {
+		getPasswordConfirmField().click();
+	}
+
+	public void fillPasswordConfirmField(String text) {
+		getPasswordConfirmField().click();
+		getPasswordConfirmField().clear();
+		getPasswordConfirmField().sendKeys(text);
+	}
+
+	// continueButton
+	public WebElement getContinueButton() {
+		return continueButton;
+	}
+
+	public void clickContinueButton() {
+		getContinueButton().click();
+	}
+	// backButton
+
+	public WebElement getBackButton() {
+		return backButton;
+	}
+
+	public void clickBackButton() {
+		getBackButton().click();
+	}
+	// bussnes logic
+
+	public LoginMessagePage fillPassworFieldResetPassword(String password, String confirmPassword) {
+		fillPasswordFieldResetPassword(password, confirmPassword);
+		clickContinueButton();
+		return new LoginMessagePage(driver);
+	}
+
 }

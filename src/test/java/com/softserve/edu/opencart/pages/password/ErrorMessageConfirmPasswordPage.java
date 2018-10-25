@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class ErrorMessageConfirmPasswordPage extends ChangePasswordPage {
+public class ErrorMessageConfirmPasswordPage extends ChangePasswordPage implements IErrorMessageConfirmPasswordPage {
 
 	public final String ERROR_MESSAGE_CONFIRM_PASSWORD = "Password confirmation does not match password!";
 
@@ -30,6 +30,11 @@ public class ErrorMessageConfirmPasswordPage extends ChangePasswordPage {
 	}
 
 	// busness logic
+	
+	public ErrorMessageConfirmPasswordPage getErrorMessageConfirmPasswordPage() {
+		return this;
+	}
+
 	public ErrorMessageChangePasswordPage gotoErrorMessageChangePasswordPage() {
 		return new ErrorMessageChangePasswordPage(driver);
 	}

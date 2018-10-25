@@ -1,13 +1,13 @@
 package com.softserve.edu.opencart.pages.password;
 
 import org.openqa.selenium.By;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.softserve.edu.opencart.data.IUser;
 import com.softserve.edu.opencart.pages.ARighMenuComponent;
 import com.softserve.edu.opencart.pages.LoginMessagePage;
-import com.softserve.edu.opencart.pages.LoginMessagePageError;
 
 public class ForgottenPasswordPage extends ARighMenuComponent{
 	

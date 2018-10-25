@@ -15,7 +15,7 @@ public class SecondLinkConfirmationPage {
 		initSecondLinkComponent();
 	}
 	private void initSecondLinkComponent() {
-		secondLink = driver.findElement(By.id("id-input-login"));//??
+		secondLink = driver.findElement(By.id(".confirm__content-warn a"));
 	}
 	
 	public WebElement getSecondLink() {

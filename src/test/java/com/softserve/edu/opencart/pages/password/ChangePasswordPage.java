@@ -5,9 +5,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.softserve.edu.opencart.pages.ARighMenuComponent;
+import com.softserve.edu.opencart.pages.IMyAccountMessagePage;
 import com.softserve.edu.opencart.pages.MyAccountMessagePage;
+import com.softserve.edu.opencart.pages.search.SearchResultPage;
 
-public class ChangePasswordPage extends ARighMenuComponent {
+public class ChangePasswordPage extends ARighMenuComponent implements IChangePasswordPage {
 
 	private WebElement passwordField;
 	private WebElement passwordConfirmField;
@@ -123,21 +125,25 @@ public class ChangePasswordPage extends ARighMenuComponent {
 	}
 
 	// busness logic
+	
+	public  ChangePasswordPage getChangePasswordPage() {
+		return this;
+	}
 
-	public MyAccountMessagePage sucesessfulChangePassword(String password, String confirmPassword) {
+	public IMyAccountMessagePage sucesessfulChangePassword(String password, String confirmPassword) {
 		fillPasswordWithValidCredentialsField(password, confirmPassword);
 		clickContinueButton();
 		return new MyAccountMessagePage(driver);
 	}
 
 
-	public ErrorMessageChangePasswordPage unsucesessfulChangePassword(String password, String confirmPassword) {
+	public IErrorMessageChangePasswordPage unsucesessfulChangePassword(String password, String confirmPassword) {
 		fillPasswordWithValidCredentialsField(password, confirmPassword);
 		clickContinueButton();
 		return new ErrorMessageChangePasswordPage(driver);
 	}
 		
-	public ErrorMessageConfirmPasswordPage unsucesessfulConfirmPassword(String password, String confirmPassword) {
+	public IErrorMessageConfirmPasswordPage unsucesessfulConfirmPassword(String password, String confirmPassword) {
 			fillPasswordWithValidCredentialsField(password, confirmPassword);
 			clickContinueButton();
 			return new ErrorMessageConfirmPasswordPage(driver);
