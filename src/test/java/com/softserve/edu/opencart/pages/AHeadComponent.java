@@ -7,6 +7,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.softserve.edu.opencart.pages.cart.functional.EmptyShoppingCartPage;
+import com.softserve.edu.opencart.pages.cart.functional.ShoppingCartPage;
+import com.softserve.edu.opencart.pages.wishlist.EmptyWishListPage;
+import com.softserve.edu.opencart.pages.wishlist.WishListPage;
 import com.softserve.edu.opencart.tools.RegexUtils;
 
 public abstract class AHeadComponent {
@@ -328,7 +332,7 @@ public abstract class AHeadComponent {
 
 	public LoginPage gotoLogin() {
 		if (isLoggedUser()) {
-			 // TODO Develop Custom Exceptions
+		    // TODO Develop Custom Exceptions 
 			throw new RuntimeException(LOGIN_ERROR);
 		}
 		clickAccountOptionByPartialName("Login");
@@ -351,20 +355,29 @@ public abstract class AHeadComponent {
 		loggedUser = false;
         return new AccountLogoutPage(driver);
     }
+
  	public HomePage gotoHome() {
  		clickLogo();
 		return new HomePage(driver);
 }
  	
-
+ 	public EmptyShoppingCartPage gotoEmptyShoppingCartPage() {
+ 		clickShoppingCart();
+    	return new EmptyShoppingCartPage(driver);
+    }
+ 
+ 	public ShoppingCartPage gotoShoppinCartPage() {
+    	clickShoppingCart();
+    	return new ShoppingCartPage(driver);
+    }
+ 	
+ 	
     public WishListPage gotoWishListPage() {
     	return new WishListPage(driver);
     }
  	
-//    protected EmptyWishListPage gotoEmptyWishListPage() {
-//    	return new EmptyWishListPage(driver);
-//    }
-//    
-
-// 	
+    public EmptyWishListPage gotoEmptyWishListPage() {
+   	return new EmptyWishListPage(driver);
+   }
+ 	
 }

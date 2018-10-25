@@ -1,13 +1,12 @@
 package com.softserve.edu.opencart.data;
 
-public enum Currencies {
-	EURO("Euro"),
-	POUND_STERLING("Pound Sterling"),
-	US_DOLLAR("US Dollar");
-	//
+public enum Views {
+	GRID("grid"), 					
+	LIST("list");
+
 	private String name;
 
-	private Currencies(String name) {
+	private Views(String name) {
 		this.name = name;
 	}
 
@@ -15,6 +14,4 @@ public enum Currencies {
 	public String toString() {
 		return name;
 	}
-
 }
-

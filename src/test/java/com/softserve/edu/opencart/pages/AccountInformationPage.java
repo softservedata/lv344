@@ -5,7 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class AccountInformationPage extends ARighMenuComponent {
+
 	private WebElement firstnameField;
+
 
 	public AccountInformationPage(WebDriver driver) {
 		super(driver);
@@ -17,6 +19,7 @@ public class AccountInformationPage extends ARighMenuComponent {
 	}
 
 	// PageObject Atomic Operation
+
 	// firstnameField
 	public WebElement getFirstnameField() {
 		return firstnameField;
@@ -38,3 +41,4 @@ public class AccountInformationPage extends ARighMenuComponent {
 		getFirstnameField().click();
 	}
 }
+

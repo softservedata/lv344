@@ -2,19 +2,19 @@ package com.softserve.edu.opencart.tools;
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterGroups;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
-import com.softserve.edu.opencart.pages.EmptyShoppingCartPage;
-import com.softserve.edu.opencart.pages.EmptyWishListPage;
 import com.softserve.edu.opencart.pages.HomePage;
-import com.softserve.edu.opencart.pages.WishListPage;
+
 
 public abstract class TestRunner {
 	protected WebDriver driver;
@@ -23,11 +23,13 @@ public abstract class TestRunner {
 	@BeforeClass
     public void beforeClass(ITestContext context) {
         System.out.println("@BeforeClass");
+
 		System.setProperty("webdriver.chrome.driver",
 				this.getClass().getResource("/chromedriver-windows-32bit.exe").getPath());
 		driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
+
     }
 
     @AfterClass(alwaysRun = true)
@@ -47,27 +49,28 @@ public abstract class TestRunner {
         System.out.println("@AfterMethod");
     }
 
+    @AfterGroups(groups = {"addItemToCart"})
+    protected void AfterGroup() {
+    	//Clear cart if we have one or more goods there
+  		if(RegexUtils.extractFirstNumber(driver.findElement(By.cssSelector("#cart-total")).getText()) != 0) {
+  			do{
+  				driver.findElement(By.cssSelector("#cart")).click();
+  				driver.findElement(By.cssSelector(".fa-times")).click();
+  			}while(RegexUtils.extractFirstNumber(driver.findElement(By.cssSelector("#cart-total")).getText()) != 0);
+  		}
+    }
+    
     protected HomePage loadApplication() {
         return new HomePage(driver);
     }
-    protected EmptyShoppingCartPage gotoEmptyShoppingCartPage() {
-    	return new EmptyShoppingCartPage(driver);
-    }
     
-    protected EmptyWishListPage gotoEmptyWishListPage() {
-    	return new EmptyWishListPage(driver);
-    }
-    
-//    protected WishListPage gotoWishListPage() {
-//    	return new WishListPage(driver);
-//    }
-
     protected void delayExecution(long miliseconds) {
         try {
 			Thread.sleep(miliseconds);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+			System.err.println("Cannot thread sleep!");
+
 		}
     }
 

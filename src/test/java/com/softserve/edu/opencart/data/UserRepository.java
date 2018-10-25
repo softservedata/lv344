@@ -57,10 +57,10 @@ public final class UserRepository {
 
     public IUser customerHahaha() {
         return User.get()
-        		.setFirstName("firstname9")
-				.setLastName("lastname")
+				.setFirstName("hahaha")
+				.setLastName("hahaha")
 				.setEMail("hahaha@gmail.com")
-				.setTelephone("phone")
+				.setTelephone("1234567")
 				.setAddress1("address12")
 				.setCity("city2")
 				.setPostCode("postCode2")
@@ -87,7 +87,39 @@ public final class UserRepository {
 				.build();
     }
     
-    public IUser testUser() {
+    public IUser searchUser() {
+        return User.get()
+				.setFirstName("Search")
+				.setLastName("Test")
+				.setEMail("search@test.mail")
+				.setTelephone("0123456789")
+				.setAddress1("Lviv")
+				.setCity("Lviv")
+				.setPostCode("0123456")
+				.setCountry("Ukraine")
+				.setRegionState("L'vivs'ka Oblast'")
+				.setPassword("search")
+				.setFax("0123456789")
+				.build();
+    }
+    
+    public IUser yStasiv() {
+        return User.get()
+				.setFirstName("Yurii")
+				.setLastName("Stasiv")
+				.setEMail("yurastasiv@hotmail.com")
+				.setTelephone("+380972537286")
+				.setAddress1("Lviv, ukraine")
+				.setCity("Lviv")
+				.setPostCode("79054")
+				.setCountry("Ukraine")
+				.setRegionState("L'vivs'ka Oblast'")
+				.setPassword("Q1w2e3r4")
+				.setFax("")
+				.build();
+    }
+    
+    public IUser wishUser() {
         return User.get()
 				.setFirstName("test")
 				.setLastName("test")
@@ -103,8 +135,11 @@ public final class UserRepository {
 				.build();
     }
 
+
+
     //public IUser admin() {}
     //public List<IUser> fromExcel() {}
     //public List<IUser> fromDB() { create class, read, max 5-7 lines}
 
 }
+

@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 
 public class LoginMessagePage extends LoginPage {
 	public final String EXPECTED_WARNING_LOGIN = "Warning: No match for E-Mail Address and/or Password.";
+
 	private WebElement alertMessage;
 
 	public LoginMessagePage(WebDriver driver) {
@@ -18,10 +19,12 @@ public class LoginMessagePage extends LoginPage {
 	}
 
 	// PageObject
+
 	// alertMessage
 	public WebElement getAlertMessage() {
 		return alertMessage;
 	}
+
 
 	public String getAlertMessageText() {
 		return getAlertMessage().getText();

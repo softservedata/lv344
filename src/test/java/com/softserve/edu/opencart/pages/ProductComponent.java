@@ -92,3 +92,4 @@ public class ProductComponent {
 
     // Business Logic
 }
+

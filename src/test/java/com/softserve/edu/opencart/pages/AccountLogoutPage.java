@@ -1,8 +1,11 @@
 package com.softserve.edu.opencart.pages;
- import org.openqa.selenium.By;
+
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
  public class AccountLogoutPage extends AUnloggedRighMenuComponent {
+
 	public final String EXPECTED_TEXT_LOGOUT = "Account Logout";
 	
 	private WebElement accountLogoutLabel;
@@ -23,4 +26,4 @@ import org.openqa.selenium.WebElement;
         return getAccountLogoutLabel().getText();
     }
  	// Business Logic
- }
+}
