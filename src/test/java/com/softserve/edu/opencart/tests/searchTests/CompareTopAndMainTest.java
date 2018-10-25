@@ -22,27 +22,29 @@ public class CompareTopAndMainTest extends SearchTestsRunner{
 	
 	@Test(dataProvider="hp")
     public void testTopAndMainForms(String request, ArrayList<String> expectedResultsList) {
-        // Precondition
+        int delayTime = 1500;
+		// open home page
         HomePage homePage = loadApplication();
-        delayExecution(1000);
-        //search by top search form
-        homePage.setSearchProductField(request);
-        homePage.clickSearchProductButton();
-        delayExecution(1000);
-        //check if result is correct
-        searchResultPage = new SearchResultPage(driver);
-        delayExecution(1000);
-        List<String> actualTopResultsList = searchResultPage.getResultNamesList();
-        assertEquals(actualTopResultsList, expectedResultsList);
-        //search by main search form
-
-        searchResultPage.getISearchEmptyResultPage().searchWithMainForm(request);
-        delayExecution(1000);
-        searchResultPage = new SearchResultPage(driver);
-        delayExecution(1000);
-        List<String> actualMainResultsList = searchResultPage.getResultNamesList();
-        assertEquals(actualMainResultsList, expectedResultsList);
+        delayExecution(delayTime);
         
-        delayExecution(4000);
+        //search by top search form
+        homePage.setSearchProductField(request);//TODO add these methods as one method to HomePage
+        homePage.clickSearchProductButton();
+        delayExecution(delayTime);
+        
+        //check if result list is correct
+        searchResultPage = new SearchResultPage(driver);
+        delayExecution(delayTime);
+        assertEquals(searchResultPage.getResultNamesList(), expectedResultsList);
+        
+        //search by main search form
+        searchResultPage.getISearchEmptyResultPage().searchWithMainForm(request);
+        delayExecution(delayTime);
+        
+        loadSearchResultPage();
+		delayExecution(delayTime);
+		
+        assertEquals(searchResultPage.getResultNamesList(), expectedResultsList);
+        delayExecution(delayTime);
     }
 }

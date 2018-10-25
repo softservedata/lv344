@@ -50,6 +50,12 @@ public abstract class AStatusBarComponent extends AHeadComponent {
 	public void clickBreadcrumb(int breadcrumbNumber) {
 		getBreadcrumb(breadcrumbNumber).click();
     }
+	
+	public HomePage clickFirstBreadcrumb() {
+		getBreadcrumb(0).click();
+		return new HomePage(driver);
+		
+    }
 
 	public void clickLastBreadcrumb() {
 		getLastBreadcrumb().click();

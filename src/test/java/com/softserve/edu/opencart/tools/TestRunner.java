@@ -2,27 +2,24 @@ package com.softserve.edu.opencart.tools;
 
 import java.util.concurrent.TimeUnit;
 
-
-
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterGroups;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import org.testng.asserts.SoftAssert;
 
 import com.softserve.edu.opencart.pages.HomePage;
 
 public abstract class TestRunner {
 	protected final Logger log = LoggerFactory.getLogger(this.getClass());
+	protected SoftAssert softAssert = new SoftAssert();
 	protected WebDriver driver;
 	protected final double PRECISION = 0.001;
 	
@@ -42,6 +39,7 @@ public abstract class TestRunner {
     @AfterClass(alwaysRun = true)
     public void afterClass() {
         System.out.println("@AfterClass");
+//        softAssert.assertAll();
         driver.quit();
     }
 
@@ -51,8 +49,9 @@ public abstract class TestRunner {
 		driver.get("http://atqc-shop.epizy.com/");
     }
 
-    @AfterMethod//(alwaysRun = true)
-    public void afterMethod(ITestResult result) {
+    @AfterMethod(alwaysRun = true)
+    public void afterMethod(ITestResult result) {    	
+//Log test status
     	if (result.isSuccess()) {
     		log.info("test " + result.getName() + " completed successfully");
     	} else {
@@ -60,20 +59,7 @@ public abstract class TestRunner {
     				+ "\n\t" + result.getThrowable().toString());
     	}
         System.out.println("@AfterMethod");
-    }
-    
-    @AfterGroups(groups = {"addItemToCart"})
-    protected void AfterGroup() {
-    	//Clear cart if we have one or more goods there
-  		if(RegexUtils.extractFirstNumber(driver.findElement(By.cssSelector("#cart-total")).getText()) != 0) {
-  			do{
-  				driver.findElement(By.cssSelector("#cart")).click();
-  				driver.findElement(By.cssSelector(".fa-times")).click();
-  			}while(RegexUtils.extractFirstNumber(driver.findElement(By.cssSelector("#cart-total")).getText()) != 0);
-  		}
-    }
-
-    
+    }  
 
     protected HomePage loadApplication() {
         return new HomePage(driver);

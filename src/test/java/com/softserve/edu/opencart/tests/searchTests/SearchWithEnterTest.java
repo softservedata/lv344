@@ -49,17 +49,19 @@ import com.softserve.edu.opencart.tools.TestRunner;
 		
 		@Test(dataProvider = "mac")
 		public void testSearchWithEnter(String request, ArrayList<String> expectedResultsList) {
-			// Precondition
+			// open home page
 	        HomePage homePage = loadApplication();
 	        delayExecution(1000);
-	        //search by top search form
+	        
+	        //search by top search form and press ENTER key
 	        homePage.setSearchProductField(request+Keys.ENTER);
 	        delayExecution(1000);
-	        //check if result is correct
+	        
 	        searchResultPage = loadSearchResultPage();
 	        delayExecution(1000);
-	        List<String> actualResultsList = searchResultPage.getResultNamesList();
-	        assertEquals(actualResultsList, expectedResultsList);
+	        
+	        //check if result is correct
+	        assertEquals(searchResultPage.getResultNamesList(), expectedResultsList);
 		}
 		
 		

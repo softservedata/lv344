@@ -24,18 +24,24 @@ public class LoginResultTest extends SearchTestsRunner{
 	
 	@Test(dataProvider = "mac")
 		public void testSearchLogined(User user, String request, ArrayList<String> expectedResultsList) {
-			// Precondition
+			int delayTime = 1500; 
+			// open home page
 	        HomePage homePage = loadApplication();
-	        delayExecution(1000);
-	        //search by top search form
+	        delayExecution(delayTime);
+	        
+	        //open login page
 	        LoginPage loginPage = homePage.gotoLogin();
+	        
+	        //login with valid credentials 
 	        MyAccountPage myAccountPage = loginPage.successLogin(user);
-	        myAccountPage.setSearchProductField(request);
+	        
+	        myAccountPage.setSearchProductField(request);//TODO add these methods as one method to HomePage
 	        myAccountPage.clickSearchProductButton();
+	        
 	        //check if result is correct
 	        searchResultPage = loadSearchResultPage();
-	        delayExecution(1000);
-	        List<String> actualResultsList = searchResultPage.getResultNamesList();
-	        assertEquals(actualResultsList, expectedResultsList);
+	        delayExecution(delayTime);
+	        
+	        assertEquals(searchResultPage.getResultNamesList(), expectedResultsList);
 		}
 }

@@ -26,34 +26,37 @@ public class ResultWithFiltersTest extends SearchTestsRunner{
 	
 	@Test(dataProvider = "hpWithFilters")
 	public void testResultWithFilters(String request, ArrayList<String> expectedResultsList,
-			SortCriterias sortCriteria, ShowLimits showLimit, Views view) 
-			throws InterruptedException {
-		//type one blank space to top text field
+			SortCriterias sortCriteria, ShowLimits showLimit, Views view)  {
+		int delayTime = 1500; 
 		// Precondition
         HomePage homePage = loadApplication();
-        delayExecution(1000);
+        delayExecution(delayTime);
+        
         //search by top search form
-        homePage.setSearchProductField(" ");
+        homePage.setSearchProductField(" ");//TODO add these methods as one method to HomePage
         homePage.clickSearchProductButton();
-        delayExecution(1000);
+        delayExecution(delayTime);
+        
 		//type search request to main search field
         searchResultPage = loadSearchResultPage();
-        searchResultPage.getISearchEmptyResultPage().clickDescriptionCheckBox();;
-        delayExecution(1000);
-        //click 'search in descriptions' checkbox
+        //check 'description' textbox
+        searchResultPage.getISearchEmptyResultPage().clickDescriptionCheckBox();
+        delayExecution(delayTime);
+        
+        //search with main form
         searchResultPage = searchResultPage.getISearchEmptyResultPage().searchWithMainForm(request);
-        delayExecution(1000);
-		//click 'list' button
+        delayExecution(delayTime);
+        
+		//choose number of goods on the page 
         searchResultPage =  searchResultPage.chooseView(view);
-		delayExecution(2000);//only for demonstration
-		//click 'sort' drop-down list
-		searchResultPage = searchResultPage.chooseSortOrder(sortCriteria);
-		delayExecution(2000);//only for demonstration
-		//click 'show' drop-down list
-		searchResultPage = searchResultPage.chooseShowLimit(showLimit);
+		delayExecution(delayTime);
 		
-	    delayExecution(1000);
-	    List<String> actualResultsList = searchResultPage.getResultNamesList();
-	    assertEquals(actualResultsList, expectedResultsList);
+		searchResultPage = searchResultPage.chooseSortOrder(sortCriteria);
+		delayExecution(delayTime);
+		
+		searchResultPage = searchResultPage.chooseShowLimit(showLimit);
+	    delayExecution(delayTime);
+	    
+	    assertEquals(searchResultPage.getResultNamesList(), expectedResultsList);
 	}
 }
