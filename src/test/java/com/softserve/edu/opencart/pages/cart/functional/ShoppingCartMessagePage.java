@@ -29,8 +29,8 @@ public class ShoppingCartMessagePage extends ShoppingCartPage {
 
     // Business Logic
 
-    public ShoppingCartMessagePage closeAlertMessage() {
+    public ShoppingCartPage closeAlertMessage() {
     	getAlertMessageCloseButton().click();
-    	return new ShoppingCartMessagePage(driver);
+    	return new ShoppingCartPage(driver);
     }
 }
