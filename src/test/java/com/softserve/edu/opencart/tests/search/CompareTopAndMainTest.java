@@ -27,12 +27,10 @@ public class CompareTopAndMainTest extends SearchTestsRunner{
         delayExecution(delayTime);
         
         //search by top search form
-        homePage.setSearchProductField(request);//TODO add these methods as one method to HomePage
-        homePage.clickSearchProductButton();
+        searchResultPage = homePage.searchProduct(request);
         delayExecution(delayTime);
         
         //check if result list is correct
-        searchResultPage = new SearchResultPage(driver);
         delayExecution(delayTime);
         assertEquals(searchResultPage.getResultNamesList(), expectedResultsList);
         
