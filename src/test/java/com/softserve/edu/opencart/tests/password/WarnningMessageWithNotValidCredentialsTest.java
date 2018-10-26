@@ -19,18 +19,15 @@ public class WarnningMessageWithNotValidCredentialsTest extends TestRunner {
 	  public void warningMessage(IUser invalidUser) {
 	    //
 	    // Precondition
-	    // Steps          
-	    
-	   ILoginMessageErrorPage loginMessagePageError = loadApplication()
+	    // Steps      
+	    ILoginMessageErrorPage loginMessagePageError = loadApplication()
 	    		.gotoLogin()
 	            .unsuccessfullLogin(invalidUser);
 	            delayExecution(1000);
 	    //
 	    // Check
-
 	    Assert.assertEquals(loginMessagePageError.getLoginMessageErrorPage().getAlertMessageText(),
 	    		loginMessagePageError.getLoginMessageErrorPage().EXPECTED_WARNING_LOGIN); 
-	    
 	    delayExecution(1000);
 
 	}
