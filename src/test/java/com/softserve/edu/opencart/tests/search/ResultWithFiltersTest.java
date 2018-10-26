@@ -1,4 +1,4 @@
-package com.softserve.edu.opencart.tests.searchTests;
+package com.softserve.edu.opencart.tests.search;
 
 import static org.testng.Assert.assertEquals;
 
@@ -18,7 +18,6 @@ import com.softserve.edu.opencart.tools.SearchTestsRunner;
 public class ResultWithFiltersTest extends SearchTestsRunner{
 	@DataProvider(name = "hpWithFilters")
 	public static Object[][] resultListHPWithFilters() {
-		//do not sort list to check exact matching
 		return new Object[][] {{"hp", 
 			ProductsListRepository.getHPNamesList(SortCriterias.PRICE_HIGH_LOW), 
 			SortCriterias.PRICE_HIGH_LOW, ShowLimits.x15, Views.LIST}};
@@ -33,8 +32,7 @@ public class ResultWithFiltersTest extends SearchTestsRunner{
         delayExecution(delayTime);
         
         //search by top search form
-        homePage.setSearchProductField(" ");//TODO add these methods as one method to HomePage
-        homePage.clickSearchProductButton();
+        searchResultPage = homePage.searchProduct(request);
         delayExecution(delayTime);
         
 		//type search request to main search field

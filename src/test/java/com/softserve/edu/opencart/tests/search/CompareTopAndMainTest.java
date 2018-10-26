@@ -1,9 +1,8 @@
-package com.softserve.edu.opencart.tests.searchTests;
+package com.softserve.edu.opencart.tests.search;
 
 import static org.testng.Assert.assertEquals;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -28,12 +27,10 @@ public class CompareTopAndMainTest extends SearchTestsRunner{
         delayExecution(delayTime);
         
         //search by top search form
-        homePage.setSearchProductField(request);//TODO add these methods as one method to HomePage
-        homePage.clickSearchProductButton();
+        searchResultPage = homePage.searchProduct(request);
         delayExecution(delayTime);
         
         //check if result list is correct
-        searchResultPage = new SearchResultPage(driver);
         delayExecution(delayTime);
         assertEquals(searchResultPage.getResultNamesList(), expectedResultsList);
         

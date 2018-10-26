@@ -1,4 +1,4 @@
-package com.softserve.edu.opencart.tests.searchTests;
+package com.softserve.edu.opencart.tests.search;
 
 
 import static org.testng.Assert.assertEquals;
@@ -31,21 +31,6 @@ import com.softserve.edu.opencart.tools.TestRunner;
 		      return new Object[][] {{"mac", ProductsListRepository.getMacNamesList(SortCriterias.DEFAULT)}};
 		   }
 		
-		//@Test
-		public void regressTest() {
-			HomePage homePage = loadApplication();
-			delayExecution(1000);
-			//search by top search form
-	        homePage.setSearchProductField(" "+Keys.ENTER);
-	        delayExecution(1000);
-	        
-	        //check if result is correct
-	        searchResultPage = new SearchResultPage(driver);
-	        searchResultPage.getISearchEmptyResultPage().chooseProductCategory(ProductSubcategories.MP3_PLAYERS__Apple);
-	        delayExecution(2000);
-
-		}
-		
 		
 		@Test(dataProvider = "mac")
 		public void testSearchWithEnter(String request, ArrayList<String> expectedResultsList) {
@@ -64,13 +49,5 @@ import com.softserve.edu.opencart.tools.TestRunner;
 	        //check if result is correct
 	        assertEquals(searchResultPage.getResultNamesList(), expectedResultsList);
 		}
-		
-		
-		
-	    
-	    
-	   
-	
-	
 	}
 	

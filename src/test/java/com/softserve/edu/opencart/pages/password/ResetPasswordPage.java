@@ -18,7 +18,6 @@ public class ResetPasswordPage extends ARighMenuComponent {
 	public ResetPasswordPage(WebDriver driver) {
 		super(driver);
 		initResetComponent();
-
 	}
 
 	private void initResetComponent() {
@@ -55,18 +54,7 @@ public class ResetPasswordPage extends ARighMenuComponent {
 		getPasswordField().sendKeys(text);
 	}
 
-	private void fillPasswordFieldResetPassword(String password, String confirmPassword) {
-		clickPasswordField();
-		clearPasswordField();
-		setPasswordField(password);
-
-		clickPasswordConfirmField();
-		clearPasswordConfirmField();
-		setPasswordConfirmField(confirmPassword);
-	}
-
 	// passwordConfirmField
-
 	public WebElement getPasswordConfirmField() {
 		return passwordConfirmField;
 	}
@@ -101,8 +89,8 @@ public class ResetPasswordPage extends ARighMenuComponent {
 	public void clickContinueButton() {
 		getContinueButton().click();
 	}
+	
 	// backButton
-
 	public WebElement getBackButton() {
 		return backButton;
 	}
@@ -110,9 +98,22 @@ public class ResetPasswordPage extends ARighMenuComponent {
 	public void clickBackButton() {
 		getBackButton().click();
 	}
+	
 	// bussnes logic
 
-	public LoginMessagePage fillPassworFieldResetPassword(String password, String confirmPassword) {
+	private void fillPasswordFieldResetPassword(String password, String confirmPassword) {
+		fillPasswordField(password);
+		//clickPasswordField();
+		//clearPasswordField();
+		//setPasswordField(password);
+
+		fillPasswordConfirmField(confirmPassword);
+		//clickPasswordConfirmField();
+		//clearPasswordConfirmField();
+		//setPasswordConfirmField(confirmPassword);
+	}
+
+	public LoginMessagePage successResetPassword(String password, String confirmPassword) {
 		fillPasswordFieldResetPassword(password, confirmPassword);
 		clickContinueButton();
 		return new LoginMessagePage(driver);
