@@ -1,11 +1,8 @@
 package com.softserve.edu.opencart.tests.password;
 
 import org.testng.Assert;
-
-
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
 import com.softserve.edu.opencart.data.IUser;
 import com.softserve.edu.opencart.data.UserRepository;
 import com.softserve.edu.opencart.pages.ILoginMessageErrorPage;
@@ -30,13 +27,11 @@ public class WarnningMessageWithNotValidCredentialsTest extends TestRunner {
 	            delayExecution(1000);
 	    //
 	    // Check
+
 	    Assert.assertEquals(loginMessagePageError.getLoginMessageErrorPage().getAlertMessageText(),
-	    		loginMessagePageError.getLoginMessageErrorPage().EXPECTED_WARNING_LOGIN);
+	    		loginMessagePageError.getLoginMessageErrorPage().EXPECTED_WARNING_LOGIN); 
+	    
 	    delayExecution(1000);
 
-	 
-	     
-	  
-	
 	}
 }

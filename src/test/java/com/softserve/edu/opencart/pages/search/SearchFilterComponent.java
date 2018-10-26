@@ -3,8 +3,6 @@ package com.softserve.edu.opencart.pages.search;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
-import com.softserve.edu.opencart.data.ProductSubcategories;
 import com.softserve.edu.opencart.data.ShowLimits;
 import com.softserve.edu.opencart.data.SortCriterias;
 
