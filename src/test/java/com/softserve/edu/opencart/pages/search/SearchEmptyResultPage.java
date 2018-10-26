@@ -28,7 +28,7 @@ public class SearchEmptyResultPage extends AStatusBarComponent implements ISearc
 	}
 	
 	public void chooseProductCategory(ProductSubcategories subcategory) {
-		getSearchCriteriaComponent().getSearchTexField().click();
+		getSearchCriteriaComponent().clickSearchField();
 		getSearchCriteriaComponent().chooseCategory(subcategory);
 	}
 	
