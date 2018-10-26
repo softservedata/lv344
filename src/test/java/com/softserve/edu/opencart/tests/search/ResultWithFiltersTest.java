@@ -18,7 +18,6 @@ import com.softserve.edu.opencart.tools.SearchTestsRunner;
 public class ResultWithFiltersTest extends SearchTestsRunner{
 	@DataProvider(name = "hpWithFilters")
 	public static Object[][] resultListHPWithFilters() {
-		//do not sort list to check exact matching
 		return new Object[][] {{"hp", 
 			ProductsListRepository.getHPNamesList(SortCriterias.PRICE_HIGH_LOW), 
 			SortCriterias.PRICE_HIGH_LOW, ShowLimits.x15, Views.LIST}};

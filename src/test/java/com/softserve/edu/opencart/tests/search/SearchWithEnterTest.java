@@ -64,13 +64,5 @@ import com.softserve.edu.opencart.tools.TestRunner;
 	        //check if result is correct
 	        assertEquals(searchResultPage.getResultNamesList(), expectedResultsList);
 		}
-		
-		
-		
-	    
-	    
-	   
-	
-	
 	}
 	

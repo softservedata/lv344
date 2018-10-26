@@ -3,7 +3,6 @@ package com.softserve.edu.opencart.tests.search;
 import static org.testng.Assert.assertEquals;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
