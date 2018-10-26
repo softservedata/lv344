@@ -1,13 +1,13 @@
 package com.softserve.edu.opencart.pages.password;
 
 import org.openqa.selenium.By;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.softserve.edu.opencart.pages.ARighMenuComponent;
 import com.softserve.edu.opencart.pages.IMyAccountMessagePage;
 import com.softserve.edu.opencart.pages.MyAccountMessagePage;
-import com.softserve.edu.opencart.pages.search.SearchResultPage;
 
 public class ChangePasswordPage extends ARighMenuComponent implements IChangePasswordPage {
 
@@ -83,27 +83,11 @@ public class ChangePasswordPage extends ARighMenuComponent implements IChangePas
 		getPasswordConfirmField().sendKeys(text);
 	}
 
-	public void fillPasswordWithInvalidCredentialsField(String password, String confirmPassword) {
-		
-		getPasswordField().click();
-		getPasswordField().clear();
-		getPasswordField().sendKeys(password);
-		
-		getPasswordConfirmField().click();
-		getPasswordConfirmField().clear();
-		getPasswordConfirmField().sendKeys(confirmPassword);
+	private void fillPasswordWithValidCredentialsField(String password, String confirmPassword) {
+		fillPasswordField(password);
+		fillPasswordConfirmField(confirmPassword);
 	}
-	
-	public void fillPasswordWithValidCredentialsField(String password, String confirmPassword) {
 		
-		getPasswordField().click();
-		getPasswordField().clear();
-		getPasswordField().sendKeys(password);
-		
-		getPasswordConfirmField().click();
-		getPasswordConfirmField().clear();
-		getPasswordConfirmField().sendKeys(confirmPassword);
-	}
 
 	// continueButton
 	public WebElement getContinueButton() {
@@ -130,20 +114,20 @@ public class ChangePasswordPage extends ARighMenuComponent implements IChangePas
 		return this;
 	}
 
-	public IMyAccountMessagePage sucesessfulChangePassword(String password, String confirmPassword) {
+	public IMyAccountMessagePage successfulChangePassword(String password, String confirmPassword) {
 		fillPasswordWithValidCredentialsField(password, confirmPassword);
 		clickContinueButton();
 		return new MyAccountMessagePage(driver);
 	}
 
 
-	public IErrorMessageChangePasswordPage unsucesessfulChangePassword(String password, String confirmPassword) {
+	public IErrorMessageChangePasswordPage unsuccessfulChangePassword(String password, String confirmPassword) {
 		fillPasswordWithValidCredentialsField(password, confirmPassword);
 		clickContinueButton();
 		return new ErrorMessageChangePasswordPage(driver);
 	}
 		
-	public IErrorMessageConfirmPasswordPage unsucesessfulConfirmPassword(String password, String confirmPassword) {
+	public IErrorMessageConfirmPasswordPage unsuccessfulConfirmPassword(String password, String confirmPassword) {
 			fillPasswordWithValidCredentialsField(password, confirmPassword);
 			clickContinueButton();
 			return new ErrorMessageConfirmPasswordPage(driver);

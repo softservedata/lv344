@@ -55,14 +55,14 @@ public class ResetPasswordPage extends ARighMenuComponent {
 		getPasswordField().sendKeys(text);
 	}
 
-	public void fillPasswordFieldResetPassword(String password, String confirmPassword) {
+	private void fillPasswordFieldResetPassword(String password, String confirmPassword) {
 		clickPasswordField();
 		clearPasswordField();
-		getPasswordField().sendKeys(password);
+		setPasswordField(password);
 
 		clickPasswordConfirmField();
 		clearPasswordConfirmField();
-		getPasswordConfirmField().sendKeys(confirmPassword);
+		setPasswordConfirmField(confirmPassword);
 	}
 
 	// passwordConfirmField

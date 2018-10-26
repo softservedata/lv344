@@ -119,9 +119,9 @@ public class LoginPage extends AUnloggedRighMenuComponent {
 		return new MyAccountPage(driver);
 	}
 
-	public LoginMessagePageError unsuccessfullLogin(IUser invalidUser) {
+	public LoginMessageErrorPage unsuccessfullLogin(IUser invalidUser) {
 		fillLoginForm(invalidUser);
-		return new LoginMessagePageError(driver);
+		return new LoginMessageErrorPage(driver);
 
 	}
 

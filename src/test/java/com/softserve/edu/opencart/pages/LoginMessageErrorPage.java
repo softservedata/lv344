@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class LoginMessagePageError extends LoginPage {
+public class LoginMessageErrorPage extends LoginPage implements ILoginMessageErrorPage {
 	public final String EXPECTED_WARNING_LOGIN = "Warning: No match for E-Mail Address and/or Password.";	
 	public final String EXPECTED_WARNING_BLOCK_ACCOUNT = "Warning: Your account has exceeded allowed number of login attempts. Please try again in 1 hour.";
 	
@@ -13,7 +13,7 @@ public class LoginMessagePageError extends LoginPage {
 //	public final String EXPECTED_MESSAGE_PASSWORD_UPDATED = "Success: Your password has been successfully updated.";
 	private WebElement alertMessage;
 
-	public LoginMessagePageError(WebDriver driver) {
+	public LoginMessageErrorPage(WebDriver driver) {
 		super(driver);
 		initAlertMessage();
 	}
@@ -42,4 +42,8 @@ public class LoginMessagePageError extends LoginPage {
 
     // Business Logic
 
+    
+    public LoginMessageErrorPage getLoginMessageErrorPage() {
+	    return this;
+	}
 }
