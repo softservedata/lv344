@@ -21,7 +21,19 @@
 <!-- 				</methods> -->
 <!-- 			</class> -->
 			<class name="com.softserve.edu.opencart.tests.LoginTest" />
+			
+			<class name="com.softserve.edu.opencart.tests.WishTest">
+				<methods>
+                       <include name="checkEmptyWishList" />
+						<include name="addProductToWishList" />
+<!--						<include name="addProductToCartFromWishList" />-->
+<!--						<include name="AddItemToCart" />-->
+<!-- 					<include name="AddSingleItemToCart" /> -->
+<!--						<include name="ChangeNumOfItemsInCart" /> -->
+<!-- 					<include name="ErrorMessageChangeNumOfItemsInCart" /> -->
+<!-- 					<include name="CartAfterRelogin" /> -->
+				</methods>
+			</class>
 		</classes>
 	</test> <!-- Test -->
-
 </suite> <!-- Suite -->

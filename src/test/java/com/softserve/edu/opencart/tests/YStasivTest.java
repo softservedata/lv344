@@ -1,6 +1,7 @@
 package com.softserve.edu.opencart.tests;
 
 import org.testng.Assert;
+
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -11,9 +12,9 @@ import com.softserve.edu.opencart.data.UserRepository;
 import com.softserve.edu.opencart.pages.HomeMessagePage;
 import com.softserve.edu.opencart.pages.HomePage;
 import com.softserve.edu.opencart.pages.MyAccountPage;
-import com.softserve.edu.opencart.pages.cart.functional.EmptyShoppingCartPage;
-import com.softserve.edu.opencart.pages.cart.functional.ShoppingCartMessagePage;
-import com.softserve.edu.opencart.pages.cart.functional.ShoppingCartPage;
+import com.softserve.edu.opencart.pages.cart.EmptyShoppingCartPage;
+import com.softserve.edu.opencart.pages.cart.ShoppingCartMessagePage;
+import com.softserve.edu.opencart.pages.cart.ShoppingCartPage;
 import com.softserve.edu.opencart.tools.TestRunner;
 
 public class YStasivTest extends TestRunner {
@@ -36,17 +37,18 @@ public class YStasivTest extends TestRunner {
 		
 //Check if page contains curent data
 		softAssert.assertEquals(homePage.getProductsListComponentTitleText(),homePage.EXPECT_PRODUCT_LIST_TITLE);
-	log.info("Element on main page was found...");
+	log.debug("Element on main page was found...");
 		delayExecution(1000); //ForDemonstration
 		softAssert.assertEquals(homePage.getCartSum(), 0.0); softAssert.assertEquals(homePage.getCartAmount(), 0);
-	log.info("Current data on page was found...");
+	log.debug("Current data on page was found...");
 		delayExecution(1000); //ForDemonstration
 		Assert.assertTrue(homePage.gotoLogin().getLastBreadcrumbText().contains("Login"));	
-	log.info("Element on enother page was found...");
+	log.debug("Element on enother page was found...");
 		delayExecution(3000); //ForDemonstration
 		softAssert.assertAll();
 	}//TODO  + репортер?
-	
+}
+
 ////=====================================================================================================
 ////											CheckEmptyCartPage
 ////=====================================================================================================
@@ -277,5 +279,3 @@ public class YStasivTest extends TestRunner {
 //		//TODO
 //		delayExecution(3000); //ForDemonstration
 //	}
-
-}

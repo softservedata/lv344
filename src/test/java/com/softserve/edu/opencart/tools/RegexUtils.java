@@ -73,5 +73,5 @@ public final class RegexUtils {
     private static String commaRemover(String text) {
     	return text.replaceAll(DOUBLE_UI_SEPARATOR, new String());
     }
-
 }
+

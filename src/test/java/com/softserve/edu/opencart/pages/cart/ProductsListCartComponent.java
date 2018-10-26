@@ -1,4 +1,4 @@
-package com.softserve.edu.opencart.pages.cart.functional;
+package com.softserve.edu.opencart.pages.cart;
 
 import java.util.ArrayList;
 import java.util.List;
