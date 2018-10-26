@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 
 import com.softserve.edu.opencart.pages.cart.EmptyShoppingCartPage;
 import com.softserve.edu.opencart.pages.cart.ShoppingCartPage;
+import com.softserve.edu.opencart.pages.search.SearchEmptyResultPage;
 import com.softserve.edu.opencart.pages.wishlist.EmptyWishListPage;
 import com.softserve.edu.opencart.pages.wishlist.WishListPage;
 
@@ -382,5 +383,14 @@ public abstract class AHeadComponent {
  	
     public EmptyWishListPage gotoEmptyWishListPage() {
    	return new EmptyWishListPage(driver);
+   }
+    
+   public SearchEmptyResultPage emptySearch(String request) {
+	   public void setSearchProductField(String text)
+		 
+		public void clearSearchProductField() 
+		 
+		public void clickSearchProductField() 
+	    }
    }
 }
