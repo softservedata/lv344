@@ -1,4 +1,4 @@
-package com.softserve.edu.opencart.tests.searchTests;
+package com.softserve.edu.opencart.tests.search;
 
 import static org.testng.Assert.assertEquals;
 import java.util.ArrayList;
