@@ -153,6 +153,21 @@ public final class UserRepository {
 				.setFax("fax")
 				.build();
     }
+    public IUser wishUser() {
+        return User.get()
+				.setFirstName("test")
+				.setLastName("test")
+				.setEMail("test@gmail.com")
+				.setTelephone("123456789")
+				.setAddress1("address13")
+				.setCity("city3")
+				.setPostCode("postCode3")
+				.setCountry("country3")
+				.setRegionState("regionState3")
+				.setPassword("qwerty")
+				.setFax("123456123")
+				.build();
+    }
 
 
     //public IUser admin() {}
@@ -160,4 +175,5 @@ public final class UserRepository {
     //public List<IUser> fromDB() { create class, read, max 5-7 lines}
 
 }
+
 

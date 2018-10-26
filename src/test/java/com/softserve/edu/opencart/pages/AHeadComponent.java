@@ -1,3 +1,4 @@
+
 package com.softserve.edu.opencart.pages;
 
 import java.util.ArrayList;
@@ -8,6 +9,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import com.softserve.edu.opencart.pages.cart.functional.EmptyShoppingCartPage;
 import com.softserve.edu.opencart.pages.cart.functional.ShoppingCartPage;
+import com.softserve.edu.opencart.pages.wishlist.EmptyWishListPage;
+import com.softserve.edu.opencart.pages.wishlist.WishListPage;
 import com.softserve.edu.opencart.tools.RegexUtils;
 
 public abstract class AHeadComponent {
@@ -371,5 +374,12 @@ public abstract class AHeadComponent {
     	clickShoppingCart();
     	return new ShoppingCartPage(driver);
     }	
+ 	
+    public WishListPage gotoWishListPage() {
+    	return new WishListPage(driver);
+    }
+ 	
+    public EmptyWishListPage gotoEmptyWishListPage() {
+   	return new EmptyWishListPage(driver);
+   }
 }
-

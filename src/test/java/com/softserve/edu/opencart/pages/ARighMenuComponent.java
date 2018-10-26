@@ -10,3 +10,4 @@ public class ARighMenuComponent extends AStatusBarComponent {
 
 }
 
+
