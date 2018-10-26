@@ -5,25 +5,32 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class FirstLinkConfirmationPage {
+
 	private WebDriver driver;
-	 
+	//
 	private WebElement firstLink;
-	
+
 	public FirstLinkConfirmationPage(WebDriver driver) {
-		driver = this.driver;
+		this.driver = driver;
 		initFirstLinkComponent();
 	}
-	private void initFirstLinkComponent() {
-		firstLink = driver.findElement(By.id((".readmsg__body a")));
-	}
-	
-	public WebElement getFirstLink() {
-        return firstLink;
-    }
 
-	 
+	private void initFirstLinkComponent() {
+		firstLink = driver.findElement(By.cssSelector(".readmsg__body a"));
+	}
+
+	// firstLink
+	public WebElement getFirstLink() {
+		return firstLink;
+	}
+
 	public void clickFirstLink() {
 		getFirstLink().click();
-    }
+	}
 
+	// business
+	public SecondLinkConfirmationPage gotoSecondLinkConfirmationPage() {
+		clickFirstLink();
+		return new SecondLinkConfirmationPage(driver);
+	}
 }
