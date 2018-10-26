@@ -1,11 +1,11 @@
 package com.softserve.edu.opencart.pages;
 
 import org.openqa.selenium.By;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class LoginMessagePage extends LoginPage {
+
 //	public final String EXPECTED_WARNING_LOGIN = "Warning: No match for E-Mail Address and/or Password.";	
 //	public final String EXPECTED_WARNING_BLOCK_ACCOUNT = "Warning: Your account has exceeded allowed number of login attempts. Please try again in 1 hour.";
 	
@@ -25,6 +25,7 @@ public class LoginMessagePage extends LoginPage {
 //	}
 	private void initAlertMessage() {
 		alertMessage = driver.findElement(By.cssSelector(".alert.alert-success"));
+
 	}
 
 	// PageObject
@@ -43,4 +44,5 @@ public class LoginMessagePage extends LoginPage {
     // Business Logic
 
 }
+
 

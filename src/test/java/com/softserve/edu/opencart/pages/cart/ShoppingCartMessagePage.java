@@ -1,4 +1,4 @@
-package com.softserve.edu.opencart.pages.cart.functional;
+package com.softserve.edu.opencart.pages.cart;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -29,8 +29,8 @@ public class ShoppingCartMessagePage extends ShoppingCartPage {
 
     // Business Logic
 
-    public ShoppingCartMessagePage closeAlertMessage() {
+    public ShoppingCartPage closeAlertMessage() {
     	getAlertMessageCloseButton().click();
-    	return new ShoppingCartMessagePage(driver);
+    	return new ShoppingCartPage(driver);
     }
 }

@@ -1,22 +1,13 @@
 package com.softserve.edu.opencart.tests.password;
 
-import java.util.List;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.softserve.edu.opencart.data.IUser;
 import com.softserve.edu.opencart.data.UserRepository;
-import com.softserve.edu.opencart.pages.HomePage;
 import com.softserve.edu.opencart.pages.LoginMessagePage;
-import com.softserve.edu.opencart.pages.LoginMessagePageError;
-import com.softserve.edu.opencart.pages.LoginPage;
-import com.softserve.edu.opencart.pages.password.ChangePasswordPage;
 import com.softserve.edu.opencart.pages.password.ForgottenPasswordPage;
-import com.softserve.edu.opencart.pages.password.ResetPasswordPage;
 import com.softserve.edu.opencart.tools.TestRunner;
 
 public class CheckPostWhenFofgotPasswordTest extends TestRunner{
@@ -24,11 +15,11 @@ public class CheckPostWhenFofgotPasswordTest extends TestRunner{
 	
 	@DataProvider
 	public Object[][] loginWithValidCredentials() {
-		return new Object[][] {{ UserRepository.get().customerIra(), } };
+		return new Object[][] {{ UserRepository.get().customerIra(), "qwerty", "qwerty"}};
 	}
 
 	@Test(dataProvider = "loginWithValidCredentials")
-	public void loginWhenFofgotPassword(IUser validUser) {
+	public void loginWhenFofgotPassword(IUser validUser, String password, String confirmPassword) {
 
 	
 	
@@ -76,6 +67,13 @@ public class CheckPostWhenFofgotPasswordTest extends TestRunner{
 //			break;
 //		}
 //	}
+	
+//	      	 LoginMessagePage loginMessagePage =  resetPasswordPage.fillPassworFieldResetPassword(password, confirmPassword);
+////	           
+//	           Assert.assertEquals(loginMessagePage.getAlertMessageText(),
+//	        		   loginMessagePage.EXPECTED_MESSAGE_PASSWORD_UPDATED);
+//	      	 delayExecution(1000);
+//	    				
 
 //	
 }}

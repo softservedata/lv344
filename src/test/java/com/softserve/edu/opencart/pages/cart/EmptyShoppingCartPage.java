@@ -1,10 +1,11 @@
-package com.softserve.edu.opencart.pages.cart.functional;
+package com.softserve.edu.opencart.pages.cart;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.softserve.edu.opencart.pages.AStatusBarComponent;
+import com.softserve.edu.opencart.pages.HomePage;
 
 public class EmptyShoppingCartPage extends AStatusBarComponent {
 	
@@ -30,7 +31,7 @@ public class EmptyShoppingCartPage extends AStatusBarComponent {
 	//CheckoutButton
 	public WebElement getContinueButton() {return continueButton;}
 	public String getContinueButtonText() {return getContinueButton().getAttribute(TAG_ATTRIBUTE_VALUE);}
-	public void clickContinueButton() {getContinueButton().click();}
+	public HomePage clickContinueButton() {getContinueButton().click();	return new HomePage(driver);}
 	
 	
 }

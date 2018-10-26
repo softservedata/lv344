@@ -1,4 +1,4 @@
-package com.softserve.edu.opencart.pages.cart.functional;
+package com.softserve.edu.opencart.pages.cart;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -47,10 +47,13 @@ public class ShoppingCartPage extends AStatusBarComponent {
         return new ShoppingCartMessagePage(driver); 
     }
 	
+	public void clickProductQuantityByPartialName(String partialProductName) {
+		getProductsCartListComponent().clickQuantityProductCartByPartialName(partialProductName);
+	}
+	
 	public void removeProductQuantityByPartialName(String partialProductName) {
-		getProductsCartListComponent()
-			.removeProductCartByPartialName(partialProductName);
-    }
+		getProductsCartListComponent().removeProductCartByPartialName(partialProductName);
+	}
 
  	public ProductsListCartComponent gotoProductsListCartComponent() {return new ProductsListCartComponent(driver);}
 }

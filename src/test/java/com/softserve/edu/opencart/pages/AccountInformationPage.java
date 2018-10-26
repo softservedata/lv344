@@ -7,7 +7,6 @@ import org.openqa.selenium.WebElement;
 public class AccountInformationPage extends ARighMenuComponent {
 
 	private WebElement firstnameField;
-	
 	public AccountInformationPage(WebDriver driver) {
 		super(driver);
 		initLoginComponent();

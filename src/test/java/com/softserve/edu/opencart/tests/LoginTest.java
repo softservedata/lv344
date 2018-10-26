@@ -13,6 +13,7 @@ import com.softserve.edu.opencart.tools.TestRunner;
 public class LoginTest extends TestRunner {
 
 	@DataProvider//(parallel = true)
+
     public Object[][] validUsers() {
         // Read from ...
         return new Object[][] { 
