@@ -10,9 +10,9 @@ import org.openqa.selenium.WebElement;
 import com.softserve.edu.opencart.pages.cart.EmptyShoppingCartPage;
 import com.softserve.edu.opencart.pages.cart.ShoppingCartPage;
 import com.softserve.edu.opencart.pages.search.SearchEmptyResultPage;
+import com.softserve.edu.opencart.pages.search.SearchResultPage;
 import com.softserve.edu.opencart.pages.wishlist.EmptyWishListPage;
 import com.softserve.edu.opencart.pages.wishlist.WishListPage;
-
 import com.softserve.edu.opencart.tools.RegexUtils;
 
 public abstract class AHeadComponent {
@@ -385,12 +385,19 @@ public abstract class AHeadComponent {
    	return new EmptyWishListPage(driver);
    }
     
-   public SearchEmptyResultPage emptySearch(String request) {
-	   public void setSearchProductField(String text)
-		 
-		public void clearSearchProductField() 
-		 
-		public void clickSearchProductField() 
+   public SearchEmptyResultPage emptySearchProduct() {
+		clickSearchProductField();
+		clearSearchProductField();
+		clickSearchProductButton();
+		return new SearchEmptyResultPage(driver);
 	    }
-   }
+   
+   public SearchResultPage searchProduct(String request) {
+		clickSearchProductField();
+		clearSearchProductField();
+		setSearchProductField(request);
+		clickSearchProductButton();
+		return new SearchResultPage(driver);
+	    }
+
 }
