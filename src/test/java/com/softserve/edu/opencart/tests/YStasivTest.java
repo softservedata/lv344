@@ -11,9 +11,9 @@ import com.softserve.edu.opencart.data.UserRepository;
 import com.softserve.edu.opencart.pages.HomeMessagePage;
 import com.softserve.edu.opencart.pages.HomePage;
 import com.softserve.edu.opencart.pages.MyAccountPage;
-import com.softserve.edu.opencart.pages.cart.functional.EmptyShoppingCartPage;
-import com.softserve.edu.opencart.pages.cart.functional.ShoppingCartMessagePage;
-import com.softserve.edu.opencart.pages.cart.functional.ShoppingCartPage;
+import com.softserve.edu.opencart.pages.cart.EmptyShoppingCartPage;
+import com.softserve.edu.opencart.pages.cart.ShoppingCartMessagePage;
+import com.softserve.edu.opencart.pages.cart.ShoppingCartPage;
 import com.softserve.edu.opencart.tools.TestRunner;
 
 public class YStasivTest extends TestRunner {

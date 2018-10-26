@@ -1,4 +1,4 @@
-package com.softserve.edu.opencart.pages.cart.functional;
+package com.softserve.edu.opencart.pages.cart;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
