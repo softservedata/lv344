@@ -124,7 +124,7 @@ public final class UserRepository {
 
     public IUser notExist() {
         return User.get()
-				.setFirstName("firsefilwghf")
+				.setFirstName("test")
 				.setLastName("lastName3")
 				.setEMail("firsefilwghf")
 				.setTelephone("telephone3")
@@ -133,7 +133,7 @@ public final class UserRepository {
 				.setPostCode("postCode3")
 				.setCountry("country3")
 				.setRegionState("regionState3")
-				.setPassword("passwghuehrord3")
+				.setPassword("test")
 				.setFax("fax3")
 				.build();
     }
