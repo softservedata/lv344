@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 
 import com.softserve.edu.opencart.data.IUser;
 import com.softserve.edu.opencart.pages.password.ForgottenPasswordPage;
-import com.softserve.edu.opencart.pages.password.ResetPasswordPage;
 
 public class LoginPage extends AUnloggedRighMenuComponent {
 
@@ -104,7 +103,6 @@ public class LoginPage extends AUnloggedRighMenuComponent {
 
 	
 	// Business Logic
-	
 	private void fillLoginForm(IUser user) {
         clickEmailField();
         clearEmailField();

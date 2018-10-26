@@ -38,7 +38,6 @@ public class SearchEmptyResultPage extends AStatusBarComponent implements ISearc
 		return new SearchResultPage(driver);
 	}
 	
-	
 	public SearchEmptyResultPage emptySearchWithMainForm(String searchRequest) {
 		getSearchCriteriaComponent().fillSearchTextField(searchRequest);
 		getSearchCriteriaComponent().clickSearchButton();

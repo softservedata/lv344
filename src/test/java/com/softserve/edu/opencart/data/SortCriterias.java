@@ -47,15 +47,6 @@ public enum SortCriterias {
 			
 	}
 	
-	private static Comparator<Product> nameComparatorDESC(){
-		return new Comparator<Product>(){
-			public int compare(Product a, Product b) {
-				return a.getName().compareTo(b.getName());
-			};
-		};
-	
-}
-	
 	public Comparator<Product> getComparator(){
 		return this.comparator;
 	}

@@ -34,6 +34,14 @@ public class SearchCriteriaComponent{
 	    public void clickSearchField() {
 	    	getSearchTexField().click();
 	    }
+	    
+	    public void clearSearchField() {
+	    	getSearchTexField().click();
+	    }
+	    
+	    public void setSearchFieldText(String text) {
+	    	getSearchTexField().sendKeys(text);
+	    }
 
 	    
 		public WebElement getSearchButton() {
@@ -73,14 +81,14 @@ public class SearchCriteriaComponent{
 		
 		
 		public void chooseCategory(ProductSubcategories subcategory) {
-			getCategoryDropDown().click();
+			clickCategoryDropDown();
 			getCategoryDropDown().findElement(By.cssSelector("["+subcategory.toString()+"]")).click();
 		}
 		
 		public void fillSearchTextField(String text) {
-		    	getSearchTexField().click();
-		    	getSearchTexField().clear();
-		    	getSearchTexField().sendKeys(text);
+				clickSearchField();
+		    	clearSearchField();
+		    	setSearchFieldText(text);
 		}
 		
 	    
