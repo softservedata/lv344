@@ -39,7 +39,6 @@ public abstract class TestRunner {
     @AfterClass(alwaysRun = true)
     public void afterClass() {
         System.out.println("@AfterClass");
-//        softAssert.assertAll();
         driver.quit();
     }
 
