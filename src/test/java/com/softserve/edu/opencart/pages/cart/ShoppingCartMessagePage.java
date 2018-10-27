@@ -5,7 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class ShoppingCartMessagePage extends ShoppingCartPage {
-	public final String EXPECTED_UPDATE_MESSAGE_CART = "Success: You have modified your shopping cart!";
+	public final String EXPECTED_MODIFIED_MESSAGE_CART = "Success: You have modified your shopping cart!";
+	public final String EXPECTED_ERROR_MESSAGE_CART = "ERROR: You can't modified your shopping cart!";
 
 	private WebElement alertMessage;
 

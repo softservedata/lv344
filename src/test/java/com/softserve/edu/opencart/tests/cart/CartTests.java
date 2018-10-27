@@ -157,7 +157,7 @@ public class CartTests extends TestRunner {
     	delayExecution(1000); //ForDemonstration
     	
 //Check if AlertMessage contains current text
-        Assert.assertEquals(cartMessagePage.getAlertMessageText(), cartMessagePage.EXPECTED_UPDATE_MESSAGE_CART);
+        Assert.assertEquals(cartMessagePage.getAlertMessageText(), cartMessagePage.EXPECTED_MODIFIED_MESSAGE_CART);
     log.debug("User see correct message...");
         delayExecution(1000); //ForDemonstration
         
@@ -201,7 +201,7 @@ public class CartTests extends TestRunner {
     log.debug("Count changed correctly...");
     
 //Check if AlertMessage contains current text
-        Assert.assertEquals(cartMessagePage.getAlertMessageText(), cartMessagePage.EXPECTED_UPDATE_MESSAGE_CART);
+        Assert.assertEquals(cartMessagePage.getAlertMessageText(), cartMessagePage.EXPECTED_ERROR_MESSAGE_CART);
     log.debug("User see correct message...");
         delayExecution(1000); //ForDemonstration 
         
