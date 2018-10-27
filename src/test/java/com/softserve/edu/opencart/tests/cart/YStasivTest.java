@@ -56,8 +56,6 @@ public class YStasivTest extends TestRunner {
 		// Read from ...
 		return new Object[][] { 
 			{ Currencies.US_DOLLAR }, 
-//			{ Currencies.EURO }, 
-//			{ Currencies.POUND_STERLING }, 
 			};
 	}
 
