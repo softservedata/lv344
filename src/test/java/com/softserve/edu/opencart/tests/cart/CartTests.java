@@ -17,7 +17,7 @@ import com.softserve.edu.opencart.pages.cart.ShoppingCartMessagePage;
 import com.softserve.edu.opencart.pages.cart.ShoppingCartPage;
 import com.softserve.edu.opencart.tools.TestRunner;
 
-public class YStasivTest extends TestRunner {
+public class CartTests extends TestRunner {
 	
 
 	
