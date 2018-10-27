@@ -46,7 +46,7 @@ public class YStasivTest extends TestRunner {
 	log.debug("Element on another page was found...");
 		delayExecution(3000); //ForDemonstration
 		softAssert.assertAll();
-	}//TODO  + репортер?
+	}
 
 //=====================================================================================================
 //											CheckEmptyCartPage
@@ -79,7 +79,7 @@ public class YStasivTest extends TestRunner {
 		Assert.assertEquals(emptyShoppingCartPage.getEmptyCartText(), emptyShoppingCartPage.EXPECT_EMPTY_CART_TEXT);
 	log.debug("Expected message about cart is empty was displayed...");
 		delayExecution(3000); //ForDemonstration
-	}//TODO репортер?
+	}
 	
 //=====================================================================================================
 //												AddItemToCart
@@ -121,7 +121,7 @@ public class YStasivTest extends TestRunner {
         shoppingCartPage.removeProductQuantityByPartialName(partialProductName);
         log.debug("The \"" + partialProductName + "\" was remove from cart page...");
         delayExecution(3000); //ForDemonstration
-    }//TODO  репортер?
+    }
 	
 	
 //=====================================================================================================
@@ -167,7 +167,7 @@ public class YStasivTest extends TestRunner {
         cartMessagePage.closeAlertMessage().removeProductQuantityByPartialName(partialProductName);
     log.debug("The \"" + partialProductName + "\" was remove from cart page...");
         delayExecution(3000); //ForDemonstration
-    }//TODO  репортер?
+    }
 	
 //=====================================================================================================
 //												ErrorMessageChangeNumOfItemsInCart
@@ -239,7 +239,7 @@ public class YStasivTest extends TestRunner {
 //Add product to cart 
 		HomeMessagePage homeMessagePage = homePage.putToCartProductByPartialName(partialProductName);
         delayExecution(1000); //ForDemonstration
-    log.debug("The \"" + partialProductName + "\" was added to catr...");
+    log.debug("The \"" + partialProductName + "\" was added to cart...");
 //Check if AlertMessage contains current text
         Assert.assertTrue(homeMessagePage.getAlertMessageText()
         		.contains(String.format(homeMessagePage.EXPECTED_MESSAGE_CART, partialProductName)));
@@ -257,25 +257,23 @@ public class YStasivTest extends TestRunner {
         delayExecution(1000); //ForDemonstration
                            
 //Logout and login again
-        shoppingCartPage.clickFirstBreadcrumb().gotoLogout().gotoLogin().successLogin(validUser).gotoHome().gotoShoppinCartPage();
+        shoppingCartPage = shoppingCartPage.clickFirstBreadcrumb().gotoLogout().gotoLogin().successLogin(validUser).gotoHome().gotoShoppinCartPage();
     log.debug("The user was relogged in...");
     
 //Check if goods left
-    	ShoppingCartPage shoppingCartPage2 = new ShoppingCartPage(driver);
-       Assert.assertTrue(shoppingCartPage2.getProductsCartListComponent().getProductsCartNameList().contains(partialProductName));
+       Assert.assertTrue(shoppingCartPage.getProductsCartListComponent().getProductsCartNameList().contains(partialProductName));
    log.debug("The \"" + partialProductName + "\" left and displayed correctly on cart page...");
 		delayExecution(1000);
 		
 //Return to previous state: remove ProductName from cart List
-        shoppingCartPage2.removeProductQuantityByPartialName(partialProductName);
+		shoppingCartPage.removeProductQuantityByPartialName(partialProductName);
     log.debug("The \"" + partialProductName + "\" was remove from cart page...");
-        homePage = shoppingCartPage2.gotoEmptyShoppingCartPage().clickContinueButton();
+        homePage = shoppingCartPage.gotoEmptyShoppingCartPage().clickContinueButton();
 		delayExecution(1000); //ForDemonstration
 
 //Logout		
 		homePage.gotoLogout().gotoHome();
 		log.debug("The user was logged out...");
-		//TODO
 		delayExecution(3000); //ForDemonstration
 	}
 }
