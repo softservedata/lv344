@@ -28,7 +28,7 @@ public class SearchEmptyResultPage extends AStatusBarComponent implements ISearc
 	}
 	
 	public void chooseProductCategory(ProductSubcategories subcategory) {
-		getSearchCriteriaComponent().getSearchTexField().click();
+		getSearchCriteriaComponent().clickSearchField();
 		getSearchCriteriaComponent().chooseCategory(subcategory);
 	}
 	
@@ -37,7 +37,6 @@ public class SearchEmptyResultPage extends AStatusBarComponent implements ISearc
 		getSearchCriteriaComponent().clickSearchButton();
 		return new SearchResultPage(driver);
 	}
-	
 	
 	public SearchEmptyResultPage emptySearchWithMainForm(String searchRequest) {
 		getSearchCriteriaComponent().fillSearchTextField(searchRequest);

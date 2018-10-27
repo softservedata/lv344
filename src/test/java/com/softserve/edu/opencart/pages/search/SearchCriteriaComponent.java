@@ -26,7 +26,7 @@ public class SearchCriteriaComponent{
 	    	descriptionCheckBox = driver.findElement(By.id("description"));
 	    	subcategoryCheckBox = driver.findElement(By.cssSelector(".checkbox-inline"));
 	    }
-	    
+	    //search field
 	    public WebElement getSearchTexField() {
 			return searchTexField;
 		}
@@ -34,8 +34,22 @@ public class SearchCriteriaComponent{
 	    public void clickSearchField() {
 	    	getSearchTexField().click();
 	    }
-
 	    
+	    public void clearSearchField() {
+	    	getSearchTexField().click();
+	    }
+	    
+	    public void setSearchFieldText(String text) {
+	    	getSearchTexField().sendKeys(text);
+	    }
+	    
+	    public void fillSearchTextField(String text) {
+			clickSearchField();
+	    	clearSearchField();
+	    	setSearchFieldText(text);
+	}
+
+	    //search button
 		public WebElement getSearchButton() {
 			return searchButton;
 		}
@@ -44,7 +58,7 @@ public class SearchCriteriaComponent{
 			getSearchButton().click();
 		}
 
-		
+		//category drop-down
 		public WebElement getCategoryDropDown() {
 			return categoryDropDown;
 		}
@@ -53,7 +67,12 @@ public class SearchCriteriaComponent{
 			getCategoryDropDown().click();
 		}
 		
-	
+		public void chooseCategory(ProductSubcategories subcategory) {
+			clickCategoryDropDown();
+			getCategoryDropDown().findElement(By.cssSelector("["+subcategory.toString()+"]")).click();
+		}
+		
+		//description checkbox
 		public WebElement getDescriptionCheckBox() {
 			return descriptionCheckBox;
 		}
@@ -62,7 +81,7 @@ public class SearchCriteriaComponent{
 			getDescriptionCheckBox().click();
 		}
 
-		
+		//subcategory checkbox
 		public WebElement getSubcategoryCheckBox() {
 			return subcategoryCheckBox;
 		}
@@ -72,16 +91,8 @@ public class SearchCriteriaComponent{
 		}
 		
 		
-		public void chooseCategory(ProductSubcategories subcategory) {
-			getCategoryDropDown().click();
-			getCategoryDropDown().findElement(By.cssSelector("["+subcategory.toString()+"]")).click();
-		}
 		
-		public void fillSearchTextField(String text) {
-		    	getSearchTexField().click();
-		    	getSearchTexField().clear();
-		    	getSearchTexField().sendKeys(text);
-		}
+		
 		
 	    
 }

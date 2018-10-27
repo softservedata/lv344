@@ -1,12 +1,11 @@
 package com.softserve.edu.opencart.pages;
 
 import org.openqa.selenium.By;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
 import com.softserve.edu.opencart.data.IUser;
 import com.softserve.edu.opencart.pages.password.ForgottenPasswordPage;
+
 
 public class LoginPage extends AUnloggedRighMenuComponent {
 
@@ -104,7 +103,6 @@ public class LoginPage extends AUnloggedRighMenuComponent {
 	}
 
 	// Business Logic
-
 	private void fillLoginForm(IUser user) {
 		clickEmailField();
 		clearEmailField();
@@ -121,9 +119,9 @@ public class LoginPage extends AUnloggedRighMenuComponent {
 		return new MyAccountPage(driver);
 	}
 
-	public LoginMessagePageError unsuccessfullLogin(IUser invalidUser) {
+	public LoginMessageErrorPage unsuccessfullLogin(IUser invalidUser) {
 		fillLoginForm(invalidUser);
-		return new LoginMessagePageError(driver);
+		return new LoginMessageErrorPage(driver);
 
 	}
 

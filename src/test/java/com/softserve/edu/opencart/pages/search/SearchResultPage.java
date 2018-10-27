@@ -2,10 +2,7 @@ package com.softserve.edu.opencart.pages.search;
 
 import java.util.List;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
-import com.softserve.edu.opencart.data.ProductSubcategories;
 import com.softserve.edu.opencart.data.ShowLimits;
 import com.softserve.edu.opencart.data.SortCriterias;
 import com.softserve.edu.opencart.data.Views;
@@ -39,6 +36,7 @@ public class SearchResultPage extends SearchEmptyResultPage implements ISearchRe
 	public SearchResultPage getSearchResultPage() {
 		return this;
 	}
+	
 	public ISearchEmptyResultPage getISearchEmptyResultPage() {
 		return this;
 	}
@@ -64,7 +62,7 @@ public class SearchResultPage extends SearchEmptyResultPage implements ISearchRe
 		return new SearchResultPage(driver);
 	}
 	
-	
+	//search all goods on the page and get their names list
 	public List<String> getResultNamesList(){
 		return getProductListComponent().getProductsNameList();
 	}

@@ -1,4 +1,4 @@
-package com.softserve.edu.opencart.tests.searchTests;
+package com.softserve.edu.opencart.tests.search;
 
 import static org.testng.Assert.assertEquals;
 import java.util.ArrayList;
@@ -35,11 +35,9 @@ public class LoginResultTest extends SearchTestsRunner{
 	        //login with valid credentials 
 	        MyAccountPage myAccountPage = loginPage.successLogin(user);
 	        
-	        myAccountPage.setSearchProductField(request);//TODO add these methods as one method to HomePage
-	        myAccountPage.clickSearchProductButton();
+	        searchResultPage = myAccountPage.searchProduct(request);
 	        
 	        //check if result is correct
-	        searchResultPage = loadSearchResultPage();
 	        delayExecution(delayTime);
 	        
 	        assertEquals(searchResultPage.getResultNamesList(), expectedResultsList);
