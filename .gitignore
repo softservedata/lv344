@@ -1,6 +1,7 @@
 # Personal files
 searchTests.xml
 passwordTest.xml
+cartTests.xml
 # Compiled class file
 *.class
 
