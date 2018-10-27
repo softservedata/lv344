@@ -21,7 +21,6 @@ public class WishListPage extends AStatusBarComponent {
 
 	private void initWishListPage() {
 		wishListButtonContinue = driver.findElement(By.cssSelector(".pull-right > a"));
-		System.out.println("initWishListPage+++++++++++++++");
 		wishListProductListComponent = new  WishListProductsListComponent(driver);
 	}
 
@@ -57,8 +56,7 @@ public class WishListPage extends AStatusBarComponent {
 	
 	public WishListMessagePage removeFromWishListProductByPartialName(String partialProductName)
 	{
-		System.out.println("removeFromWishListProductByPartialName+++++++++++++++wishListMessagePage.getAlertMessageText()");
-		getWishListProductsListComponent()
+			getWishListProductsListComponent()
 			.removeProductFromWishListByPartialName(partialProductName);
 		return new WishListMessagePage(driver); 
 	}

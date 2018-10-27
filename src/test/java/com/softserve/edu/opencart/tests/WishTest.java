@@ -10,6 +10,7 @@ import com.softserve.edu.opencart.pages.AccountLogoutPage;
 import com.softserve.edu.opencart.pages.HomeMessagePage;
 import com.softserve.edu.opencart.pages.HomePage;
 import com.softserve.edu.opencart.pages.MyAccountPage;
+import com.softserve.edu.opencart.pages.cart.ShoppingCartPage;
 import com.softserve.edu.opencart.pages.wishlist.WishListMessagePage;
 import com.softserve.edu.opencart.pages.wishlist.WishListPage;
 import com.softserve.edu.opencart.tools.TestRunner;
@@ -53,7 +54,7 @@ public class WishTest extends TestRunner {
 		delayExecution(1000);
 	}
 
-	// Тест перевіряємо чи додається товар.
+	// Add product to wish list
 	@Test(dataProvider = "SomeProduct")
 	public void addProductToWishList(IUser validUser, String partialProductName) {
 		//
@@ -88,6 +89,8 @@ public class WishTest extends TestRunner {
 		Assert.assertEquals(homePage.gotoWishListPage().getWishListProductNameByPartialName(partialProductName),
 				partialProductName);
 		delayExecution(1000);
+		
+		//Remove product from wish list
 
 		WishListMessagePage wishListMessagePage = homePage.gotoWishListPage()
 				.removeFromWishListProductByPartialName(partialProductName);
@@ -109,8 +112,8 @@ public class WishTest extends TestRunner {
 
 	}
 
-	// Тест перевіряємо чи додається товар з віш ліста в шопінг.
-	// @Test(dataProvider = "SomeProduct")
+	// Add product to cart from wish list
+	 @Test(dataProvider = "SomeProduct")
 	public void addProductToCartFromWishList(IUser validUser, String partialProductName) {
 		//
 		// Precondition
@@ -133,34 +136,35 @@ public class WishTest extends TestRunner {
 		homePage.clickWishList();
 		delayExecution(1000);
 
-		// Check in table to present ProductName
-		//Assert.assertEquals(homePage.gotoWishListPage().getWishListProductNameByPartialName(partialProductName),
-	//			partialProductName);
-	//	delayExecution(1000);
-
 		WishListMessagePage wishListMessagePage = homePage.gotoWishListPage()
 				.putFromWishListToCartProductByPartialName(partialProductName);
 		Assert.assertEquals(wishListMessagePage.getAlertMessageText(),
 				String.format(homeMessagePage.EXPECTED_MESSAGE_CART, partialProductName));
 		delayExecution(1000);
 
+		//Remove product from wish list
 		wishListMessagePage = homePage.gotoWishListPage().removeFromWishListProductByPartialName(partialProductName);
 
 		// Close message
 		WishListPage wishListPage = wishListMessagePage.closeAlertMessage();
+		
+		
+		//Go to ShoppingCart and check if goods was added
+        ShoppingCartPage shoppingCartPage = wishListPage.gotoShoppinCartPage(); 
+       Assert.assertTrue(shoppingCartPage.getProductsCartListComponent().getProductsCartNameList().contains(partialProductName));
+        delayExecution(1000); //ForDemonstration
+                           
+		
+//Return to previous state: remove ProductName from cart List
+        shoppingCartPage.removeProductQuantityByPartialName(partialProductName);
+        homePage = shoppingCartPage.gotoEmptyShoppingCartPage().clickContinueButton();
+		delayExecution(1000); //ForDemonstration
 
-		// Go to myAccountPage and logout page
-		myAccountPage = wishListPage.clickWishListButtonContinue();
-		delayExecution(1000);
+//Logout		
+		homePage.gotoLogout().gotoHome();
+		delayExecution(1000); //ForDemonstration
 
-		//ShoppingCartPage shoppingCartPage = myAccountPage.gotoShoppinCartPage();
-		//delayExecution(1000);
-		//ShoppingCartMessagePage cartMessagePage = shoppingCartPage.removeProductQuantityByPartialName(partialProductName);
-		//delayExecution(1000);
-
-		//AccountLogoutPage accountLogoutPage = cartMessagePage.gotoLogout();  //myAccountPage.gotoLogout();
-	//	accountLogoutPage.gotoHome();
-	//	delayExecution(1000);
+		
 	}
 
 }

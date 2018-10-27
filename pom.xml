@@ -247,7 +247,7 @@
 						</surefire.reports.directory>
 					</systemPropertyVariables>
 					<suiteXmlFiles>
-						<suiteXmlFile>testng2.xml</suiteXmlFile>
+						<suiteXmlFile>runWishListText.xml</suiteXmlFile>
 <!-- 						<suiteXmlFile>runAllTest.xml</suiteXmlFile> -->
 					</suiteXmlFiles>
 					<reportsDirectory>${testng.reports.directory}</reportsDirectory>
