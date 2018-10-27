@@ -111,7 +111,7 @@ public class StartTest extends TestRunner {
         delayExecution(4000);
     }
 
-    @Test(dataProvider = "productNames")
+    //@Test(dataProvider = "productNames")
     public void checkProductToWishUnlogged(String partialProductName) {
         //
         // Precondition
