@@ -3,7 +3,6 @@ package com.softserve.edu.opencart.tests.search;
 import static org.testng.Assert.assertEquals;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -17,7 +16,7 @@ import com.softserve.edu.opencart.tools.SearchTestsRunner;
 
 public class ResultWithFiltersTest extends SearchTestsRunner{
 	@DataProvider(name = "hpWithFilters")
-	public static Object[][] resultListHPWithFilters() {
+	public Object[][] resultListHPWithFilters() {
 		return new Object[][] {{"hp", 
 			ProductsListRepository.getHPNamesList(SortCriterias.PRICE_HIGH_LOW), 
 			SortCriterias.PRICE_HIGH_LOW, ShowLimits.x15, Views.LIST}};
@@ -35,14 +34,13 @@ public class ResultWithFiltersTest extends SearchTestsRunner{
         searchResultPage = homePage.searchProduct(request);
         delayExecution(delayTime);
         
-		//type search request to main search field
-        searchResultPage = loadSearchResultPage();
         //check 'description' textbox
         searchResultPage.getISearchEmptyResultPage().clickDescriptionCheckBox();
         delayExecution(delayTime);
         
         //search with main form
-        searchResultPage = searchResultPage.getISearchEmptyResultPage().searchWithMainForm(request);
+        searchResultPage = searchResultPage.getISearchEmptyResultPage()
+        		.searchWithMainForm(request);
         delayExecution(delayTime);
         
 		//choose number of goods on the page 

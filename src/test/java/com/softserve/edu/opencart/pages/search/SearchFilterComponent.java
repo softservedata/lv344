@@ -19,7 +19,7 @@ public class SearchFilterComponent{
         initSearchFilterComponent();
 	}
 	private  void initSearchFilterComponent() {
-		listButton = driver.findElement(By.id("list-view"));
+		listButton = driver.findElement(By.cssSelector(".fa.fa-th-list"));
 		gridButton = driver.findElement(By.id("grid-view"));
 		sortByDropDown = driver.findElement(By.id("input-sort"));
 		showDropDown = driver.findElement(By.id("input-limit"));
