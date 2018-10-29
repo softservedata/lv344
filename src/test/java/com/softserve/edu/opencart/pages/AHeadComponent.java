@@ -340,7 +340,6 @@ public abstract class AHeadComponent {
 	public LoginPage gotoLogin() {
 
 		if (isLoggedUser()) {
-		    // TODO Develop Custom Exceptions 
 			throw new RuntimeException(LOGIN_ERROR);
 		}
 		clickAccountOptionByPartialName("Login");
@@ -351,7 +350,7 @@ public abstract class AHeadComponent {
 		if (!isLoggedUser()) {
 			throw new RuntimeException(LOGIN_ERROR);
 		}
-		clickAccountOptionByPartialName("My Account"); // TODO enum
+		clickAccountOptionByPartialName("My Account"); 
         return new MyAccountPage(driver);
     }
 	public AccountLogoutPage gotoLogout() {

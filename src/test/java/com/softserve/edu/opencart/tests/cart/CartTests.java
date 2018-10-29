@@ -19,11 +19,17 @@ import com.softserve.edu.opencart.tools.TestRunner;
 
 public class CartTests extends TestRunner {
 	
-
-	
+	/**
+	 * Checking the Cart Functionality
+	 * 
+	 * @author Yurii Stasiv
+	 */	
 //=====================================================================================================
 //											SmokeTestOpenCart
 //=====================================================================================================
+	/** 
+	 * Test for further testing
+	 */
 	@Test(enabled = true)
 	public void smokeTestOpenCart() {
 	log.info("SmokeTestOpenCart start");
@@ -82,6 +88,9 @@ public class CartTests extends TestRunner {
 //=====================================================================================================
 //												AddItemToCart
 //=====================================================================================================	
+	/** 
+	 * The test checks the addition of the product to the cart
+	 */
 		@DataProvider//(parallel = true)
 	    public Object[][] productNames() {
 	        // Read from ...
@@ -125,6 +134,9 @@ public class CartTests extends TestRunner {
 //=====================================================================================================
 //												ChangeNumOfItemsInCart
 //=====================================================================================================	
+	/** 
+	 * The test checks the change in the number of items in the cart
+	 */
 	@Test(dataProvider = "productNames", dependsOnMethods = { "smokeTestOpenCart", "addItemToCart" }, enabled = true)
 	public void changeNumOfItemsInCart(String partialProductName) {
 	log.info("ChangeNumOfItemsInCart start with test item \"" + partialProductName + "\"");
@@ -170,6 +182,9 @@ public class CartTests extends TestRunner {
 //=====================================================================================================
 //												ErrorMessageChangeNumOfItemsInCart
 //=====================================================================================================
+	/**
+	 * The test checks the error message when trying to enter non-valid data
+	 */
 	@Test(dataProvider = "productNames", dependsOnMethods = { "smokeTestOpenCart", "addItemToCart" }, enabled = true)
 	public void errorMessageChangeNumOfItemsInCart(String partialProductName) {
 	log.info("ErrorMessageChangeNumOfItemsInCart start with test item \"" + partialProductName + "\"");
@@ -214,6 +229,9 @@ public class CartTests extends TestRunner {
 //=====================================================================================================
 //												CartAfterRelogin
 //=====================================================================================================	
+	/**
+	 * The test checks if the product is stored after re-entering
+	 */
 	@DataProvider // (parallel = true)
 	public Object[][] SomeProduct() {
 		// Read from ...
