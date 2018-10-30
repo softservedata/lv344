@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 import com.softserve.edu.opencart.data.ApplicationSourceRepository;
 import com.softserve.edu.opencart.data.IApplicationSource;
+import com.softserve.edu.opencart.pages.HeadComponent;
 import com.softserve.edu.opencart.pages.HomePage;
 
 public class Application {
@@ -192,16 +193,20 @@ public class Application {
 
     // Pages
 
-    public HomePage loadHomePage() {
-        //getBrowser().openUrl(applicationSource.getBaseUrl());
+    public HomePage loadApplication() {
+        getBrowser().openUrl(getApplicationSource().getBaseUrl());
         // TODO Remove getBrowser().getDriver()
-        // return new HomePage(browser().getDriver());
+        return new HomePage(getBrowser().getDriver());
         //return new HomePage();
-    	//
         //return HomePage.load(getBrowser().getDriver(), applicationSource.getBaseUrl());
-    	return null;// TODO +++++
     }
 
+    public HomePage logoutApplication() {
+    	// TODO move getDriver() to Search class 
+        return new HeadComponent(getBrowser().getDriver()).gotoHomeWithLogout();
+    	//return (new AHeadComponent(getBrowser().getDriver()){}).gotoHomeWithLogout();
+    }
+    
     // public LoginPage login() {
     // getBrowser().openUrl(applicationSource.getUserLoginUrl());
     // return new LoginPage();

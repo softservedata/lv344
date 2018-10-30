@@ -28,7 +28,10 @@ public class BrowserWrapper {
 	private static class ChromeTemporary implements IBrowser {
 		public WebDriver getBrowser(IApplicationSource applicationSource) {
 			System.setProperty("webdriver.chrome.driver", applicationSource.getDriverPath());
-			return new ChromeDriver();
+			WebDriver driver = new ChromeDriver();
+			driver.manage().window().maximize();
+			//return new ChromeDriver();
+			return driver;
 		}
 	}
 

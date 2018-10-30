@@ -71,6 +71,22 @@ public final class UserRepository {
 				.build();
     }
 
+    public IUser customerSearch() {
+        return User.get()
+				.setFirstName("Search")
+				.setLastName("lastname")
+				.setEMail("search@test.mail")
+				.setTelephone("phone")
+				.setAddress1("address12")
+				.setCity("city2")
+				.setPostCode("postCode2")
+				.setCountry("country2")
+				.setRegionState("regionState2")
+				.setPassword("search")
+				.setFax("fax")
+				.build();
+    }
+
     public IUser newUser() {
         return User.get()
 				.setFirstName("firstName3")
