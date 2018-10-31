@@ -18,7 +18,6 @@ public class ShoppingCartPage extends AStatusBarComponent {
 		initEmptyCartPageText();
 	}
 
-	//TODO УТОЧНИТИ ЯК ПРАВИЛЬНО ШУКАТИ ЕЛЕМЕНТИ
 	private void initEmptyCartPageText() {
 		productsCartListComponent = new ProductsListCartComponent(driver);
 		totalPrice = driver.findElement(By.xpath("//td/strong[text()='Total:']/../../td[contains(text() , '')]"));
