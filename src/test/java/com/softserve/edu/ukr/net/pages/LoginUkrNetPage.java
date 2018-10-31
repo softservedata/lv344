@@ -81,8 +81,9 @@ public class LoginUkrNetPage {
 		clickLoginButton();
 	}
 
-	public LoginedUkrNetPage successLoginUkrNet(IUserUkrNet user) {
+	public LoginedUkrNetPage successLoginUkrNet(IUserUkrNet user)  {
       fillLoginForm(user);
+//      driver.navigate().refresh();
       // refresh page
       try {
 		Thread.sleep(4000);

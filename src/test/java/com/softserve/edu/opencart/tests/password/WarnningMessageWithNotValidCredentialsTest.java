@@ -11,24 +11,22 @@ import com.softserve.edu.opencart.tools.TestRunner;
 public class WarnningMessageWithNotValidCredentialsTest extends TestRunner {
 
 	@DataProvider
-	  public Object[][] loginWithNotValidCredentials() {
-	    return new Object[][] {{UserRepository.get().notExist() }, };
-	  }
+	public Object[][] loginWithNotValidCredentials() {
+		return new Object[][] { { UserRepository.get().notExist() }, };
+	}
 
-	  @Test(dataProvider = "loginWithNotValidCredentials")
-	  public void warningMessage(IUser invalidUser) {
-	    //
-	    // Precondition
-	    // Steps      
-	    ILoginMessageErrorPage loginMessagePageError = loadApplication()
-	    		.gotoLogin()
-	            .unsuccessfullLogin(invalidUser);
-	            delayExecution(1000);
-	    //
-	    // Check
-	    Assert.assertEquals(loginMessagePageError.getLoginMessageErrorPage().getAlertMessageText(),
-	    		loginMessagePageError.getLoginMessageErrorPage().EXPECTED_WARNING_LOGIN); 
-	    delayExecution(1000);
+	@Test(dataProvider = "loginWithNotValidCredentials")
+	public void warningMessage(IUser invalidUser) {
+		//
+		// Precondition
+		// Steps
+		ILoginMessageErrorPage loginMessagePageError = loadApplication()
+				.gotoLogin()
+				.unsuccessfullLogin(invalidUser);
 
+		// Check
+		Assert.assertEquals(loginMessagePageError.getLoginMessageErrorPage().getAlertMessageText(),
+				loginMessagePageError.getLoginMessageErrorPage().EXPECTED_WARNING_LOGIN);
+  log.info("finish");
 	}
 }
