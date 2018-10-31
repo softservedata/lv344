@@ -4,10 +4,19 @@ import org.testng.ITestResult;
 import org.testng.internal.thread.ThreadTimeoutException;
 
 public final class TestResultUtils {
-
+	private static final String NEW_LINE = "\n";
+    private static final String BREAK_LINE = "<BR>";
+    
 	private TestResultUtils() {
 	}
 
+	public static void testResultReport(String reportMessage) {
+		ReporterWrapper reporterWrapper = Application.get().reporter();
+		reporterWrapper.error(reportMessage.replaceAll(NEW_LINE, BREAK_LINE));
+        reporterWrapper.addHtmlSourceCode();
+        reporterWrapper.addScreenShot();
+	}
+	
 	public static String testResultMessage(ITestResult testResult) {
 		String message = "\n";
 		if (testResult.getStatus() == ITestResult.SUCCESS) {
@@ -16,6 +25,7 @@ public final class TestResultUtils {
         	message = message + "FAILED: " + testResult.getName()
         		+ testResultStackTrace(testResult.getThrowable());
         }
+		testResultReport(message);
 		return message;
 	}
 

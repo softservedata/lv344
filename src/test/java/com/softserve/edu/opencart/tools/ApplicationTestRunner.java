@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
+import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -39,7 +40,7 @@ public class ApplicationTestRunner {
     @AfterMethod(alwaysRun = true)
     public void afterMethod(ITestResult testResult) {
         log.info("@AfterMethod start, ThreadId = " + Thread.currentThread().getId());
-        //Reporter.setCurrentTestResult(result);
+        Reporter.setCurrentTestResult(testResult);
         log.info("@AfterMethod done" + TestResultUtils.testResultMessage(testResult));
     }
 

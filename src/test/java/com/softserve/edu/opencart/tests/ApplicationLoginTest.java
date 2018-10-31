@@ -13,12 +13,12 @@ import com.softserve.edu.opencart.tools.ApplicationTestRunner;
 
 public class ApplicationLoginTest extends ApplicationTestRunner {
 
-	@DataProvider(parallel = true)
+	@DataProvider//(parallel = true)
     public Object[][] validUsers() {
         // Read from ...
         return new Object[][] { 
             { UserRepository.get().customerHahaha() },
-            { UserRepository.get().customerSearch() },
+            //{ UserRepository.get().customerSearch() },
             };
     }
 
@@ -45,7 +45,7 @@ public class ApplicationLoginTest extends ApplicationTestRunner {
         //
         // Check
         Assert.assertEquals(accountLogoutPage.getAccountLogoutLabelText(),
-        		accountLogoutPage.EXPECTED_TEXT_LOGOUT);
+        		accountLogoutPage.EXPECTED_TEXT_LOGOUT + "1");
         delayExecution(1000);
         //
         // Return to previous state

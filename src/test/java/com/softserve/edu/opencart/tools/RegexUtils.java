@@ -9,6 +9,7 @@ public final class RegexUtils {
     private final static String PATTERN_UNSIGNED_NUMBER = "\\d+";
     // private final static String PATTERN_UNSIGNED_DOUBLE = "\\d+(\\.\\d+)*";
     private final static String PATTERN_UNSIGNED_DOUBLE = "\\d+(,\\d+)*\\.\\d{2}";
+    public final static String DELETE_SERVER = "http://[^/]+/";
     private final static String EXTRACT_NUMBER_MESSAGE = "NumberFormatException for pattern =  %s text =  %s";
 
     private RegexUtils() {

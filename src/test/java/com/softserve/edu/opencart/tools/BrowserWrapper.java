@@ -3,9 +3,11 @@ package com.softserve.edu.opencart.tools;
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -122,11 +124,26 @@ public class BrowserWrapper {
 	// document.body.scrollHeight
 	// document.body.style.zoom = 0.5
 	public File getScreenshot() {
-		return ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
+		//execJavaScript("document.body.style.zoom = 0.5");
+		File file = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
+		//execJavaScript("document.body.style.zoom = 1");
+		return file;
 	}
 
 	public String getSourceCode() {
 		return getDriver().getPageSource();
+	}
+
+	public JavascriptExecutor getJavascriptExecutor() {
+		return (JavascriptExecutor) getDriver();
+	}
+
+	public Object execJavaScript(String jsCode) {
+		return getJavascriptExecutor().executeScript(jsCode);
+	}
+
+	public Object execJavaScript(String jsCode, WebElement webElement) {
+		return getJavascriptExecutor().executeScript(jsCode, webElement);
 	}
 
 	public void openUrl(String url) {

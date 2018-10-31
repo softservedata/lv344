@@ -27,7 +27,7 @@ public class ApplicationSource implements IApplicationSource {
 	// private String loggerStrategy;
 	//
 	// Reporter Console Output
-	// private boolean consoleOutput;
+	private boolean consoleOutput;
 	//
 	// URLs
 	private String baseUrl;
@@ -45,11 +45,13 @@ public class ApplicationSource implements IApplicationSource {
 	private Driver jdbcDriver;
 
 	// TODO Develop Builder
-	public ApplicationSource(String browserName, String driverPath, long implicitWaitTimeOut, String baseUrl,
+	public ApplicationSource(String browserName, String driverPath, long implicitWaitTimeOut,
+			boolean consoleOutput, String baseUrl,
 			String databaseUrl, String databaseLogin, String databasePassword, Driver jdbcDriver) {
 		this.browserName = browserName;
 		this.driverPath = driverPath;
 		this.implicitWaitTimeOut = implicitWaitTimeOut;
+		this.consoleOutput = consoleOutput;
 		this.baseUrl = baseUrl;
 		//
 		this.databaseUrl = databaseUrl;
@@ -70,6 +72,10 @@ public class ApplicationSource implements IApplicationSource {
 
 	public void setImplicitWaitTimeOut(long implicitWaitTimeOut) {
 		this.implicitWaitTimeOut = implicitWaitTimeOut;
+	}
+
+	public void setConsoleOutput(boolean consoleOutput) {
+		this.consoleOutput = consoleOutput;
 	}
 
 	public void setBaseUrl(String baseUrl) {
@@ -104,6 +110,10 @@ public class ApplicationSource implements IApplicationSource {
 
 	public long getImplicitWaitTimeOut() {
 		return implicitWaitTimeOut;
+	}
+
+	public boolean getConsoleOutput() {
+		return consoleOutput;
 	}
 
 	public String getBaseUrl() {

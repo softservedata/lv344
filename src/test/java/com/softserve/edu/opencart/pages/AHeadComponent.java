@@ -1,6 +1,7 @@
 package com.softserve.edu.opencart.pages;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -9,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.softserve.edu.opencart.tools.BrowserWrapper;
 import com.softserve.edu.opencart.tools.RegexUtils;
 
 public abstract class AHeadComponent {
@@ -69,7 +71,8 @@ public abstract class AHeadComponent {
 	private final String LOGIN_ERROR = "Login Error";
 	protected final String TAG_ATTRIBUTE_VALUE = "value";
 	//
-	protected static boolean loggedUser = false;
+	//protected static boolean loggedUser = false;
+	protected static HashMap<Long, Boolean> loggedUsers = new HashMap<>();
 	protected WebDriver driver;
 	//
 	private WebElement currency;
@@ -323,9 +326,19 @@ public abstract class AHeadComponent {
         dropdownOptions = null;
     }
 	
-	// loggedUser
+	// TODO Move to Class
+	// loggedUsers
 	public boolean isLoggedUser() {
-        return loggedUser;
+		Boolean isLogged = loggedUsers.get(Thread.currentThread().getId());
+        return (isLogged != null) && isLogged;
+    }
+
+	public void setLoggedUser() {
+		loggedUsers.put(Thread.currentThread().getId(), true);
+    }
+
+	public void setUnloggedUser() {
+		loggedUsers.put(Thread.currentThread().getId(), false);
     }
 
 	// Business Logic
@@ -364,7 +377,8 @@ public abstract class AHeadComponent {
 		logger.trace("gotoLogout() running clickAccountOptionByPartialName();");
 		clickAccountOptionByPartialName("Logout");
 		logger.trace("gotoLogout() running loggedUser = false;");
-		loggedUser = false;
+		//loggedUser = false;
+		setUnloggedUser();
 		logger.debug("gotoLogout() done");
         return new AccountLogoutPage(driver);
     }

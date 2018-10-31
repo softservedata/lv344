@@ -94,7 +94,8 @@ public class LoginPage extends AUnloggedRighMenuComponent {
 	
 	public MyAccountPage successLogin(IUser user) {
         fillLoginForm(user);
-        loggedUser = true;
+        //loggedUser = true;
+        setLoggedUser();
         return new MyAccountPage(driver);
     }
 

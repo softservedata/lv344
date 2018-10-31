@@ -27,7 +27,7 @@ public final class ApplicationSourceRepository {
         return new ApplicationSource("ChromeTemporary", // "ChromeTemporary", // "ChromeProfile",
         		ApplicationSourceRepository.class.getResource("/chromedriver-windows-32bit.exe").getPath().substring(1),
                 //"C:/Program Files (x86)/Google/Chrome/Application/chromedriver.exe",
-                10, 
+                10, true,
                 //"http://192.168.103.210/opencart/upload",
                 "http://atqc-shop.epizy.com",
                 //"http://nazaronoc.000webhostapp.com/"

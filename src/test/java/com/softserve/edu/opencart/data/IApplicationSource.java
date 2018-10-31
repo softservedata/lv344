@@ -10,6 +10,8 @@ public interface IApplicationSource {
 
 	long getImplicitWaitTimeOut();
 
+	boolean getConsoleOutput();
+	
 	String getBaseUrl();
 
 	String getDatabaseUrl();
