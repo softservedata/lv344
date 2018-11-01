@@ -37,8 +37,7 @@ public class SuccessMessageWhenChangePasswordTest extends TestRunner {
 		
 		myAccountMessagePage.getMyAccountMessagePage().gotoLogout()
 		        .gotoLogin()
-		        .successLogin(validUser)		
-		        .gotoLogout();
+		        .successLogin(validUser);
 		
 
 	}

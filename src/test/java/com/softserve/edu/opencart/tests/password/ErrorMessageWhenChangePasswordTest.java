@@ -39,7 +39,7 @@ public class ErrorMessageWhenChangePasswordTest extends TestRunner {
 	 Assert.assertEquals(errorMessageChangePasswordPage.getErrorMessageChangePasswordPage().getAlertMessageText(),
 			 errorMessageChangePasswordPage.getErrorMessageChangePasswordPage().ERROR_MESSAGE_CHANGE_PASSWORD);	 
 	 
-	 errorMessageChangePasswordPage.getErrorMessageChangePasswordPage().gotoLogout();	 
+	 errorMessageChangePasswordPage.getErrorMessageChangePasswordPage();	 
  }
 
 	 @DataProvider
@@ -64,7 +64,7 @@ public class ErrorMessageWhenChangePasswordTest extends TestRunner {
     Assert.assertEquals(errorMessageConfirmPasswordPage.getErrorMessageConfirmPasswordPage().getAlertMessageText(),
     		errorMessageConfirmPasswordPage.getErrorMessageConfirmPasswordPage().ERROR_MESSAGE_CONFIRM_PASSWORD);
     
-    errorMessageConfirmPasswordPage.getErrorMessageConfirmPasswordPage().gotoLogout();    
+    errorMessageConfirmPasswordPage.getErrorMessageConfirmPasswordPage();    
 }
 
 	@DataProvider
@@ -99,7 +99,7 @@ public class ErrorMessageWhenChangePasswordTest extends TestRunner {
 		Assert.assertEquals(errorMessageConfirmPasswordPage.getErrorMessageConfirmPasswordPage().getAlertMessageText(),
 				errorMessageConfirmPasswordPage.getErrorMessageConfirmPasswordPage().ERROR_MESSAGE_CONFIRM_PASSWORD);		
 		
-		errorMessageChangePasswordPage.getErrorMessageChangePasswordPage().gotoLogout();
+		errorMessageChangePasswordPage.getErrorMessageChangePasswordPage();
 
 	}
 }

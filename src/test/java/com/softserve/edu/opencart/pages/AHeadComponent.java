@@ -1,6 +1,7 @@
 package com.softserve.edu.opencart.pages;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -8,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.softserve.edu.opencart.tools.BrowserWrapper;
 
 import com.softserve.edu.opencart.pages.cart.EmptyShoppingCartPage;
 import com.softserve.edu.opencart.pages.cart.ShoppingCartPage;
@@ -74,7 +76,8 @@ public abstract class AHeadComponent {
 	private final String LOGIN_ERROR = "Login Error";
 	protected final String TAG_ATTRIBUTE_VALUE = "value";
 	//
-	protected static boolean loggedUser = false;
+	//protected static boolean loggedUser = false;
+	protected static HashMap<Long, Boolean> loggedUsers = new HashMap<>();
 	protected WebDriver driver;
 
 	//	
@@ -330,11 +333,21 @@ public abstract class AHeadComponent {
         dropdownOptions = null;
     }
 	
-	// loggedUser
-	public boolean isLoggedUser() {
-        return loggedUser;
-    }
+	    // TODO Move to Class
+		// loggedUsers
+		public boolean isLoggedUser() {
+			Boolean isLogged = loggedUsers.get(Thread.currentThread().getId());
+	        return (isLogged != null) && isLogged;
+	    }
 
+		public void setLoggedUser() {
+			loggedUsers.put(Thread.currentThread().getId(), true);
+	    }
+
+		public void setUnloggedUser() {
+			loggedUsers.put(Thread.currentThread().getId(), false);
+	    }
+		
 	// Business Logic
 
 	public LoginPage gotoLogin() {
@@ -353,6 +366,15 @@ public abstract class AHeadComponent {
 		clickAccountOptionByPartialName("My Account"); 
         return new MyAccountPage(driver);
     }
+	
+	public HomePage gotoHomeWithLogout() {
+		AHeadComponent headComponent = this;
+		if (isLoggedUser()) {
+			headComponent = gotoLogout();
+		}
+		return headComponent.gotoHome();
+    }
+	
 	public AccountLogoutPage gotoLogout() {
 		log.debug("gotoLogout() start");
 		if (!isLoggedUser()) {
@@ -362,7 +384,8 @@ public abstract class AHeadComponent {
 		log.trace("gotoLogout() running clickAccountOptionByPartialName();");
 		clickAccountOptionByPartialName("Logout");
 		log.trace("gotoLogout() running loggedUser = false;");
-		loggedUser = false;
+		//loggedUser = false;
+		setUnloggedUser();
 		log.debug("gotoLogout() done");
         return new AccountLogoutPage(driver);
     }

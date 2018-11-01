@@ -16,6 +16,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.asserts.SoftAssert;
 
+import com.softserve.edu.opencart.pages.AHeadComponent;
 import com.softserve.edu.opencart.pages.HomePage;
 
 public abstract class TestRunner {
@@ -55,11 +56,17 @@ public abstract class TestRunner {
     				+ "\n\t" + result.getThrowable().toString());
     		System.out.println();
     	}
+    	logoutApplication();
     }  
 
     protected HomePage loadApplication() {
         return new HomePage(driver);
     }
+    
+    protected HomePage logoutApplication() {
+        //return new HeadComponent(driver).gotoHomeWithLogout();
+    	return (new AHeadComponent(driver){}).gotoHomeWithLogout();
+    } 
     
     protected void delayExecution(long miliseconds) {
         try {

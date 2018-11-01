@@ -21,7 +21,7 @@ public class LoginedUkrNetPage {
 //		driver.switchTo().frame(driver.findElement(By.cssSelector("#login-frame-wraper > iframe")));
 		//
 		inboxLink = driver.findElement(By.cssSelector(".service__entry.service__entry_mail"));
-		logoutLink = driver.findElement(By.id("id-logout"));
+		logoutLink = driver.findElement(By.cssSelector("#id-logout.account__logout"));
 	}
 	
 	//inboxLink

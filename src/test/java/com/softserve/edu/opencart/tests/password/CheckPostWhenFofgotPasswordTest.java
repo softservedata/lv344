@@ -1,6 +1,7 @@
 package com.softserve.edu.opencart.tests.password;
 
 import org.testng.Assert;
+
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -11,8 +12,6 @@ import com.softserve.edu.opencart.data.UserUkrNetRepository;
 import com.softserve.edu.opencart.pages.LoginMessagePage;
 import com.softserve.edu.opencart.pages.password.ForgottenPasswordPage;
 import com.softserve.edu.opencart.tools.TestRunnerUkrNet;
-import com.softserve.edu.ukr.net.pages.LoginedUkrNetPage;
-
 public class CheckPostWhenFofgotPasswordTest extends TestRunnerUkrNet {
 
 	@DataProvider
@@ -48,7 +47,7 @@ public class CheckPostWhenFofgotPasswordTest extends TestRunnerUkrNet {
 				loginMessagePage.EXPECTED_MESSAGE_PASSWORD_UPDATED);
              switchToLoginedUkrNet().logoutUkrNet();
                    
-           loginMessagePage.gotoLogin().successLogin(validUser).gotoLogout();
+           loginMessagePage.gotoLogin().successLogin(validUser);
            
 	}
 }
