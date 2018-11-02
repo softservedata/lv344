@@ -33,4 +33,5 @@ public class FirstLinkConfirmationPage {
 		clickFirstLink();
 		return new SecondLinkConfirmationPage(driver);
 	}
+
 }

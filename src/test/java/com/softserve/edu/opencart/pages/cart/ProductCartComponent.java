@@ -24,7 +24,6 @@ public class ProductCartComponent {
 
 	//TODO ДОПИСАТИ ПЕРЕВІРКУ ЧИ МИ НА СТОРІНЦІ
 		private void initProductCartComponent() {
-			//productListComponent = productLayout.findElement(By.cssSelector(".table-responsive tbody tr"));
 			name = cartProductLayout.findElement(By.cssSelector("form .text-left a"));
 			//unitPrice = cartProductLayout.findElement(By.cssSelector(".price"));
 			//totalPrice = cartProductLayout.findElement(By.xpath("//div[contains(@class,'table')]//a[text()='MacBook']/../..//td[contains(text(),'$')]"));

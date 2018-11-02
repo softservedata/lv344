@@ -23,26 +23,22 @@ public class SuccessMessageWhenChangePasswordTest extends TestRunner {
 			
 			// Precondition
 			// Steps
-       log.info("Start");
+        
 		ChangePasswordPage changePasswordPage = loadApplication()
 				.gotoLogin()
 				.successLogin(validUser)
 				.gotoChangePassword();
-
-
-		IMyAccountMessagePage myAccountMessagePage = changePasswordPage.successfulChangePassword(password, confirmPassword);
-		delayExecution(1000);
+		
+		IMyAccountMessagePage myAccountMessagePage = changePasswordPage.successfulChangePassword(password, confirmPassword);	
 
 			// Check
 		Assert.assertEquals(myAccountMessagePage.getMyAccountMessagePage().getAlertMessageText(),
-				myAccountMessagePage.getMyAccountMessagePage().EXPECTED_SUCCESS_CHANGE_PASSWORD);
+				myAccountMessagePage.getMyAccountMessagePage().EXPECTED_SUCCESS_CHANGE_PASSWORD);		
 		
-		delayExecution(1000);
-
 		myAccountMessagePage.getMyAccountMessagePage().gotoLogout()
-		.gotoLogin()
-		.successLogin(validUser)
-		.gotoLogout();
+		        .gotoLogin()
+		        .successLogin(validUser);
+		
 
 	}
 }

@@ -23,9 +23,10 @@ public class ResetPasswordPage extends ARighMenuComponent {
 	private void initResetComponent() {
 		passwordField = driver.findElement(By.cssSelector("#input-password.form-control"));
 		passwordConfirmField = driver.findElement(By.cssSelector("#input-confirm.form-control"));
-		continueButton = driver.findElement(By.cssSelector("input.btn.btn-primary"));
+		continueButton = driver.findElement(By.cssSelector("button.btn.btn-primary"));
 		backButton = driver.findElement(By.cssSelector("a.btn.btn-default"));
 	}
+	
 
 	// passwordField
 	public WebElement getPasswordField() {
@@ -103,14 +104,14 @@ public class ResetPasswordPage extends ARighMenuComponent {
 
 	private void fillPasswordFieldResetPassword(String password, String confirmPassword) {
 		fillPasswordField(password);
-		//clickPasswordField();
-		//clearPasswordField();
-		//setPasswordField(password);
+//		clickPasswordField();
+//		clearPasswordField();
+//		setPasswordField(password);
 
 		fillPasswordConfirmField(confirmPassword);
-		//clickPasswordConfirmField();
-		//clearPasswordConfirmField();
-		//setPasswordConfirmField(confirmPassword);
+//		clickPasswordConfirmField();
+//		clearPasswordConfirmField();
+//		setPasswordConfirmField(confirmPassword);
 	}
 
 	public LoginMessagePage successResetPassword(String password, String confirmPassword) {

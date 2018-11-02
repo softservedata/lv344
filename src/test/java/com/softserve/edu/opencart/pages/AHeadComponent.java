@@ -1,11 +1,15 @@
 package com.softserve.edu.opencart.pages;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import com.softserve.edu.opencart.tools.BrowserWrapper;
 
 import com.softserve.edu.opencart.pages.cart.EmptyShoppingCartPage;
 import com.softserve.edu.opencart.pages.cart.ShoppingCartPage;
@@ -67,12 +71,13 @@ public abstract class AHeadComponent {
     }
 
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-	
+	protected final Logger log = LoggerFactory.getLogger(this.getClass());
 	private final String OPTION_NOT_FOUND_MESSAGE = "Option %s not found in %s";
 	private final String LOGIN_ERROR = "Login Error";
 	protected final String TAG_ATTRIBUTE_VALUE = "value";
 	//
-	protected static boolean loggedUser = false;
+	//protected static boolean loggedUser = false;
+	protected static HashMap<Long, Boolean> loggedUsers = new HashMap<>();
 	protected WebDriver driver;
 
 	//	
@@ -117,6 +122,7 @@ public abstract class AHeadComponent {
 	
 	//currency
 	public WebElement getCurrency() {
+		log.trace("getCurrency() running return currency;");
         return currency;
     }
 	
@@ -327,17 +333,26 @@ public abstract class AHeadComponent {
         dropdownOptions = null;
     }
 	
-	// loggedUser
-	public boolean isLoggedUser() {
-        return loggedUser;
-    }
+	    // TODO Move to Class
+		// loggedUsers
+		public boolean isLoggedUser() {
+			Boolean isLogged = loggedUsers.get(Thread.currentThread().getId());
+	        return (isLogged != null) && isLogged;
+	    }
 
+		public void setLoggedUser() {
+			loggedUsers.put(Thread.currentThread().getId(), true);
+	    }
+
+		public void setUnloggedUser() {
+			loggedUsers.put(Thread.currentThread().getId(), false);
+	    }
+		
 	// Business Logic
 
 	public LoginPage gotoLogin() {
 
 		if (isLoggedUser()) {
-		    // TODO Develop Custom Exceptions 
 			throw new RuntimeException(LOGIN_ERROR);
 		}
 		clickAccountOptionByPartialName("Login");
@@ -348,16 +363,30 @@ public abstract class AHeadComponent {
 		if (!isLoggedUser()) {
 			throw new RuntimeException(LOGIN_ERROR);
 		}
-		clickAccountOptionByPartialName("My Account"); // TODO enum
+		clickAccountOptionByPartialName("My Account"); 
         return new MyAccountPage(driver);
     }
-
+	
+	public HomePage gotoHomeWithLogout() {
+		AHeadComponent headComponent = this;
+		if (isLoggedUser()) {
+			headComponent = gotoLogout();
+		}
+		return headComponent.gotoHome();
+    }
+	
 	public AccountLogoutPage gotoLogout() {
+		log.debug("gotoLogout() start");
 		if (!isLoggedUser()) {
+			log.error("gotoLogout() throw new RuntimeException(" + LOGIN_ERROR + ");");
 			throw new RuntimeException(LOGIN_ERROR);
 		}
+		log.trace("gotoLogout() running clickAccountOptionByPartialName();");
 		clickAccountOptionByPartialName("Logout");
-		loggedUser = false;
+		log.trace("gotoLogout() running loggedUser = false;");
+		//loggedUser = false;
+		setUnloggedUser();
+		log.debug("gotoLogout() done");
         return new AccountLogoutPage(driver);
     }
 

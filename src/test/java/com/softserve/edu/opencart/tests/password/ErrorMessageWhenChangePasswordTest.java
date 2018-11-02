@@ -13,19 +13,20 @@ import com.softserve.edu.opencart.tools.TestRunner;
 public class ErrorMessageWhenChangePasswordTest extends TestRunner {
 
 	 @DataProvider
-	 public Object[][] errorMessageWhenPasswordShortLong() {
+	 public Object[][]errorMessageWhenPasswordShortLong()
+	 {
 	 return new Object[][] {{ UserRepository.get().customerIra(), "aaa", "aaa"} ,
 		                   { UserRepository.get().customerIra(),  "aaaaaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaaa"} 
 	 	};
 	 }
 	 
 	
-	@Test(dataProvider = "errorMessageWhenPasswordShortLong")
+	@Test(priority = 0, dataProvider = "errorMessageWhenPasswordShortLong")
 	 public void shortLongPassword(IUser validUser, String password, String confirmPassword) {
 	
 	// Precondition
 	// Steps
-
+		
 	 ChangePasswordPage changePasswordPage = loadApplication()
 			 .gotoLogin()
 			 .successLogin(validUser)
@@ -33,23 +34,20 @@ public class ErrorMessageWhenChangePasswordTest extends TestRunner {
 	 
     // Steps
 	 IErrorMessageChangePasswordPage errorMessageChangePasswordPage = changePasswordPage.unsuccessfulChangePassword(password, confirmPassword);
-		delayExecution(1000);
-
+	
 	 //Check
 	 Assert.assertEquals(errorMessageChangePasswordPage.getErrorMessageChangePasswordPage().getAlertMessageText(),
-			 errorMessageChangePasswordPage.getErrorMessageChangePasswordPage().ERROR_MESSAGE_CHANGE_PASSWORD);
-	 delayExecution(1000);
+			 errorMessageChangePasswordPage.getErrorMessageChangePasswordPage().ERROR_MESSAGE_CHANGE_PASSWORD);	 
 	 
-	 errorMessageChangePasswordPage.getErrorMessageChangePasswordPage().gotoLogout();
-	 
-	 }
+	 errorMessageChangePasswordPage.getErrorMessageChangePasswordPage();	 
+ }
 
 	 @DataProvider
 	 public Object[][] errorMessageWhenNotMatchPassword() {
 		 return new Object[][] {{UserRepository.get().customerIra(),"aaaa", "aaaaa"}};
 	 }
 
-	 @Test(dataProvider = "errorMessageWhenNotMatchPassword")
+	 @Test(priority = 1, dataProvider = "errorMessageWhenNotMatchPassword")
 	 public void notMatchPassword(IUser validUser, String password, String confirmPassword) {
 	
 	// Precondition		 
@@ -61,17 +59,12 @@ public class ErrorMessageWhenChangePasswordTest extends TestRunner {
 
 	 // Steps
 	IErrorMessageConfirmPasswordPage errorMessageConfirmPasswordPage = changePasswordPage.unsuccessfulConfirmPassword(password, confirmPassword);
-	delayExecution(1000);
-
 	
   //Check
     Assert.assertEquals(errorMessageConfirmPasswordPage.getErrorMessageConfirmPasswordPage().getAlertMessageText(),
     		errorMessageConfirmPasswordPage.getErrorMessageConfirmPasswordPage().ERROR_MESSAGE_CONFIRM_PASSWORD);
-    delayExecution(1000);
     
-    errorMessageConfirmPasswordPage.getErrorMessageConfirmPasswordPage().gotoLogout();
-    
-    
+    errorMessageConfirmPasswordPage.getErrorMessageConfirmPasswordPage();    
 }
 
 	@DataProvider
@@ -81,7 +74,7 @@ public class ErrorMessageWhenChangePasswordTest extends TestRunner {
 		};
 	}
 
-	@Test(dataProvider = "errorMessageWhithEmptyPassword")
+	@Test(priority = 2, dataProvider = "errorMessageWhithEmptyPassword")
 	public void emptyPassword(IUser validUser, String password, String confirmPassword) {
 		//
 		// Precondition
@@ -92,8 +85,6 @@ public class ErrorMessageWhenChangePasswordTest extends TestRunner {
 				.successLogin(validUser)
 				.gotoChangePassword();
 		
-
-		
 		IErrorMessageChangePasswordPage errorMessageChangePasswordPage = changePasswordPage.unsuccessfulChangePassword(password, confirmPassword);
 		delayExecution(1000);
 
@@ -101,16 +92,14 @@ public class ErrorMessageWhenChangePasswordTest extends TestRunner {
 
 		Assert.assertEquals(errorMessageChangePasswordPage.getErrorMessageChangePasswordPage().getAlertMessageText(),
 				errorMessageChangePasswordPage.getErrorMessageChangePasswordPage().ERROR_MESSAGE_CHANGE_PASSWORD);
-		delayExecution(1000);
 
 		IErrorMessageConfirmPasswordPage errorMessageConfirmPasswordPage = errorMessageChangePasswordPage.getErrorMessageChangePasswordPage()
 				.gotoErrorMessageConfirmPasswordPage();
 
 		Assert.assertEquals(errorMessageConfirmPasswordPage.getErrorMessageConfirmPasswordPage().getAlertMessageText(),
-				errorMessageConfirmPasswordPage.getErrorMessageConfirmPasswordPage().ERROR_MESSAGE_CONFIRM_PASSWORD);
-		delayExecution(1000);
+				errorMessageConfirmPasswordPage.getErrorMessageConfirmPasswordPage().ERROR_MESSAGE_CONFIRM_PASSWORD);		
 		
-		errorMessageChangePasswordPage.getErrorMessageChangePasswordPage().gotoLogout();
+		errorMessageChangePasswordPage.getErrorMessageChangePasswordPage();
 
 	}
 }
