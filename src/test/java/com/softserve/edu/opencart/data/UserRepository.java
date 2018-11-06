@@ -64,7 +64,7 @@ public final class UserRepository {
 				.setAddress1("address12")
 				.setCity("city2")
 				.setPostCode("postCode2")
-				.setCountry("country2")
+				.setCountry("Ukraine")
 				.setRegionState("regionState2")
 				.setPassword("qwerty")
 				.setFax("fax")

@@ -45,7 +45,7 @@ public class ApplicationLoginTest extends ApplicationTestRunner {
         //
         // Check
         Assert.assertEquals(accountLogoutPage.getAccountLogoutLabelText(),
-        		accountLogoutPage.EXPECTED_TEXT_LOGOUT + "1");
+        		accountLogoutPage.EXPECTED_TEXT_LOGOUT);
         delayExecution(1000);
         //
         // Return to previous state

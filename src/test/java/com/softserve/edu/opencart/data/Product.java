@@ -1,15 +1,20 @@
 package com.softserve.edu.opencart.data;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class Product {
+import com.softserve.edu.opencart.tools.RegexUtils;
+
+public class Product implements IProduct {
 
 	private String name;
 	private String description;
 	private Map<Currencies, Double> price; 
 	private Map<Currencies, Double> priceExTax;
 	
+	// TODO Develop Builder
 	public Product(String name, String description) {
 		this.name = name;
 		this.description = description;
@@ -52,4 +57,37 @@ public class Product {
 		return getPriceExTax().get(currency);
 	}
 
+	/*
+    public static List<IProduct> getByList(List<List<String>> rows) {
+    	List<IProduct> result = new ArrayList<>();
+    	Map<Integer, Currencies> currencies = new HashMap<>();
+    	String node;
+    	for (List<String> currentRow : rows) {
+    		node = currentRow.get(REQUIRED_COLUMN_NUMBER);
+    		if (RegexUtils.isDoubleMatches(node)) {
+    			IPartialProduct partialProduct = Product.get()
+        		.setSearchKey(currentRow.get(REQUIRED_COLUMN_SEARCH_KEY))
+        		.setName(currentRow.get(REQUIRED_COLUMN_NAME))
+        		.setDescriptionNext(currentRow.get(REQUIRED_COLUMN_DESCRIPTION));
+    			//
+    			for (int i = REQUIRED_COLUMN_NUMBER; i < currentRow.size(); i++) {
+    				partialProduct = partialProduct.setPrice(currencies.get(i),
+    						RegexUtils.extractFirstDouble(currentRow.get(i)));  
+    			}
+    			result.add(((IBuild)partialProduct).buildProduct());
+    		} else {
+				for (int i = REQUIRED_COLUMN_NUMBER; i < currentRow.size(); i++) {
+    				for (Currencies currency : Currencies.values()) {
+    					if (currentRow.get(i).toLowerCase().equals(
+    							currency.name().toLowerCase())) {
+    						currencies.put(i, currency);
+    						continue;
+    					}
+    				}
+    			}
+    		}
+    	}
+    	return result;
+    }
+*/
 }
