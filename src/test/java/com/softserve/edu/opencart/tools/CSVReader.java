@@ -12,14 +12,13 @@ public final class CSVReader implements IFileReader {
     
 	private final String PATH_SEPARATOR = "/";
 	private final String CSV_SPLIT_BY = ";";
-	//private IRowFactory rowFactory; 
 	private String filename;
 	private String path;
 	
 	public CSVReader(String filename) {
 	    this.filename = filename;
 	    this.path = this.getClass().getResource(PATH_SEPARATOR + filename).getPath().substring(1);
-	    System.out.println("***PATH = " + path);
+	    //System.out.println("***PATH = " + path);
 	}
 	
 	public String getFilename() {

@@ -8,6 +8,11 @@ import java.util.Map;
 import com.softserve.edu.opencart.tools.RegexUtils;
 
 public class Product implements IProduct {
+	private final static int COLUMN_EURO = 2;
+	private final static int COLUMN_POUND_STERLING = 3;
+	private final static int COLUMN_US_DOLLAR = 4;
+	private final static int COLUMN_NAME = 0;
+	private final static int COLUMN_DESCRIPTION = 1;
 
 	private String name;
 	private String description;
@@ -57,37 +62,26 @@ public class Product implements IProduct {
 		return getPriceExTax().get(currency);
 	}
 
-	/*
     public static List<IProduct> getByList(List<List<String>> rows) {
     	List<IProduct> result = new ArrayList<>();
-    	Map<Integer, Currencies> currencies = new HashMap<>();
-    	String node;
+    	//
+    	if (!RegexUtils.isDoubleMatches(rows.get(0).get(COLUMN_EURO))) {
+    		rows.remove(0);
+    	}
     	for (List<String> currentRow : rows) {
-    		node = currentRow.get(REQUIRED_COLUMN_NUMBER);
-    		if (RegexUtils.isDoubleMatches(node)) {
-    			IPartialProduct partialProduct = Product.get()
-        		.setSearchKey(currentRow.get(REQUIRED_COLUMN_SEARCH_KEY))
-        		.setName(currentRow.get(REQUIRED_COLUMN_NAME))
-        		.setDescriptionNext(currentRow.get(REQUIRED_COLUMN_DESCRIPTION));
-    			//
-    			for (int i = REQUIRED_COLUMN_NUMBER; i < currentRow.size(); i++) {
-    				partialProduct = partialProduct.setPrice(currencies.get(i),
-    						RegexUtils.extractFirstDouble(currentRow.get(i)));  
-    			}
-    			result.add(((IBuild)partialProduct).buildProduct());
-    		} else {
-				for (int i = REQUIRED_COLUMN_NUMBER; i < currentRow.size(); i++) {
-    				for (Currencies currency : Currencies.values()) {
-    					if (currentRow.get(i).toLowerCase().equals(
-    							currency.name().toLowerCase())) {
-    						currencies.put(i, currency);
-    						continue;
-    					}
-    				}
-    			}
-    		}
+    		Product currentProduct = new Product(currentRow.get(COLUMN_NAME),
+    				currentRow.get(COLUMN_DESCRIPTION));
+    		// TODO use cycle
+    		currentProduct.addPrice(Currencies.EURO,
+    				RegexUtils.extractFirstDouble(currentRow.get(COLUMN_EURO)));
+    		currentProduct.addPrice(Currencies.POUND_STERLING,
+    				RegexUtils.extractFirstDouble(currentRow.get(COLUMN_POUND_STERLING)));
+    		currentProduct.addPrice(Currencies.US_DOLLAR,
+    				RegexUtils.extractFirstDouble(currentRow.get(COLUMN_US_DOLLAR)));
+    		//
+    		result.add(currentProduct);
     	}
     	return result;
     }
-*/
+
 }
