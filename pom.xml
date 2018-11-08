@@ -112,6 +112,11 @@
 		<!-- <version>4.0</version> -->
 		<!-- <version>4.0.2206.100</version> -->
 		<!-- </dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.microsoft.sqlserver</groupId> -->
+<!-- 			<artifactId>mssql-jdbc</artifactId> -->
+<!-- 			<version>7.0.0.jre10</version> -->
+<!-- 		</dependency> -->
 		<dependency>
 			<groupId>net.sourceforge.jtds</groupId>
 			<artifactId>jtds</artifactId>
