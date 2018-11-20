@@ -42,7 +42,7 @@ public class ApplicationProductTest extends ApplicationTestRunner {
     public Object[][] validExternalProducts() {
 		List<IProduct> commons = new ArrayList<>();
 		commons.addAll(ProductRepository.fromExcelProducts());
-		//commons.addAll(ProductRepository.fromCsvProducts());
+		commons.addAll(ProductRepository.fromCsvProducts());
         return ListUtils.toMultiArray(commons,Currencies.EURO);
     }
 
