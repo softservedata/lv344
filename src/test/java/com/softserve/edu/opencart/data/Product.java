@@ -1,16 +1,25 @@
 package com.softserve.edu.opencart.data;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-
+import java.util.List;
 import java.util.Map;
 
-public class Product {
+import com.softserve.edu.opencart.tools.RegexUtils;
+
+public class Product implements IProduct {
+	private final static int COLUMN_EURO = 2;
+	private final static int COLUMN_POUND_STERLING = 3;
+	private final static int COLUMN_US_DOLLAR = 4;
+	private final static int COLUMN_NAME = 0;
+	private final static int COLUMN_DESCRIPTION = 1;
 
 	private String name;
 	private String description;
 	private Map<Currencies, Double> price; 
 	private Map<Currencies, Double> priceExTax;
 	
+	// TODO Develop Builder
 	public Product(String name, String description) {
 		this.name = name;
 		this.description = description;
@@ -53,5 +62,26 @@ public class Product {
 		return getPriceExTax().get(currency);
 	}
 
-}
+    public static List<IProduct> getByList(List<List<String>> rows) {
+    	List<IProduct> result = new ArrayList<>();
+    	//
+    	if (!RegexUtils.isDoubleMatches(rows.get(0).get(COLUMN_EURO))) {
+    		rows.remove(0);
+    	}
+    	for (List<String> currentRow : rows) {
+    		Product currentProduct = new Product(currentRow.get(COLUMN_NAME),
+    				currentRow.get(COLUMN_DESCRIPTION));
+    		// TODO use cycle
+    		currentProduct.addPrice(Currencies.EURO,
+    				RegexUtils.extractFirstDouble(currentRow.get(COLUMN_EURO)));
+    		currentProduct.addPrice(Currencies.POUND_STERLING,
+    				RegexUtils.extractFirstDouble(currentRow.get(COLUMN_POUND_STERLING)));
+    		currentProduct.addPrice(Currencies.US_DOLLAR,
+    				RegexUtils.extractFirstDouble(currentRow.get(COLUMN_US_DOLLAR)));
+    		//
+    		result.add(currentProduct);
+    	}
+    	return result;
+    }
 
+}

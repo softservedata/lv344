@@ -18,7 +18,8 @@ public class ApplicationTestRunner {
     @BeforeClass
     public void beforeClass(ITestContext context) {
         log.info("@BeforeClass start");
-        Application.get(ApplicationSourceRepository.EpizyChrome());
+//        Application.get(ApplicationSourceRepository.EpizyChrome());
+        Application.get(ApplicationSourceRepository.localChrome());
         log.info("@BeforeClass done");
     }
 

@@ -29,7 +29,7 @@ public final class TestResultUtils {
 		return message;
 	}
 
-	public static String testResultStackTrace(Throwable throwable) {// что за класс 
+	public static String testResultStackTrace(Throwable throwable) {
 		String message = new String();
 		if (throwable != null) {
 			message = message + "\n" + throwable.toString();

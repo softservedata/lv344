@@ -113,12 +113,13 @@ public class LoginPage extends AUnloggedRighMenuComponent {
 		clickLoginButton();
 	}
 
+	
 	public MyAccountPage successLogin(IUser user) {
-		fillLoginForm(user);
-//		loggedUser = true;
-		setUnloggedUser();
-		return new MyAccountPage(driver);
-	}
+        fillLoginForm(user);
+        //loggedUser = true;
+        setLoggedUser();
+        return new MyAccountPage(driver);
+    }
 
 	public LoginMessageErrorPage unsuccessfullLogin(IUser invalidUser) {
 		fillLoginForm(invalidUser);

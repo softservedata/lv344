@@ -2,6 +2,7 @@ package com.softserve.edu.opencart.tests.password;
 
 import org.testng.Assert;
 
+
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -9,9 +10,10 @@ import com.softserve.edu.opencart.data.IUser;
 import com.softserve.edu.opencart.data.UserRepository;
 import com.softserve.edu.opencart.pages.IMyAccountMessagePage;
 import com.softserve.edu.opencart.pages.password.ChangePasswordPage;
-import com.softserve.edu.opencart.tools.TestRunner;
+import com.softserve.edu.opencart.tools.Application;
+import com.softserve.edu.opencart.tools.ApplicationTestRunner;
 
-public class SuccessMessageWhenChangePasswordTest extends TestRunner {
+public class SuccessMessageWhenChangePasswordTest extends ApplicationTestRunner {
 
 	@DataProvider
 	public Object[][] loginWithValidCredentials() {
@@ -23,8 +25,8 @@ public class SuccessMessageWhenChangePasswordTest extends TestRunner {
 			
 			// Precondition
 			// Steps
-        
-		ChangePasswordPage changePasswordPage = loadApplication()
+        log.info("info***");
+		ChangePasswordPage changePasswordPage = Application.get().loadApplication() 
 				.gotoLogin()
 				.successLogin(validUser)
 				.gotoChangePassword();

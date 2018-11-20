@@ -17,8 +17,8 @@ public class LoginTest extends TestRunner {
     public Object[][] validUsers() {
         // Read from ...
         return new Object[][] { 
-            { UserRepository.get().customerHahaha() },
-            };
+            { UserRepository.get() .customerHahaha()}
+        };                     
     }
 
     @Test(dataProvider = "validUsers")

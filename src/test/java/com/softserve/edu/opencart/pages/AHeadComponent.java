@@ -1,6 +1,7 @@
 package com.softserve.edu.opencart.pages;
 
 import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,8 +10,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.softserve.edu.opencart.tools.BrowserWrapper;
-
 import com.softserve.edu.opencart.pages.cart.EmptyShoppingCartPage;
 import com.softserve.edu.opencart.pages.cart.ShoppingCartPage;
 import com.softserve.edu.opencart.pages.search.SearchEmptyResultPage;
@@ -359,13 +358,7 @@ public abstract class AHeadComponent {
         return new LoginPage(driver);
     }
 	
-	public MyAccountPage gotoMyAccount() {
-		if (!isLoggedUser()) {
-			throw new RuntimeException(LOGIN_ERROR);
-		}
-		clickAccountOptionByPartialName("My Account"); 
-        return new MyAccountPage(driver);
-    }
+	
 	
 	public HomePage gotoHomeWithLogout() {
 		AHeadComponent headComponent = this;
@@ -373,6 +366,14 @@ public abstract class AHeadComponent {
 			headComponent = gotoLogout();
 		}
 		return headComponent.gotoHome();
+    }
+	
+	public MyAccountPage gotoMyAccount() {
+		if (!isLoggedUser()) {
+			throw new RuntimeException(LOGIN_ERROR);
+		}
+		clickAccountOptionByPartialName("My Account");  // TODO enum
+        return new MyAccountPage(driver);
     }
 	
 	public AccountLogoutPage gotoLogout() {

@@ -42,7 +42,7 @@ public abstract class TestRunner {
 
     @BeforeMethod
     public void beforeMethod() {
-		driver.get("http://atqc-shop.epizy.com/");
+		driver.get("http://taqc-opencart.epizy.com");
     }
 
     @AfterMethod(alwaysRun = true)

@@ -18,7 +18,7 @@ public class ApplicationLoginTest extends ApplicationTestRunner {
         // Read from ...
         return new Object[][] { 
             { UserRepository.get().customerHahaha() },
-            //{ UserRepository.get().customerSearch() },
+//            { UserRepository.get().customerIra() },
             };
     }
 
