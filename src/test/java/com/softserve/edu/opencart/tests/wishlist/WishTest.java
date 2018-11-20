@@ -1,4 +1,4 @@
-package com.softserve.edu.opencart.tests;
+package com.softserve.edu.opencart.tests.wishlist;
 
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;

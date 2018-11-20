@@ -36,7 +36,7 @@ public class SearchCriteriaComponent{
 	    }
 	    
 	    public void clearSearchField() {
-	    	getSearchTexField().click();
+	    	getSearchTexField().clear();
 	    }
 	    
 	    public void setSearchFieldText(String text) {

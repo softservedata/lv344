@@ -18,7 +18,7 @@ import com.softserve.edu.opencart.tools.SearchTestsRunner;
 
 public class LoginResultTest extends SearchTestsRunner{
 	@DataProvider(name = "mac")
-	   public static Object[][] resultListMac() {
+	   public Object[][] resultListMac() {
 	      return new Object[][] {{UserRepository.get().searchUser(),"mac", ProductsListRepository.getMacNamesList(SortCriterias.DEFAULT)}};
 	   }
 	

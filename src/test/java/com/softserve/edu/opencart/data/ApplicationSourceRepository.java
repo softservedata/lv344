@@ -59,8 +59,8 @@ public final class ApplicationSourceRepository {
                 10, true,
                 //"http://192.168.103.210/opencart/upload",
                 //"http://atqc-shop.epizy.com",
-                 "http://192.168.103.191/opencart/upload/",
-//                "http://localhost/opencart/",
+//                 "http://192.168.103.191/opencart/upload/",
+                "http://localhost/opencart/",
                 //"http://taqc-opencart.epizy.com/",
                 //"http://nazaronoc.000webhostapp.com/"
                 "jdbc:mysql://192.168.103.210:3306/opencart",

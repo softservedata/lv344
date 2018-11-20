@@ -15,7 +15,7 @@ import com.softserve.edu.opencart.tools.SearchTestsRunner;
 
 public class CompareTopAndMainTest extends SearchTestsRunner{
 	@DataProvider(name = "hp")
-	public static Object[][] resultListHP() {
+	public Object[][] resultListHP() {
 		return new Object[][] {{"hp", ProductsListRepository.getHPNamesList(SortCriterias.DEFAULT)}};
 	}
 	
@@ -31,15 +31,13 @@ public class CompareTopAndMainTest extends SearchTestsRunner{
         delayExecution(delayTime);
         
         //check if result list is correct
-        delayExecution(delayTime);
         assertEquals(searchResultPage.getResultNamesList(), expectedResultsList);
+        delayExecution(delayTime);
         
         //search by main search form
-        searchResultPage.getISearchEmptyResultPage().searchWithMainForm(request);
+        searchResultPage = searchResultPage.getISearchEmptyResultPage()
+        		.searchWithMainForm(request);
         delayExecution(delayTime);
-        
-        loadSearchResultPage();
-		delayExecution(delayTime);
 		
         assertEquals(searchResultPage.getResultNamesList(), expectedResultsList);
         delayExecution(delayTime);
