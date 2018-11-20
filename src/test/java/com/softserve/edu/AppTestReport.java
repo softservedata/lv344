@@ -17,7 +17,7 @@ import org.testng.asserts.SoftAssert;
 import org.testng.internal.thread.ThreadTimeoutException;
 
 public class AppTestReport {
-	public static final Logger logger = LoggerFactory.getLogger(AppTest.class);
+	public static final Logger logger = LoggerFactory.getLogger(AppTestReport.class);
 	private boolean isTestComplete;
 	private SoftAssert softAssert;
 

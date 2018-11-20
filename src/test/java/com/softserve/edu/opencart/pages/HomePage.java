@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 
 import com.softserve.edu.opencart.data.Currencies;
 
+import io.qameta.allure.Step;
+
 public class HomePage extends AHeadComponent {
 
 	private ProductsListComponent productsListComponent;
@@ -32,6 +34,7 @@ public class HomePage extends AHeadComponent {
 				.getPriceAmount();
 	}
 
+	@Step("choose_Currency STEP")
 	public HomePage chooseCurrency(Currencies currency) {
         clickCurrencyByPartialName(currency.toString());
         return new HomePage(driver); 

@@ -15,6 +15,15 @@ import com.softserve.edu.opencart.tools.Application;
 import com.softserve.edu.opencart.tools.ApplicationTestRunner;
 import com.softserve.edu.opencart.tools.ListUtils;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
+
+@Epic("Application_Product_Test EPIC")
+@Feature("Application_Product_Test FEATURE")
 public class ApplicationProductTest extends ApplicationTestRunner {
 
 	@DataProvider//(parallel = true)
@@ -46,10 +55,13 @@ public class ApplicationProductTest extends ApplicationTestRunner {
         return ListUtils.toMultiArray(commons,Currencies.EURO);
     }
 
-	//@Test(dataProvider = "validProduct")
+	@Description("check_Product_Currency DESCRIPTION")
+	@Severity(SeverityLevel.NORMAL)
+	@Story("check_Product_Currency STORY")
+	@Test(dataProvider = "validProduct")
 	//@Test(dataProvider = "validCSVProducts")
 	//@Test(dataProvider = "validExcelProducts")
-	@Test(dataProvider = "validExternalProducts")
+	//@Test(dataProvider = "validExternalProducts")
     public void checkProductCurrency(IProduct product, Currencies currency) {
     	//logger.info("checkLogin start");
         //
@@ -61,7 +73,7 @@ public class ApplicationProductTest extends ApplicationTestRunner {
         //
         // Check
         Assert.assertEquals(homePage
-        		.getProductPriceAmountByPartialName(product.getName()),
+        		.getProductPriceAmountByPartialName(product.getName())+1,
         		product.getPrice(currency),
         		Application.PRICE_PRECISION);
         delayExecution(1000);

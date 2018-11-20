@@ -29,6 +29,12 @@
 		<!-- <org.seleniumhq.selenium.htmlunit-driver>2.26</org.seleniumhq.selenium.htmlunit-driver> -->
 		<!-- - - - - - Reports - - - - - -->
 		<testng.reports.directory>target/surefire-reports/test-output</testng.reports.directory>
+		<!-- <allure.version>1.5.0</allure.version> -->
+		<allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+		<allure-testng.version>2.8.1</allure-testng.version>
+		<allure-testng-adaptor.version>1.5.4</allure-testng-adaptor.version>
+		<allure-attachments.version>2.0-BETA21</allure-attachments.version>
+		<aspectj.version>1.9.2</aspectj.version>
 		<!-- - - - - - Mocks - - - - - -->
 		<org.mockito.version>1.10.19</org.mockito.version>
 		<org.powermock.version>1.7.4</org.powermock.version>
@@ -69,6 +75,18 @@
 		<!-- <artifactId>htmlunit-driver</artifactId> -->
 		<!-- <version>${org.seleniumhq.selenium.htmlunit-driver}</version> -->
 		<!-- </dependency> -->
+		<!-- - - - Reports - - - -->
+		<dependency>
+			<groupId>io.qameta.allure</groupId>
+			<artifactId>allure-testng</artifactId>
+			<version>${allure-testng.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${aspectj.version}</version>
+			<!-- <scope>test</scope> -->
+		</dependency>
 		<!-- - - - Mock Object - - - -->
 		<dependency>
 			<groupId>org.mockito</groupId>
@@ -112,11 +130,11 @@
 		<!-- <version>4.0</version> -->
 		<!-- <version>4.0.2206.100</version> -->
 		<!-- </dependency> -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>com.microsoft.sqlserver</groupId> -->
-<!-- 			<artifactId>mssql-jdbc</artifactId> -->
-<!-- 			<version>7.0.0.jre10</version> -->
-<!-- 		</dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>com.microsoft.sqlserver</groupId> -->
+		<!-- <artifactId>mssql-jdbc</artifactId> -->
+		<!-- <version>7.0.0.jre10</version> -->
+		<!-- </dependency> -->
 		<dependency>
 			<groupId>net.sourceforge.jtds</groupId>
 			<artifactId>jtds</artifactId>
@@ -263,9 +281,39 @@
 						<suiteXmlFile>testng2.xml</suiteXmlFile>
 					</suiteXmlFiles>
 					<reportsDirectory>${testng.reports.directory}</reportsDirectory>
+					<argLine>
+						-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+					</argLine>
+					<systemProperties>
+						<property>
+							<name>allure.results.directory</name>
+							<value>${allure.results.directory}</value>
+						</property>
+					</systemProperties>
 				</configuration>
 			</plugin>
-
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.6.0</version>
+				<executions>
+					<execution>
+						<id>post-test</id>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<phase>site</phase>
+						<!-- <phase>test</phase> -->
+						<configuration>
+							<executable>allureServer.bat</executable>
+							<!-- <arguments> -->
+							<!-- <argument>exec-maven-plugin</argument> -->
+							<!-- <argument>1.6.0</argument> -->
+							<!-- </arguments> -->
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<!-- - - - Echo - - - -->
 			<plugin>
 				<groupId>com.github.ekryd.echo-maven-plugin</groupId>
@@ -278,7 +326,8 @@
 							<goal>echo</goal>
 						</goals>
 						<configuration>
-							<message>+++++Operation System: ${os.detected.name}</message>
+							<message>+++++AspectJ jar Path: ${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar</message>
+							<!-- <message>+++++Operation System: ${os.detected.name}</message> -->
 							<!-- <message>+++++Build Directory: ${project.build.directory}</message> -->
 							<!-- <message>+++++Operation System: ${os.detected.classifier}</message> -->
 							<!-- <message>+++++Local Repository: ${settings.localRepository}</message> -->
@@ -290,5 +339,16 @@
 
 		</plugins>
 	</build>
+
+	<reporting>
+		<excludeDefaults>true</excludeDefaults>
+		<plugins>
+			<plugin>
+				<groupId>io.qameta.allure</groupId>
+				<artifactId>allure-maven</artifactId>
+				<version>2.9</version>
+			</plugin>
+		</plugins>
+	</reporting>
 
 </project>

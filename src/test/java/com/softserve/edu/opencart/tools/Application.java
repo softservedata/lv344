@@ -10,6 +10,8 @@ import com.softserve.edu.opencart.data.IApplicationSource;
 import com.softserve.edu.opencart.pages.HeadComponent;
 import com.softserve.edu.opencart.pages.HomePage;
 
+import io.qameta.allure.Step;
+
 public class Application {
 
 	public static final double PRICE_PRECISION = 0.001;
@@ -199,6 +201,7 @@ public class Application {
 
     // Pages
 
+    @Step("load_Application STEP")
     public HomePage loadApplication() {
         getBrowser().openUrl(getApplicationSource().getBaseUrl());
         // TODO Remove getBrowser().getDriver()
