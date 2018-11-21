@@ -63,7 +63,7 @@ public class ApplicationProductTest extends ApplicationTestRunner {
 	//@Test(dataProvider = "validExcelProducts")
 	//@Test(dataProvider = "validExternalProducts")
     public void checkProductCurrency(IProduct product, Currencies currency) {
-    	//logger.info("checkLogin start");
+    	log.info("***checkProductCurrency start");
         //
         // Precondition
         // Steps
@@ -73,7 +73,7 @@ public class ApplicationProductTest extends ApplicationTestRunner {
         //
         // Check
         Assert.assertEquals(homePage
-        		.getProductPriceAmountByPartialName(product.getName())+1,
+        		.getProductPriceAmountByPartialName(product.getName()),
         		product.getPrice(currency),
         		Application.PRICE_PRECISION);
         delayExecution(1000);
@@ -83,6 +83,7 @@ public class ApplicationProductTest extends ApplicationTestRunner {
         delayExecution(1000);
         //
         //logger.info("checkLogin done");
+        log.info("***checkProductCurrency done");
     }
 
 }

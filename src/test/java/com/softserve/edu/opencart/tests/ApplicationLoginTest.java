@@ -24,7 +24,7 @@ public class ApplicationLoginTest extends ApplicationTestRunner {
 
 	@Test(dataProvider = "validUsers")
     public void checkLogin(IUser validUser) {
-    	//logger.info("checkLogin start");
+    	log.info("***checkLogin start");
         //
         // Precondition
         // Steps
