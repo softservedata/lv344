@@ -23,8 +23,8 @@ public class Product implements IProduct {
 	public Product(String name, String description) {
 		this.name = name;
 		this.description = description;
-		price = new HashMap<>();
-		priceExTax = new HashMap<>();
+		price = new HashMap<Currencies, Double>();
+		priceExTax = new HashMap<Currencies, Double>();
 	}
 
 	public Product addPrice(Currencies currency, double price) {
@@ -63,7 +63,7 @@ public class Product implements IProduct {
 	}
 
     public static List<IProduct> getByList(List<List<String>> rows) {
-    	List<IProduct> result = new ArrayList<>();
+    	List<IProduct> result = new ArrayList<IProduct>();
     	//
     	if (!RegexUtils.isDoubleMatches(rows.get(0).get(COLUMN_EURO))) {
     		rows.remove(0);

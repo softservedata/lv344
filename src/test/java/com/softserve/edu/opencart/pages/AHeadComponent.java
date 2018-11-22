@@ -52,7 +52,7 @@ public abstract class AHeadComponent {
         }
         
         public List<String> getListOptionsText() {
-            List<String> result = new ArrayList<>();
+            List<String> result = new ArrayList<String>();
             for (WebElement current : getListOptions()) {
                 result.add(current.getText());
             }
@@ -72,7 +72,7 @@ public abstract class AHeadComponent {
 	protected final String TAG_ATTRIBUTE_VALUE = "value";
 	//
 	//protected static boolean loggedUser = false;
-	protected static HashMap<Long, Boolean> loggedUsers = new HashMap<>();
+	protected static HashMap<Long, Boolean> loggedUsers = new HashMap<Long, Boolean>();
 	protected WebDriver driver;
 	//
 	private WebElement currency;
@@ -272,7 +272,7 @@ public abstract class AHeadComponent {
     }
 	
 	public List<String> getMenuTopTexts() {
-        List<String> result = new ArrayList<>();
+        List<String> result = new ArrayList<String>();
         for (WebElement current : getMenuTop()) {
             result.add(current.findElement(By
                     .cssSelector("a.dropdown-toggle")).getText());
@@ -388,4 +388,10 @@ public abstract class AHeadComponent {
 		clickLogo();
 		return new HomePage(driver);
 	}
+
+	public ShoppingCartPage gotoShoppingCartPage() {
+		clickShoppingCart();
+		return new ShoppingCartPage(driver);
+	}
+
 }

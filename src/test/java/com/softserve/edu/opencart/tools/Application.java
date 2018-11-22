@@ -41,7 +41,7 @@ public class Application {
 
     private Application(IApplicationSource applicationSource) {
         this.applicationSource = applicationSource;
-        browsers = new HashMap<>();
+        browsers = new HashMap<Long, BrowserWrapper>();
     }
 
     public static Application get() {

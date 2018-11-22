@@ -18,7 +18,7 @@ public class ProductsListComponent {
 	}
 
     private void initProductsListComponents() {
-    	productComponents = new ArrayList<>(); 
+    	productComponents = new ArrayList<ProductComponent>(); 
     	for (WebElement current : driver.findElements(By.cssSelector(".product-layout"))) {
             productComponents.add(new ProductComponent(current));
         }
@@ -44,7 +44,7 @@ public class ProductsListComponent {
     }
 
     public List<String> getProductsNameList() {
-        List<String> result = new ArrayList<>();
+        List<String> result = new ArrayList<String>();
         for (ProductComponent current : getProductComponents()) {
             result.add(current.getNameText());
         }

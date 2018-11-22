@@ -3,6 +3,7 @@ package com.softserve.edu.opencart.tests;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.mockito.Mockito;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -11,6 +12,7 @@ import com.softserve.edu.opencart.data.Currencies;
 import com.softserve.edu.opencart.data.IProduct;
 import com.softserve.edu.opencart.data.ProductRepository;
 import com.softserve.edu.opencart.pages.HomePage;
+import com.softserve.edu.opencart.pages.ShoppingCartPage;
 import com.softserve.edu.opencart.tools.Application;
 import com.softserve.edu.opencart.tools.ApplicationTestRunner;
 import com.softserve.edu.opencart.tools.ListUtils;
@@ -49,7 +51,7 @@ public class ApplicationProductTest extends ApplicationTestRunner {
 
 	@DataProvider//(parallel = true)
     public Object[][] validExternalProducts() {
-		List<IProduct> commons = new ArrayList<>();
+		List<IProduct> commons = new ArrayList<IProduct>();
 		commons.addAll(ProductRepository.fromExcelProducts());
 		commons.addAll(ProductRepository.fromCsvProducts());
         return ListUtils.toMultiArray(commons,Currencies.EURO);
@@ -84,6 +86,16 @@ public class ApplicationProductTest extends ApplicationTestRunner {
         //
         //logger.info("checkLogin done");
         log.info("***checkProductCurrency done");
+        //
+        // TODO Steps, Add to Cart
+        //
+        //ShoppingCartPage shoppingCartPage = homePage.gotoShoppingCartPage();
+        ShoppingCartPage shoppingCartPage = Mockito.mock(ShoppingCartPage.class);
+        Mockito.when(shoppingCartPage.getTatalPrice()).thenReturn(product.getPrice(currency));
+        //
+        Assert.assertEquals(shoppingCartPage.getTatalPrice(),
+        		product.getPrice(currency),
+        		Application.PRICE_PRECISION);
     }
 
 }
