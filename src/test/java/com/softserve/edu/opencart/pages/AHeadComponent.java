@@ -1,6 +1,7 @@
 package com.softserve.edu.opencart.pages;
 
 import java.util.ArrayList;
+import io.qameta.allure.Step;
 
 import java.util.HashMap;
 import java.util.List;
@@ -33,7 +34,7 @@ public abstract class AHeadComponent {
 //            listOptions.add(driver.findElement(lastLocator));
 //            //listOptions.add(search.getWebElement(lastLocator));
 //        }
-        
+		@Step("choose_Currency STEP")
         private void initListOptions(By searchLocator){
             listOptions = driver.findElements(searchLocator);
             //listOptions = search.getWebElements(searchLocator);

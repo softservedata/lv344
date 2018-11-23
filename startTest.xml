@@ -20,7 +20,10 @@
 <!-- 			</class> -->
 <!-- 			<class name="com.softserve.edu.opencart.tests.LoginTest" /> -->
 <!-- 			<class name="com.softserve.edu.AppTestReport" /> -->
-			<class name="com.softserve.edu.opencart.tests.ApplicationProductTest" />
+<!-- 			<class name="com.softserve.edu.opencart.tests.ApplicationProductTest" /> -->
+                <class name="com.softserve.edu.opencart.tests.password.SuccessMessageWhenChangePasswordTest" /> 
+                <class name="com.softserve.edu.opencart.tests.AllureTest" />
+			
 		</classes>
 	</test> <!-- Test -->
 

@@ -1,5 +1,6 @@
 package com.softserve.edu.opencart.tools;
 import java.sql.Connection;
+import io.qameta.allure.Step;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
@@ -199,6 +200,7 @@ public class Application {
 
     // Pages
 
+    @Step("load_Application STEP")
     public HomePage loadApplication() {
         getBrowser().openUrl(getApplicationSource().getBaseUrl());
         // TODO Remove getBrowser().getDriver()
